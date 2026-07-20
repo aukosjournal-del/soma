@@ -33,6 +33,9 @@ export default defineConfig({
         // Cache offline raisonnable : assets statiques + navigations.
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         navigateFallback: "/index.html",
+        // Sans ça, les bundles des anciens déploiements restent servis
+        // depuis le cache et masquent les correctifs déployés.
+        cleanupOutdatedCaches: true,
       },
       devOptions: { enabled: false },
     }),
@@ -44,6 +47,11 @@ export default defineConfig({
       "@infrastructure": fileURLToPath(new URL("./src/infrastructure", import.meta.url)),
       "@presentation": fileURLToPath(new URL("./src/presentation", import.meta.url)),
     },
+  },
+  // Empreinte de build : permet de vérifier en un coup d'œil (console) quelle
+  // version est réellement servie, plutôt que de la supposer.
+  define: {
+    __BUILD_STAMP__: JSON.stringify(new Date().toISOString()),
   },
   server: { port: 5173, host: true },
 });
