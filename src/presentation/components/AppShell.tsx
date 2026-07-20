@@ -32,7 +32,10 @@ export function AppShell({ children }: { children: ReactNode }) {
            * augmentée de l'indicateur d'accueil. Les marges latérales couvrent
            * l'encoche en orientation paysage.
            */
-          paddingTop: "env(safe-area-inset-top, 0px)",
+          // 16 px de respiration en plus de la zone sûre : la Dynamic Island
+          // est un bloc opaque bien plus épais qu'une encoche, et le titre en
+          // 26 px gras butait contre elle.
+          paddingTop: "calc(16px + env(safe-area-inset-top, 0px))",
           paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))",
           paddingLeft: "calc(16px + env(safe-area-inset-left, 0px))",
           paddingRight: "calc(16px + env(safe-area-inset-right, 0px))",
