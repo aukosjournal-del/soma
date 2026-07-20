@@ -31,11 +31,14 @@ export function AppShell({ children }: { children: ReactNode }) {
            * de la zone sûre, et on garde en bas la place de la nav flottante
            * augmentée de l'indicateur d'accueil. Les marges latérales couvrent
            * l'encoche en orientation paysage.
+           *
+           * Pas de marge supplémentaire ici : Facebook (et les apps natives en
+           * général) posent leur en-tête juste sous la zone sûre, sans étage
+           * de respiration en plus. Le +16px ajouté précédemment donnait,
+           * cumulé au padding-top propre du header (8px), un écart bien plus
+           * large que ce que montrent les apps de référence — corrigé.
            */
-          // 16 px de respiration en plus de la zone sûre : la Dynamic Island
-          // est un bloc opaque bien plus épais qu'une encoche, et le titre en
-          // 26 px gras butait contre elle.
-          paddingTop: "calc(16px + env(safe-area-inset-top, 0px))",
+          paddingTop: "env(safe-area-inset-top, 0px)",
           paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))",
           paddingLeft: "calc(16px + env(safe-area-inset-left, 0px))",
           paddingRight: "calc(16px + env(safe-area-inset-right, 0px))",
