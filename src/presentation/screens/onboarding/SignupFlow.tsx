@@ -3,8 +3,6 @@ import { AccountStep } from "./AccountStep";
 import { UsernameStep } from "./UsernameStep";
 import { PhysicalProfileStep } from "./PhysicalProfileStep";
 import { ExperienceStep, type FinalizeStatus } from "./ExperienceStep";
-import { AuthShell } from "@presentation/components/AuthShell";
-import { BrandHeader } from "@presentation/components/BrandHeader";
 import {
   type PhysicalProfileInput,
   emptyPhysicalProfile,
@@ -29,7 +27,14 @@ interface Identity {
  * niveau + finalisation réelle (3/3). Conserve les données entre écrans,
  * comme la machine à état unique du prototype.
  */
-export function SignupFlow({ onBackToLogin }: { onBackToLogin?: () => void }) {
+export function SignupFlow({
+  onBackToLogin,
+  onCompleted,
+}: {
+  onBackToLogin?: () => void;
+  /** Inscription finalisée : on entre dans l'application. */
+  onCompleted?: () => void;
+}) {
   const authGateway = useMemo(() => new SupabaseAuthGateway(), []);
   const finalizeSignup = useMemo(
     () => new FinalizeSignup(authGateway, new SupabaseProfileRepository()),
@@ -63,7 +68,8 @@ export function SignupFlow({ onBackToLogin }: { onBackToLogin?: () => void }) {
       physical,
       experienceLevel: level,
     });
-    if (result.status === "completed") setStep("done");
+    // Profil créé : on entre directement dans l'application (Accueil).
+    if (result.status === "completed") onCompleted?.();
     else if (result.status === "confirm_email") setStatus("confirm_email");
     else {
       setStatus("error");
@@ -123,16 +129,7 @@ export function SignupFlow({ onBackToLogin }: { onBackToLogin?: () => void }) {
     );
   }
 
-  // step === "done" — profil créé. L'écran Home arrive au sprint suivant.
-  return (
-    <AuthShell>
-      <BrandHeader />
-      <h1 style={{ color: "#fff", fontSize: "22px", fontWeight: 900, margin: "0 0 6px", textAlign: "center" }}>
-        Bienvenue, @{identity.username}&nbsp;!
-      </h1>
-      <p style={{ color: "var(--color-text-muted)", fontSize: "13px", margin: 0, textAlign: "center" }}>
-        Ton profil est créé. L'écran d'accueil arrive au prochain sprint.
-      </p>
-    </AuthShell>
-  );
+  // La finalisation appelle onCompleted : le parent bascule sur l'application.
+  // Cet écran ne devrait donc jamais rester affiché.
+  return null;
 }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LoginStep } from "./LoginStep";
 import { ForgotPasswordStep } from "./ForgotPasswordStep";
 import { SignupFlow } from "@presentation/screens/onboarding/SignupFlow";
@@ -19,6 +19,22 @@ export function AuthRoot() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string>();
   const [forgotSent, setForgotSent] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  // Session déjà active (retour sur l'app, rechargement) : on entre directement.
+  useEffect(() => {
+    let cancelled = false;
+    auth
+      .hasSession()
+      .then((active) => {
+        if (!cancelled && active) setView("authed");
+      })
+      .catch(() => undefined)
+      .finally(() => !cancelled && setChecking(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [auth]);
 
   const goto = (v: View) => {
     setError(undefined);
@@ -50,8 +66,13 @@ export function AuthRoot() {
     setForgotSent(true);
   };
 
+  // Évite un flash de l'écran de connexion pendant la vérification de session.
+  if (checking) return null;
+
   if (view === "signup") {
-    return <SignupFlow onBackToLogin={() => goto("login")} />;
+    return (
+      <SignupFlow onBackToLogin={() => goto("login")} onCompleted={() => setView("authed")} />
+    );
   }
 
   if (view === "forgot") {
