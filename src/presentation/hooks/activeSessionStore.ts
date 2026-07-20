@@ -64,6 +64,21 @@ export const activeSessionStore = {
   clear() {
     set(null);
   },
+  /**
+   * Invalide la séance du jour uniquement si elle n'a pas été entamée
+   * (aucune série validée ou marquée ratée). Elle sera reconstruite depuis
+   * le planning au prochain affichage. Une séance en cours n'est jamais
+   * détruite : on ne perd pas le travail de l'utilisateur.
+   */
+  invalidateIfUntouched(): boolean {
+    if (!state) return true;
+    const touched = state.exercises.some((exo) =>
+      exo.sets.some((s) => s.checked || s.failed || s.weight !== "" || s.reps !== ""),
+    );
+    if (touched) return false;
+    set(null);
+    return true;
+  },
 };
 
 export function useActiveSession(): ActiveSession | null {

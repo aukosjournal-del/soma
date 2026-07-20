@@ -24,11 +24,14 @@ export function useWorkoutSession() {
   const profiles = useMemo(() => new SupabaseProfileRepository(), []);
 
   const session = useActiveSession();
-  const [loading, setLoading] = useState(session === null);
+  // Une séance vide (aucun exercice) n'est pas un cache valide : le planning a
+  // pu être renseigné depuis. On retente le chargement à chaque affichage.
+  const cached = session !== null && session.exercises.length > 0;
+  const [loading, setLoading] = useState(!cached);
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    if (session !== null) {
+    if (cached) {
       setLoading(false);
       return;
     }
@@ -56,7 +59,7 @@ export function useWorkoutSession() {
     return () => {
       cancelled = true;
     };
-  }, [session, routines, profiles]);
+  }, [cached, routines, profiles]);
 
   const check = useCallback((exerciseId: string, setId: number) => {
     activeSessionStore.updateExercises((current) => {

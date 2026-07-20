@@ -4,6 +4,7 @@ import type { Difficulty, Exercise } from "@domain/workout/entities/Exercise";
 import type { RoutineDraft, WeeklyPlan } from "@domain/workout/ports/RoutineRepository";
 import type { NewExercise } from "@domain/workout/ports/ExerciseRepository";
 import { todayIndex } from "@domain/workout/entities/Routine";
+import { activeSessionStore } from "./activeSessionStore";
 import { SupabaseRoutineRepository } from "@infrastructure/supabase/adapters/SupabaseRoutineRepository";
 import { SupabaseExerciseRepository } from "@infrastructure/supabase/adapters/SupabaseExerciseRepository";
 import { SupabaseProfileRepository } from "@infrastructure/supabase/adapters/SupabaseProfileRepository";
@@ -58,6 +59,9 @@ export function usePlanning() {
       setPlan((p) => ({ ...p, [selectedDay]: next })); // optimiste
       try {
         await routinesRepo.assignRoutine(selectedDay, next);
+        // Le planning du jour a changé : la séance en cache doit se
+        // reconstruire (sauf si elle est déjà commencée).
+        if (selectedDay === todayIndex()) activeSessionStore.invalidateIfUntouched();
         setFlash(true);
         window.setTimeout(() => setFlash(false), 1200);
       } catch (e) {
@@ -71,9 +75,14 @@ export function usePlanning() {
   const saveRoutine = useCallback(
     async (draft: RoutineDraft) => {
       await routinesRepo.saveRoutine(draft);
+      // Si la routine modifiée est celle d'aujourd'hui, la séance doit refléter
+      // les nouveaux exercices.
+      if (draft.id && plan[todayIndex()] === draft.id) {
+        activeSessionStore.invalidateIfUntouched();
+      }
       await refresh();
     },
-    [routinesRepo, refresh],
+    [plan, routinesRepo, refresh],
   );
 
   const deleteRoutine = useCallback(
