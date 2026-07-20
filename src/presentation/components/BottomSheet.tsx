@@ -62,8 +62,12 @@ export function BottomSheet({ open, title, onClose, children, tall, footer }: Bo
         style={{
           position: "fixed",
           zIndex: 60,
-          left: "50%",
-          transform: "translateX(-50%)",
+          // Centrage par marges auto, et non par `translateX(-50%)` : l'animation
+          // d'ouverture anime `transform` et écraserait la correction horizontale
+          // pendant toute sa durée (panneau décalé, puis recentré d'un coup).
+          left: 0,
+          right: 0,
+          marginInline: "auto",
           bottom: 0,
           width: "100%",
           maxWidth: "var(--content-max-width)",
