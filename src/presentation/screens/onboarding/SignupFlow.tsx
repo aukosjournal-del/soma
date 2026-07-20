@@ -1,0 +1,138 @@
+import { useMemo, useState } from "react";
+import { AccountStep } from "./AccountStep";
+import { UsernameStep } from "./UsernameStep";
+import { PhysicalProfileStep } from "./PhysicalProfileStep";
+import { ExperienceStep, type FinalizeStatus } from "./ExperienceStep";
+import { AuthShell } from "@presentation/components/AuthShell";
+import { BrandHeader } from "@presentation/components/BrandHeader";
+import {
+  type PhysicalProfileInput,
+  emptyPhysicalProfile,
+} from "@domain/onboarding/value-objects/PhysicalProfile";
+import type { ExperienceLevel } from "@domain/onboarding/value-objects/ExperienceLevel";
+import type { OAuthProvider } from "@domain/onboarding/ports/AuthGateway";
+import { FinalizeSignup } from "@domain/onboarding/use-cases/FinalizeSignup";
+import { SupabaseAuthGateway } from "@infrastructure/supabase/adapters/SupabaseAuthGateway";
+import { SupabaseProfileRepository } from "@infrastructure/supabase/adapters/SupabaseProfileRepository";
+
+type Step = "account" | "username" | "physical" | "experience" | "done";
+
+interface Identity {
+  firstName: string;
+  lastName: string;
+  username: string;
+}
+
+/**
+ * Orchestrateur du parcours d'inscription complet :
+ * compte (email/mdp) → pseudo (Étape 1/3) → profil physique (2/3) →
+ * niveau + finalisation réelle (3/3). Conserve les données entre écrans,
+ * comme la machine à état unique du prototype.
+ */
+export function SignupFlow({ onBackToLogin }: { onBackToLogin?: () => void }) {
+  const authGateway = useMemo(() => new SupabaseAuthGateway(), []);
+  const finalizeSignup = useMemo(
+    () => new FinalizeSignup(authGateway, new SupabaseProfileRepository()),
+    [authGateway],
+  );
+
+  const [step, setStep] = useState<Step>("account");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [identity, setIdentity] = useState<Identity>({ firstName: "", lastName: "", username: "" });
+  const [physical, setPhysical] = useState<PhysicalProfileInput>(emptyPhysicalProfile());
+  const [level, setLevel] = useState<ExperienceLevel | null>(null);
+  const [status, setStatus] = useState<FinalizeStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>();
+
+  const handleOAuth = (provider: OAuthProvider) => {
+    authGateway.signInWithOAuth(provider).catch((e) => {
+      console.error("[oauth]", e);
+    });
+  };
+
+  const handleFinalize = async () => {
+    if (!level) return;
+    setStatus("submitting");
+    setErrorMessage(undefined);
+    const result = await finalizeSignup.execute({
+      email: credentials.email,
+      password: credentials.password,
+      firstName: identity.firstName,
+      lastName: identity.lastName,
+      username: identity.username,
+      physical,
+      experienceLevel: level,
+    });
+    if (result.status === "completed") setStep("done");
+    else if (result.status === "confirm_email") setStatus("confirm_email");
+    else {
+      setStatus("error");
+      setErrorMessage(result.message);
+    }
+  };
+
+  if (step === "account") {
+    return (
+      <AccountStep
+        initialEmail={credentials.email}
+        initialPassword={credentials.password}
+        onOAuth={handleOAuth}
+        onHaveAccount={onBackToLogin}
+        onContinue={(data) => {
+          setCredentials(data);
+          setStep("username");
+        }}
+      />
+    );
+  }
+
+  if (step === "username") {
+    return (
+      <UsernameStep
+        onHaveAccount={onBackToLogin}
+        onContinue={(data) => {
+          setIdentity(data);
+          setStep("physical");
+        }}
+      />
+    );
+  }
+
+  if (step === "physical") {
+    return (
+      <PhysicalProfileStep
+        initial={physical}
+        onContinue={(data) => {
+          setPhysical(data);
+          setStep("experience");
+        }}
+        onSkip={() => setStep("experience")}
+      />
+    );
+  }
+
+  if (step === "experience") {
+    return (
+      <ExperienceStep
+        selected={level}
+        onSelect={setLevel}
+        onFinalize={handleFinalize}
+        status={status}
+        errorMessage={errorMessage}
+      />
+    );
+  }
+
+  // step === "done" — profil créé. L'écran Home arrive au sprint suivant.
+  return (
+    <AuthShell>
+      <BrandHeader />
+      <h1 style={{ color: "#fff", fontSize: "22px", fontWeight: 900, margin: "0 0 6px", textAlign: "center" }}>
+        Bienvenue, @{identity.username}&nbsp;!
+      </h1>
+      <p style={{ color: "var(--color-text-muted)", fontSize: "13px", margin: 0, textAlign: "center" }}>
+        Ton profil est créé. L'écran d'accueil arrive au prochain sprint.
+      </p>
+    </AuthShell>
+  );
+}

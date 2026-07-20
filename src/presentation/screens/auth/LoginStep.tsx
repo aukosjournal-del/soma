@@ -1,0 +1,124 @@
+import { useState } from "react";
+import { AuthShell } from "@presentation/components/AuthShell";
+import { BrandHeader } from "@presentation/components/BrandHeader";
+import { GlassInput } from "@presentation/components/GlassInput";
+
+export interface LoginStepProps {
+  onSubmit: (identifier: string, password: string) => void;
+  submitting?: boolean;
+  errorMessage?: string;
+  onForgot: () => void;
+  onCreateAccount: () => void;
+}
+
+/**
+ * Écran de connexion (isLoginView du prototype). Clone pixel-perfect.
+ * Auth réelle : email + mot de passe via Supabase (délégué au parent).
+ */
+export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCreateAccount }: LoginStepProps) {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submit = () => {
+    if (submitting) return;
+    if (identifier.trim() && password.trim()) onSubmit(identifier.trim(), password);
+  };
+
+  return (
+    <AuthShell>
+      <BrandHeader />
+
+      <h1 style={{ color: "#fff", fontSize: "22px", fontWeight: 900, margin: "0 0 4px", textAlign: "center" }}>
+        Content de te revoir
+      </h1>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
+        Connecte-toi pour suivre ta progression.
+      </p>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <GlassInput
+          type="text"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
+          placeholder="E-mail ou nom d'utilisateur"
+          autoComplete="username"
+          autoCapitalize="none"
+        />
+        <GlassInput
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Mot de passe"
+          autoComplete="current-password"
+          onKeyDown={(e) => e.key === "Enter" && submit()}
+        />
+      </div>
+
+      <button
+        type="button"
+        onClick={submit}
+        disabled={submitting}
+        style={{
+          width: "100%",
+          minHeight: "52px",
+          marginTop: "16px",
+          fontWeight: 800,
+          fontSize: "15px",
+          borderRadius: "12px",
+          background: "var(--color-accent)",
+          color: "var(--color-on-accent)",
+          border: "none",
+          cursor: submitting ? "not-allowed" : "pointer",
+          boxSizing: "border-box",
+          opacity: submitting ? 0.6 : 1,
+        }}
+      >
+        {submitting ? "CONNEXION…" : "SE CONNECTER"}
+      </button>
+
+      {errorMessage && (
+        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>
+          {errorMessage}
+        </p>
+      )}
+
+      <button
+        type="button"
+        onClick={onForgot}
+        style={{
+          width: "100%",
+          marginTop: "14px",
+          background: "none",
+          border: "none",
+          color: "var(--color-text-muted)",
+          fontSize: "13px",
+          fontWeight: 600,
+          cursor: "pointer",
+        }}
+      >
+        Mot de passe oublié&nbsp;?
+      </button>
+
+      <div style={{ height: "1px", background: "var(--color-border)", margin: "18px 0" }} />
+
+      <button
+        type="button"
+        onClick={onCreateAccount}
+        style={{
+          width: "100%",
+          minHeight: "48px",
+          fontWeight: 700,
+          fontSize: "14px",
+          borderRadius: "12px",
+          background: "var(--color-bg-elevated)",
+          border: "1px solid var(--color-border)",
+          color: "var(--color-text-secondary)",
+          cursor: "pointer",
+          boxSizing: "border-box",
+        }}
+      >
+        Créer un compte
+      </button>
+    </AuthShell>
+  );
+}

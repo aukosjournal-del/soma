@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    name: Typecheck & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck (strict)
+        run: npm run typecheck
+
+      - name: Build (+ service worker PWA)
+        run: npm run build
+        env:
+          # Clé publiable : publique par conception, sûre en clair.
+          VITE_SUPABASE_URL: https://ujanhmwreipxeypkpcoc.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_TxP86I84PpmEJuuEJ95-sQ_qy4c0HOW

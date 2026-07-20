@@ -1,0 +1,73 @@
+/* =====================================================================
+ * SOMA · Design Tokens — Source de vérité unique (Ground Truth)
+ * Repris à l'identique de /tokens/*.css du prototype SOMA.dc.html.
+ * NE PAS réinterpréter : toute évolution passe par validation Co-founder.
+ * ===================================================================== */
+
+:root {
+  /* --- Base ------------------------------------------------------------ */
+  --color-bg: #002B4C;
+  --color-bg-elevated: rgba(192, 235, 255, 0.08);
+  --color-bg-elevated-strong: rgba(192, 235, 255, 0.13);
+  --color-border: rgba(192, 235, 255, 0.15);
+  --color-border-soft: rgba(192, 235, 255, 0.1);
+
+  /* --- Texte ----------------------------------------------------------- */
+  --color-text: #ffffff;
+  --color-text-secondary: #C0EBFF;
+  --color-text-muted: rgba(192, 235, 255, 0.6);
+  --color-text-faint: rgba(192, 235, 255, 0.4);
+  --color-text-placeholder: rgba(192, 235, 255, 0.3);
+  --color-at-prefix: rgba(192, 235, 255, 0.5);
+
+  /* --- Accent ---------------------------------------------------------- */
+  --color-accent: #F59E71;
+  --color-accent-soft: rgba(245, 158, 113, 0.15);
+  --color-accent-border: rgba(245, 158, 113, 0.4);
+  --color-on-accent: #002B4C;
+
+  /* --- Sémantique ------------------------------------------------------ */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-error-border: rgba(239, 68, 68, 0.4);
+  --color-info: #C0EBFF;
+
+  /* --- Effets ---------------------------------------------------------- */
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-accent-cta: 0 8px 24px -8px rgba(245, 158, 113, 0.7);
+  --blur-glass: blur(20px);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 0.2s;
+  --duration-med: 0.3s;
+
+  /* --- Espacements & rayons ------------------------------------------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px;
+  --radius-sm: 8px;  --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 24px; --radius-pill: 999px;
+  --control-height-md: 48px;
+  --control-height-lg: 52px;
+  --content-max-width: 448px;
+
+  /* --- Typographie ---------------------------------------------------- */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --tracking-eyebrow: 0.14em;
+  --tracking-logo: 0.06em;
+}
+
+/* Base globale (repris du prototype : body + placeholders) -------------- */
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+}
+button, input, textarea, select { font-family: inherit; }
+input::placeholder, textarea::placeholder { color: var(--color-text-placeholder); }
+
+/* Tous les chiffres alignés — exigence impérative Sprint 2 ------------- */
+.soma-tabular { font-variant-numeric: tabular-nums; }
+
+/* Animations du prototype --------------------------------------------- */
+@keyframes somaSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes somaFadeIn  { from { opacity: 0; } to { opacity: 1; } }
