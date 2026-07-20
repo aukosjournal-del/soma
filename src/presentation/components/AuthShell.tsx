@@ -18,7 +18,10 @@ export function AuthShell({ children }: { children: ReactNode }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "24px",
+        // Zone sûre iOS : la carte ne doit pas passer sous la barre d'état
+        // ni sous l'indicateur d'accueil.
+        padding:
+          "calc(24px + env(safe-area-inset-top, 0px)) calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px))",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",

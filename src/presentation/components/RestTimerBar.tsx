@@ -20,7 +20,8 @@ export function RestTimerBar() {
         position: "fixed",
         left: "50%",
         transform: "translateX(-50%)",
-        bottom: "92px",
+        // Aligné sur la nav flottante, qui suit elle aussi la zone sûre.
+        bottom: "calc(92px + env(safe-area-inset-bottom, 0px))",
         zIndex: 45,
         width: "calc(100% - 32px)",
         maxWidth: "420px",
