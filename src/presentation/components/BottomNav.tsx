@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useHideOnScroll } from "@presentation/hooks/useHideOnScroll";
+import { useCompactOnScroll } from "@presentation/hooks/useCompactOnScroll";
 
 export type AppTab = "planning" | "workout" | "home" | "recap" | "profile";
 
@@ -84,16 +84,16 @@ const TABS: { id: AppTab; label: string; svg: ReactNode }[] = [
  * Navigation basse — 5 onglets en icônes, ordre exact du prototype :
  * Planning · Séance · Accueil · Récap · Profil.
  *
- * Se masque en défilant vers le bas, réapparaît en défilant vers le haut
- * (instantanément sur un balayage rapide) ; toujours visible en haut de page
- * et à l'approche du bas, pour ne jamais bloquer la navigation.
+ * Toujours visible, jamais masquée. En défilant vers le bas, la pilule passe
+ * en mode compact (plus fine, légèrement translucide) pour libérer de la
+ * place de lecture ; elle se redéploie dès qu'on remonte, instantanément sur
+ * un balayage rapide, et reste déployée en haut de page et près du bas.
  */
 export function BottomNav({ active, onChange }: BottomNavProps) {
-  const hidden = useHideOnScroll();
+  const isCompact = useCompactOnScroll();
 
   return (
     <nav
-      aria-hidden={hidden}
       style={{
         position: "fixed",
         left: 0,
@@ -104,10 +104,6 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
         zIndex: 40,
         width: "calc(100% - 32px)",
         maxWidth: "416px",
-        transform: hidden ? "translateY(140%)" : "translateY(0)",
-        transition: "transform 0.25s ease",
-        // Off-écran pendant le masquage : aucun clic fantôme sur les onglets.
-        pointerEvents: hidden ? "none" : "auto",
       }}
     >
       <div
@@ -120,8 +116,10 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
           WebkitBackdropFilter: "var(--blur-glass)",
           border: "1px solid var(--color-border)",
           borderRadius: "999px",
-          padding: "5px",
+          padding: isCompact ? "3px" : "5px",
+          opacity: isCompact ? 0.7 : 1,
           boxShadow: "var(--shadow-card)",
+          transition: "padding 0.25s ease, opacity 0.25s ease",
         }}
       >
         {TABS.map((tab) => {
@@ -134,9 +132,11 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
               aria-label={tab.label}
               aria-current={isActive ? "page" : undefined}
               style={{
-                // 48px : zone de touche minimale recommandée (iOS/Android).
-                height: "48px",
-                minWidth: "48px",
+                // 48px déployé : zone de touche minimale recommandée
+                // (iOS/Android). Réduite en mode compact — état transitoire
+                // qui redevient 48px dès qu'on cesse de défiler vers le bas.
+                height: isCompact ? "40px" : "48px",
+                minWidth: isCompact ? "40px" : "48px",
                 flex: 1,
                 borderRadius: "999px",
                 display: "flex",
@@ -144,7 +144,7 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
                 justifyContent: "center",
                 border: "none",
                 cursor: "pointer",
-                transition: "background 0.25s ease, color 0.25s ease",
+                transition: "background 0.25s ease, color 0.25s ease, height 0.25s ease, min-width 0.25s ease",
                 background: isActive ? "var(--color-accent)" : "transparent",
                 color: isActive ? "var(--color-on-accent)" : "rgba(192,235,255,0.65)",
               }}
