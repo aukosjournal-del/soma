@@ -27,7 +27,7 @@ export function AppRoot() {
 
   const launchFreeSession = (exercises: RoutineDraftExercise[]) => {
     // La Séance Libre remplace la séance active du jour, puis on bascule.
-    activeSessionStore.start("Libre", buildSessionFromDraft(exercises), null);
+    activeSessionStore.start("Libre", buildSessionFromDraft(exercises), null, "free");
     setTab("workout");
   };
 

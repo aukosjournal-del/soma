@@ -7,6 +7,8 @@ export interface ActiveSession {
   startedAt: string;
   routineId: string | null;
   routineName: string | null;
+  /** 'routine' = issue du planning, 'free' = Séance Libre (jamais resynchronisée). */
+  source: "routine" | "free";
   exercises: SessionExercise[];
 }
 
@@ -54,8 +56,13 @@ export const activeSessionStore = {
   getSnapshot(): ActiveSession | null {
     return state;
   },
-  start(routineName: string | null, exercises: SessionExercise[], routineId: string | null = null) {
-    set({ date: today(), startedAt: new Date().toISOString(), routineId, routineName, exercises });
+  start(
+    routineName: string | null,
+    exercises: SessionExercise[],
+    routineId: string | null = null,
+    source: "routine" | "free" = "routine",
+  ) {
+    set({ date: today(), startedAt: new Date().toISOString(), routineId, routineName, exercises, source });
   },
   updateExercises(updater: (current: SessionExercise[]) => SessionExercise[]) {
     if (!state) return;

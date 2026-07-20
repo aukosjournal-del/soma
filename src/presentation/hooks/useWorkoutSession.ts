@@ -24,17 +24,20 @@ export function useWorkoutSession() {
   const profiles = useMemo(() => new SupabaseProfileRepository(), []);
 
   const session = useActiveSession();
-  // Une séance vide (aucun exercice) n'est pas un cache valide : le planning a
-  // pu être renseigné depuis. On retente le chargement à chaque affichage.
-  const cached = session !== null && session.exercises.length > 0;
-  const [loading, setLoading] = useState(!cached);
+  const [loading, setLoading] = useState(session === null);
   const [error, setError] = useState<string>();
 
+  /**
+   * À chaque affichage de l'écran, on confronte la séance en cache au planning
+   * réel. Le cache seul ne suffit pas : il peut avoir été construit avant
+   * l'assignation d'une routine, ou sur un autre appareil.
+   *
+   * Règles :
+   *  - la routine du jour a changé et la séance n'est pas entamée -> on rebâtit ;
+   *  - la séance est entamée -> on n'y touche pas, le travail prime ;
+   *  - le réseau échoue -> on garde le cache (offline-first).
+   */
   useEffect(() => {
-    if (cached) {
-      setLoading(false);
-      return;
-    }
     let cancelled = false;
 
     (async () => {
@@ -44,13 +47,26 @@ export function useWorkoutSession() {
           profiles.getExperienceCoefficient(),
         ]);
         if (cancelled) return;
+
+        const current = activeSessionStore.getSnapshot();
+        // Une Séance Libre est un choix explicite : le planning ne la remplace pas.
+        if (current?.source === "free") return;
+        const sameRoutine = current !== null && current.routineId === (routine?.id ?? null);
+        if (sameRoutine) return; // le cache est à jour, on conserve la progression
+
+        // Séance déjà entamée sur une autre routine : on ne détruit rien.
+        if (current !== null && !activeSessionStore.invalidateIfUntouched()) return;
+
         activeSessionStore.start(
           routine?.name ?? null,
           buildSessionExercises(routine as Routine | null, coefficient),
           routine?.id ?? null,
         );
       } catch (e) {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Chargement impossible.");
+        // Hors-ligne ou erreur réseau : on conserve la séance locale.
+        if (!cancelled && activeSessionStore.getSnapshot() === null) {
+          setError(e instanceof Error ? e.message : "Chargement impossible.");
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -59,7 +75,9 @@ export function useWorkoutSession() {
     return () => {
       cancelled = true;
     };
-  }, [cached, routines, profiles]);
+    // Volontairement sans `session` en dépendance : on ne veut re-synchroniser
+    // qu'au montage de l'écran, pas à chaque série validée.
+  }, [routines, profiles]);
 
   const check = useCallback((exerciseId: string, setId: number) => {
     activeSessionStore.updateExercises((current) => {
@@ -96,7 +114,7 @@ export function useWorkoutSession() {
     );
     syncQueueStore.push<SessionPayload>("session.complete", {
       routineId: session.routineId,
-      source: session.routineId ? "routine" : "free",
+      source: session.source,
       routineName: session.routineName,
       durationSec,
       exercises: session.exercises,
