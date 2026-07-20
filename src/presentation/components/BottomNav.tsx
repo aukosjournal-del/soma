@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useHideOnScroll } from "@presentation/hooks/useHideOnScroll";
 
 export type AppTab = "planning" | "workout" | "home" | "recap" | "profile";
 
@@ -7,9 +8,11 @@ export interface BottomNavProps {
   onChange: (tab: AppTab) => void;
 }
 
+// 24px : bas de la fourchette 24-26px recommandée pour une icône de nav basse
+// (16-20px se lisait mal une fois la zone de touche portée à 48px).
 const icon = {
-  width: 20,
-  height: 20,
+  width: 24,
+  height: 24,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -80,18 +83,31 @@ const TABS: { id: AppTab; label: string; svg: ReactNode }[] = [
 /**
  * Navigation basse — 5 onglets en icônes, ordre exact du prototype :
  * Planning · Séance · Accueil · Récap · Profil.
+ *
+ * Se masque en défilant vers le bas, réapparaît en défilant vers le haut
+ * (instantanément sur un balayage rapide) ; toujours visible en haut de page
+ * et à l'approche du bas, pour ne jamais bloquer la navigation.
  */
 export function BottomNav({ active, onChange }: BottomNavProps) {
+  const hidden = useHideOnScroll();
+
   return (
     <nav
+      aria-hidden={hidden}
       style={{
         position: "fixed",
-        left: "50%",
-        transform: "translateX(-50%)",
-        bottom: "calc(20px + env(safe-area-inset-bottom))",
+        left: 0,
+        right: 0,
+        marginInline: "auto",
+        // Décollée du bord, jamais chevauchée par la barre d'accueil iOS.
+        bottom: "calc(16px + env(safe-area-inset-bottom))",
         zIndex: 40,
         width: "calc(100% - 32px)",
         maxWidth: "416px",
+        transform: hidden ? "translateY(140%)" : "translateY(0)",
+        transition: "transform 0.25s ease",
+        // Off-écran pendant le masquage : aucun clic fantôme sur les onglets.
+        pointerEvents: hidden ? "none" : "auto",
       }}
     >
       <div
@@ -118,7 +134,9 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
               aria-label={tab.label}
               aria-current={isActive ? "page" : undefined}
               style={{
-                height: "46px",
+                // 48px : zone de touche minimale recommandée (iOS/Android).
+                height: "48px",
+                minWidth: "48px",
                 flex: 1,
                 borderRadius: "999px",
                 display: "flex",
