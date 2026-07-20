@@ -3,8 +3,9 @@ import { RadialHalos } from "./RadialHalos";
 
 /**
  * Coquille des écrans d'authentification : fond navy plein, halos fixes,
- * carte glassmorphism centrée (max 400px). Valeurs reprises du prototype
- * (SOMA.dc.html, lignes 24-31).
+ * carte glassmorphism centrée. La largeur suit `--content-max-width`, la
+ * même colonne que les écrans applicatifs : sans ça la carte de connexion
+ * était visiblement plus étroite que le reste de l'app.
  */
 export function AuthShell({ children }: { children: ReactNode }) {
   return (
@@ -29,7 +30,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
           position: "relative",
           zIndex: 1,
           width: "100%",
-          maxWidth: "400px",
+          maxWidth: "var(--content-max-width)",
           background: "var(--color-bg-elevated)",
           border: "1px solid var(--color-border)",
           borderRadius: "24px",

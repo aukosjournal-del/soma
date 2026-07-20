@@ -21,6 +21,13 @@ const oauthBtnBase: CSSProperties = {
   boxSizing: "border-box",
 };
 
+/**
+ * Connexion Apple / Google : masquée tant que les fournisseurs ne sont pas
+ * configurés côté Supabase. Proposer des boutons qui échouent coûte plus cher
+ * que de ne pas les proposer. Repasser à `true` une fois l'OAuth branché.
+ */
+const OAUTH_ENABLED = false;
+
 export interface AccountStepProps {
   initialEmail?: string;
   initialPassword?: string;
@@ -51,12 +58,13 @@ export function AccountStep({
       <BrandHeader />
 
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px", textAlign: "center" }}>
-        SOMA. Votre carnet d'entraînement connecté.
+        Ton carnet d'entraînement
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
-        Zéro friction. Connecte-toi en un clic.
+        Deux minutes pour créer ton compte.
       </p>
 
+      {OAUTH_ENABLED && (
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <button type="button" onClick={() => onOAuth("apple")} style={{ ...oauthBtnBase, background: "#fff", color: "#002B4C", border: "none" }}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -74,19 +82,22 @@ export function AccountStep({
           <span>Continuer avec Google</span>
         </button>
       </div>
+      )}
 
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "18px 0" }}>
-        <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
-        <span style={{ color: "var(--color-text-faint)", fontSize: "12px" }}>ou utiliser votre adresse email</span>
-        <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
-      </div>
+      {OAUTH_ENABLED && (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "18px 0" }}>
+          <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
+          <span style={{ color: "var(--color-text-faint)", fontSize: "12px" }}>ou avec ton e-mail</span>
+          <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
+        </div>
+      )}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Adresse email"
+          placeholder="Ton e-mail"
           autoComplete="email"
           style={{
             width: "100%",
@@ -103,7 +114,7 @@ export function AccountStep({
           }}
         />
         {emailInvalid && (
-          <p style={{ color: "var(--color-error)", fontSize: "12px", margin: 0 }}>Adresse email invalide.</p>
+          <p style={{ color: "var(--color-error)", fontSize: "12px", margin: 0 }}>Cette adresse ne semble pas valide.</p>
         )}
         <GlassInput
           type="password"

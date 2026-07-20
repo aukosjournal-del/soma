@@ -48,7 +48,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
       </p>
 
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
-        Configurez votre profil physique
+        Parle-nous de toi
       </h1>
 
       <p

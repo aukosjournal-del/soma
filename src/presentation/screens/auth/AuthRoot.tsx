@@ -4,6 +4,7 @@ import { ForgotPasswordStep } from "./ForgotPasswordStep";
 import { SignupFlow } from "@presentation/screens/onboarding/SignupFlow";
 import { AppRoot } from "@presentation/screens/AppRoot";
 import { SupabaseAuthGateway } from "@infrastructure/supabase/adapters/SupabaseAuthGateway";
+import { rememberMe } from "@infrastructure/auth/rememberMe";
 
 type View = "login" | "signup" | "forgot" | "authed";
 
@@ -21,16 +22,27 @@ export function AuthRoot() {
   const [forgotSent, setForgotSent] = useState(false);
   const [checking, setChecking] = useState(true);
 
-  // Session déjà active (retour sur l'app, rechargement) : on entre directement.
+  // Session déjà active : on entre directement, mais seulement si l'utilisateur
+  // a coché « se souvenir de moi » (ou s'il s'agit du même onglet).
   useEffect(() => {
     let cancelled = false;
-    auth
-      .hasSession()
-      .then((active) => {
-        if (!cancelled && active) setView("authed");
-      })
-      .catch(() => undefined)
-      .finally(() => !cancelled && setChecking(false));
+    (async () => {
+      try {
+        const active = await auth.hasSession();
+        if (cancelled) return;
+        if (!active) return;
+        if (rememberMe.shouldRestoreSession()) {
+          setView("authed");
+          return;
+        }
+        // Session persistée non désirée : on la ferme avant d'afficher le login.
+        await auth.signOut();
+      } catch {
+        /* pas de session exploitable : on reste sur la connexion */
+      } finally {
+        if (!cancelled) setChecking(false);
+      }
+    })();
     return () => {
       cancelled = true;
     };
@@ -42,13 +54,14 @@ export function AuthRoot() {
     setView(v);
   };
 
-  const handleLogin = async (identifier: string, password: string) => {
+  const handleLogin = async (identifier: string, password: string, remember: boolean) => {
     setError(undefined);
     setSubmitting(true);
     try {
       // Email ou @pseudo : le prototype accepte les deux.
       if (EMAIL_RE.test(identifier)) await auth.signInWithEmail(identifier, password);
       else await auth.signInWithUsername(identifier, password);
+      rememberMe.set(remember);
       setView("authed");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Connexion impossible.");
@@ -71,7 +84,15 @@ export function AuthRoot() {
 
   if (view === "signup") {
     return (
-      <SignupFlow onBackToLogin={() => goto("login")} onCompleted={() => setView("authed")} />
+      <SignupFlow
+        onBackToLogin={() => goto("login")}
+        onCompleted={() => {
+          // Nouvelle inscription : on marque l'onglet pour qu'un rechargement
+          // ne renvoie pas sur la connexion, sans mémoriser pour autant.
+          rememberMe.set(false);
+          setView("authed");
+        }}
+      />
     );
   }
 

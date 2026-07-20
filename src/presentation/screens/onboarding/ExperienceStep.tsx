@@ -34,7 +34,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
       </p>
 
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
-        Quel est votre niveau actuel&nbsp;?
+        Où en es-tu&nbsp;?
       </h1>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -84,7 +84,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
           opacity: selected ? 1 : 0.5,
         }}
       >
-        {submitting ? "FINALISATION…" : "FINALISER MON PROFIL"}
+        {submitting ? "CRÉATION…" : "C'EST PARTI"}
       </button>
 
       {status === "error" && errorMessage && (
@@ -94,7 +94,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
       )}
       {status === "confirm_email" && (
         <p style={{ color: "var(--color-success)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>
-          Compte créé&nbsp;! Confirme ton email pour activer ton profil.
+          Compte créé. Confirme ton e-mail pour activer ton profil.
         </p>
       )}
     </AuthShell>

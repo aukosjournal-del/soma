@@ -49,14 +49,14 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
         Retrouve ton compte
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
-        Entre ton e-mail ou ton nom de profil.
+        Entre ton e-mail ou ton pseudo.
       </p>
 
       <GlassInput
         type="text"
         value={identifier}
         onChange={(e) => setIdentifier(e.target.value)}
-        placeholder="E-mail ou nom de profil"
+        placeholder="E-mail ou pseudo"
         autoComplete="username"
         autoCapitalize="none"
       />

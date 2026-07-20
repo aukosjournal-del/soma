@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 export interface BottomSheetProps {
   open: boolean;
@@ -19,6 +19,25 @@ export interface BottomSheetProps {
  * Repris à l'identique du prototype (radius top 28, somaSlideUp 0.3s).
  */
 export function BottomSheet({ open, title, onClose, children, tall, footer }: BottomSheetProps) {
+  // Fige le défilement de la page derrière le sheet. La gouttière d'ascenseur
+  // étant réservée en permanence (globals.css), le contenu ne se décale pas.
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  // Échap ferme le sheet — attendu de tout dialogue modal.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
@@ -52,7 +71,8 @@ export function BottomSheet({ open, title, onClose, children, tall, footer }: Bo
           borderTop: "1px solid var(--color-border)",
           borderTopLeftRadius: "28px",
           borderTopRightRadius: "28px",
-          padding: "12px 16px 32px",
+          // Marge basse : 32 px, augmentés de la zone sûre (encoche/barre iOS).
+          padding: "12px 16px calc(32px + env(safe-area-inset-bottom, 0px))",
           boxSizing: "border-box",
           boxShadow: "0 -20px 60px rgba(0,0,0,0.5)",
           animation: "somaSlideUp 0.3s ease-out",

@@ -2,9 +2,10 @@ import { useState } from "react";
 import { AuthShell } from "@presentation/components/AuthShell";
 import { BrandHeader } from "@presentation/components/BrandHeader";
 import { GlassInput } from "@presentation/components/GlassInput";
+import { rememberMe } from "@infrastructure/auth/rememberMe";
 
 export interface LoginStepProps {
-  onSubmit: (identifier: string, password: string) => void;
+  onSubmit: (identifier: string, password: string, remember: boolean) => void;
   submitting?: boolean;
   errorMessage?: string;
   onForgot: () => void;
@@ -18,10 +19,11 @@ export interface LoginStepProps {
 export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCreateAccount }: LoginStepProps) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(rememberMe.isRemembered());
 
   const submit = () => {
     if (submitting) return;
-    if (identifier.trim() && password.trim()) onSubmit(identifier.trim(), password);
+    if (identifier.trim() && password.trim()) onSubmit(identifier.trim(), password, remember);
   };
 
   return (
@@ -29,10 +31,10 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
       <BrandHeader />
 
       <h1 style={{ color: "#fff", fontSize: "22px", fontWeight: 900, margin: "0 0 4px", textAlign: "center" }}>
-        Content de te revoir
+        Te revoilà
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
-        Connecte-toi pour suivre ta progression.
+        Reprends où tu t'es arrêté.
       </p>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -40,7 +42,7 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
           type="text"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
-          placeholder="E-mail ou nom d'utilisateur"
+          placeholder="E-mail ou pseudo"
           autoComplete="username"
           autoCapitalize="none"
         />
@@ -53,6 +55,34 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
           onKeyDown={(e) => e.key === "Enter" && submit()}
         />
       </div>
+
+      <label
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          marginTop: "14px",
+          cursor: "pointer",
+          userSelect: "none",
+        }}
+      >
+        <input
+          type="checkbox"
+          checked={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+          style={{
+            width: "18px",
+            height: "18px",
+            accentColor: "var(--color-accent)",
+            cursor: "pointer",
+            flexShrink: 0,
+            margin: 0,
+          }}
+        />
+        <span style={{ color: "var(--color-text-secondary)", fontSize: "13px", fontWeight: 600 }}>
+          Rester connecté
+        </span>
+      </label>
 
       <button
         type="button"

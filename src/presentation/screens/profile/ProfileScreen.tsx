@@ -23,6 +23,7 @@ import type { TrainingHistory } from "@domain/profile/entities/Achievements";
 import { DisciplineCard } from "./DisciplineCard";
 import { GoalsCard } from "./GoalsCard";
 import { SupabaseAuthGateway } from "@infrastructure/supabase/adapters/SupabaseAuthGateway";
+import { rememberMe } from "@infrastructure/auth/rememberMe";
 
 const card = {
   background: "var(--color-bg-elevated)",
@@ -141,6 +142,9 @@ export function ProfileScreen() {
     await refresh();
   };
   const logout = async () => {
+    // Se déconnecter annule « rester connecté » : sinon la case cochée
+    // relancerait l'app directement sur l'Accueil au prochain démarrage.
+    rememberMe.clear();
     await new SupabaseAuthGateway().signOut();
     // Recharge l'app : on repart proprement sur l'écran de connexion.
     window.location.assign("/");

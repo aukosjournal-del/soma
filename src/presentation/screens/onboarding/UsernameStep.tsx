@@ -9,7 +9,7 @@ import type { UsernameCheck } from "@domain/onboarding/use-cases/CheckUsernameAv
 function statusView(check: UsernameCheck): { text: string; color: string } {
   switch (check.status) {
     case "checking":
-      return { text: "Vérification en cours…", color: "var(--color-at-prefix)" };
+      return { text: "On vérifie…", color: "var(--color-at-prefix)" };
     case "available":
       return { text: "Disponible !", color: "var(--color-success)" };
     case "taken":
@@ -19,7 +19,7 @@ function statusView(check: UsernameCheck): { text: string; color: string } {
         ? { text: "Minimum 3 caractères", color: "var(--color-error)" }
         : { text: "Maximum 30 caractères", color: "var(--color-error)" };
     case "error":
-      return { text: "Vérification impossible, réessaie", color: "var(--color-error)" };
+      return { text: "Impossible de vérifier, réessaie", color: "var(--color-error)" };
     default:
       return { text: " ", color: "var(--color-at-prefix)" };
   }
@@ -66,7 +66,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
       </p>
 
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
-        Choisissez votre nom d'utilisateur
+        Choisis ton pseudo
       </h1>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>

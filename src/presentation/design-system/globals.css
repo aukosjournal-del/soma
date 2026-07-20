@@ -9,6 +9,19 @@ html, body, #root {
   min-height: 100%;
   height: 100%;
 }
+
+/*
+ * Réserve la gouttière d'ascenseur des deux côtés. Sans ça, sur les
+ * navigateurs à ascenseur classique (Windows, Linux, macOS réglé sur
+ * « toujours afficher »), le document est centré sur une largeur amputée
+ * de ~15 px tandis que les bottom sheets — en `position: fixed` — restent
+ * centrés sur la fenêtre entière : les sheets apparaissent décalés vers la
+ * droite d'une demi-largeur d'ascenseur. Invisible sur macOS en ascenseurs
+ * flottants, d'où un défaut qui ne se voit que sur certains appareils.
+ */
+html {
+  scrollbar-gutter: stable both-edges;
+}
 #root {
   isolation: isolate;
 }
