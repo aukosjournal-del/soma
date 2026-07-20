@@ -329,7 +329,7 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                 boxSizing: "border-box",
               }}
             >
-              ⚡ Séance libre
+              Séance libre
             </button>
           </div>
 
