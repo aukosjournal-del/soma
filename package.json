@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx",
     "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "gen:types": "supabase gen types typescript --project-id ujanhmwreipxeypkpcoc --schema public > src/infrastructure/supabase/database.types.ts",
     "cap:sync": "cap sync",
     "cap:ios": "cap run ios",
@@ -32,10 +34,12 @@
     "eslint": "^9.11.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "jsdom": "^30.0.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
-    "vite-plugin-pwa": "^0.20.5"
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^4.1.10"
   }
 }

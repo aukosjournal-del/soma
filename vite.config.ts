@@ -1,4 +1,6 @@
-import { defineConfig } from "vite";
+// `vitest/config` réexporte `defineConfig` de Vite en ajoutant le typage du
+// champ `test` — un seul fichier de config pour le build et les tests.
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import { fileURLToPath, URL } from "node:url";
@@ -54,4 +56,10 @@ export default defineConfig({
     __BUILD_STAMP__: JSON.stringify(new Date().toISOString()),
   },
   server: { port: 5173, host: true },
+  test: {
+    // jsdom : les stores (activeSessionStore, syncQueueStore) lisent
+    // `localStorage`, absent de l'environnement Node par défaut.
+    environment: "jsdom",
+    include: ["src/**/*.test.ts"],
+  },
 });
