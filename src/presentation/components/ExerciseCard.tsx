@@ -69,15 +69,15 @@ export function ExerciseCard({ exercise, index, total, onWeight, onReps, onCheck
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "18px 1fr 1fr 48px",
-          gap: "8px",
-          padding: "0 2px",
+          gridTemplateColumns: "16px 1fr 1fr 48px 48px",
+          gap: "6px",
           marginBottom: "8px",
         }}
       >
         <span />
         <span style={columnLabel}>Charge</span>
         <span style={columnLabel}>Reps</span>
+        <span />
         <span />
       </div>
 

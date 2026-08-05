@@ -57,9 +57,11 @@ export default defineConfig({
   },
   server: { port: 5173, host: true },
   test: {
-    // jsdom : les stores (activeSessionStore, syncQueueStore) lisent
-    // `localStorage`, absent de l'environnement Node par défaut.
-    environment: "jsdom",
+    // Environnement node explicite + stub `localStorage` maison. jsdom
+    // s'appliquait sous Linux mais pas sur macOS : le résultat des tests
+    // dépendait de la machine, ce qui est pire qu'inutile.
+    environment: "node",
+    setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.test.ts"],
   },
 });
