@@ -50,12 +50,13 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
       )}
       <button
         type="button"
+              className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
           width: "100%",
           minHeight: "52px",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",
@@ -86,6 +87,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
             <button
               key={indicator.id}
               type="button"
+              className="soma-press"
               onClick={() => setVisible((v) => toggleSelection(v, indicator.id, MAX_VISIBLE_INDICATORS))}
               disabled={disabled}
               aria-pressed={checked}
@@ -96,7 +98,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 padding: "10px 12px",
                 borderRadius: "12px",
                 background: "var(--color-bg-elevated)",
-                border: `1px solid ${checked ? "var(--color-accent-border)" : "var(--color-border)"}`,
+                border: "none",
                 cursor: disabled ? "not-allowed" : "pointer",
                 opacity: disabled ? 0.5 : 1,
                 textAlign: "left",
@@ -110,7 +112,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                   height: "22px",
                   width: "22px",
                   borderRadius: "7px",
-                  border: `1px solid ${checked ? "var(--color-accent)" : "var(--color-border)"}`,
+                  border: "none",
                   background: checked ? "var(--color-accent)" : "transparent",
                   color: "var(--color-on-accent)",
                   display: "flex",
@@ -126,7 +128,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
               </span>
 
               <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ display: "block", color: "#fff", fontSize: "13px", fontWeight: 700 }}>
+                <span style={{ display: "block", color: "#fff", fontSize: "13px", fontWeight: 500 }}>
                   {indicator.label}
                 </span>
                 <span style={{ display: "block", color: "var(--color-text-faint)", fontSize: "11px", marginTop: "2px" }}>
@@ -139,7 +141,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                   flexShrink: 0,
                   color: "var(--color-text-secondary)",
                   fontSize: "14px",
-                  fontWeight: 900,
+                  fontWeight: 500,
                   fontVariantNumeric: "tabular-nums",
                 }}
               >

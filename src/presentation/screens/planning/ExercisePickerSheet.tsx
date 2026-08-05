@@ -46,6 +46,7 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
             <button
               key={routine.id}
               type="button"
+              className="soma-press"
               onClick={() => void add(routine)}
               disabled={busyId !== undefined}
               style={{
@@ -57,7 +58,6 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
                 padding: "12px",
                 borderRadius: "12px",
                 background: "var(--color-bg-elevated)",
-                border: "1px solid var(--color-border)",
                 cursor: busyId ? "not-allowed" : "pointer",
                 textAlign: "left",
                 boxSizing: "border-box",
@@ -65,12 +65,12 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
               }}
             >
               <span style={{ minWidth: 0 }}>
-                <span style={{ display: "block", color: "#fff", fontSize: "15px", fontWeight: 900 }}>{routine.name}</span>
+                <span style={{ display: "block", color: "#fff", fontSize: "15px", fontWeight: 500 }}>{routine.name}</span>
                 <span style={{ display: "block", color: "var(--color-text-muted)", fontSize: "12px" }}>
                   {routine.focus ?? ""}
                 </span>
               </span>
-              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "12px", fontWeight: 800, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "12px", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
                 {busyId === routine.id ? "Ajout…" : `${routine.exercises.length} ex.`}
               </span>
             </button>

@@ -12,8 +12,7 @@ import {
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "0 0 10px",
 } as const;
@@ -62,7 +61,6 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
           width: "100%",
           height: "180px",
           borderRadius: "12px",
-          border: "1px solid var(--color-border)",
           background:
             "repeating-linear-gradient(45deg, rgba(192,235,255,0.1) 0px, rgba(192,235,255,0.1) 4px, rgba(192,235,255,0.05) 4px, rgba(192,235,255,0.05) 8px)",
           display: "flex",
@@ -70,7 +68,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
           justifyContent: "center",
           color: "var(--color-text-muted)",
           fontSize: "13px",
-          fontWeight: 600,
+          fontWeight: 500,
           marginBottom: "18px",
           boxSizing: "border-box",
         }}
@@ -86,16 +84,17 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
             <button
               key={lvl}
               type="button"
+              className="soma-press"
               onClick={() => void pick(lvl)}
               aria-pressed={active}
               style={{
                 height: "36px",
                 borderRadius: "10px",
-                border: `1px solid ${active ? DIFFICULTY_COLOR[lvl] : "var(--color-border)"}`,
+                border: "none",
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 fontSize: "11px",
-                fontWeight: 700,
+                fontWeight: 500,
                 cursor: "pointer",
               }}
             >

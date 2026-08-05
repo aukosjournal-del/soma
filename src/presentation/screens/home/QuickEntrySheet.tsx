@@ -6,12 +6,11 @@ const field = {
   width: "100%",
   height: "48px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
   borderRadius: "12px",
   padding: "0 12px",
   color: "#fff",
   fontSize: "15px",
-  fontWeight: 700,
+  fontWeight: 500,
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -19,8 +18,7 @@ const field = {
 const label = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   letterSpacing: "0.04em",
   marginBottom: "4px",
 } as const;
@@ -115,13 +113,14 @@ export function QuickEntrySheet({ open, initial, onClose, onSave }: QuickEntrySh
 
       <button
         type="button"
+              className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

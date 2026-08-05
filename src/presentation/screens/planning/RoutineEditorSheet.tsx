@@ -24,7 +24,6 @@ const field = {
   width: "100%",
   height: "48px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
   borderRadius: "12px",
   padding: "0 12px",
   color: "#fff",
@@ -35,12 +34,11 @@ const microInput = {
   width: "100%",
   height: "32px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
   borderRadius: "8px",
   textAlign: "center",
   color: "#fff",
   fontSize: "12px",
-  fontWeight: 700,
+  fontWeight: 500,
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -48,17 +46,14 @@ const microInput = {
 const microLabel = {
   color: "var(--color-at-prefix)",
   fontSize: "9px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   marginBottom: "2px",
 } as const;
 
 const sectionLabel = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "0.04em",
+  fontWeight: 500,
   marginBottom: "4px",
 } as const;
 
@@ -159,7 +154,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ex: Push"
-            style={{ ...field, fontSize: "15px", fontWeight: 700 }}
+            style={{ ...field, fontSize: "15px", fontWeight: 500 }}
           />
         </label>
 
@@ -170,7 +165,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={focus}
             onChange={(e) => setFocus(e.target.value)}
             placeholder="Ex: Pectoraux · Épaules · Triceps"
-            style={{ ...field, fontSize: "14px", fontWeight: 600 }}
+            style={{ ...field, fontSize: "14px", fontWeight: 500 }}
           />
         </label>
 
@@ -180,10 +175,9 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             style={{
               ...field,
               background: "rgba(192,235,255,0.05)",
-              border: "1px solid var(--color-border-soft)",
               color: "var(--color-accent)",
               fontSize: "16px",
-              fontWeight: 700,
+              fontWeight: 500,
               display: "flex",
               alignItems: "center",
               fontVariantNumeric: "tabular-nums",
@@ -206,11 +200,10 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                   padding: "8px 10px",
                   borderRadius: "10px",
                   background: "var(--color-bg-elevated)",
-                  border: "1px solid var(--color-border)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-                  <span style={{ color: "#fff", fontSize: "13px", fontWeight: 700 }}>{ex.name}</span>
+                  <span style={{ color: "#fff", fontSize: "13px", fontWeight: 500 }}>{ex.name}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
                     <button
                       type="button"
@@ -286,7 +279,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               value={pick}
               onChange={(e) => setPick(e.target.value)}
               aria-label="Choisir un exercice"
-              style={{ ...field, flex: 1, height: "44px", fontSize: "13px", fontWeight: 600, padding: "0 10px" }}
+              style={{ ...field, flex: 1, height: "44px", fontSize: "13px", fontWeight: 500, padding: "0 10px" }}
             >
               {library.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -297,6 +290,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             <button
               type="button"
               onClick={addExercise}
+              className="soma-press"
               style={{
                 flexShrink: 0,
                 height: "44px",
@@ -305,7 +299,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 border: "none",
                 background: "var(--color-accent-soft)",
                 color: "var(--color-accent)",
-                fontWeight: 800,
+                fontWeight: 500,
                 fontSize: "13px",
                 cursor: "pointer",
               }}
@@ -324,6 +318,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
         {routine && (
           <button
             type="button"
+            className="soma-press"
             onClick={async () => {
               await onDelete(routine.id);
               onClose();
@@ -333,11 +328,11 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               padding: "0 18px",
               borderRadius: "12px",
               background: "rgba(239,68,68,0.12)",
-              border: "1px solid var(--color-error-border)",
               color: "var(--color-error)",
-              fontWeight: 800,
+              fontWeight: 500,
               fontSize: "14px",
               cursor: "pointer",
+              border: "none",
             }}
           >
             Supprimer
@@ -345,12 +340,13 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
         )}
         <button
           type="button"
+          className="soma-press"
           onClick={submit}
           disabled={saving}
           style={{
             flex: 1,
             minHeight: "52px",
-            fontWeight: 800,
+            fontWeight: 500,
             fontSize: "15px",
             borderRadius: "12px",
             background: "var(--color-accent)",

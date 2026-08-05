@@ -7,8 +7,7 @@ const AVATAR_EMOJIS = ["💪", "🔥", "⚡", "🏋️", "🐺", "🦁"];
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "0 0 10px",
 } as const;
@@ -46,17 +45,17 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
       <p style={eyebrow}>Photo</p>
       <button
         type="button"
+              className="soma-press"
         disabled
         title="Import de photo à venir"
         style={{
           width: "100%",
           height: "56px",
           borderRadius: "12px",
-          border: "1px dashed rgba(192,235,255,0.25)",
           background: "rgba(192,235,255,0.05)",
           color: "var(--color-text-muted)",
           fontSize: "13px",
-          fontWeight: 700,
+          fontWeight: 500,
           cursor: "not-allowed",
           marginBottom: "18px",
           boxSizing: "border-box",
@@ -73,13 +72,14 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             <button
               key={emoji}
               type="button"
+              className="soma-press"
               onClick={() => void pick(emoji)}
               aria-label={`Avatar ${emoji}`}
               aria-pressed={active}
               style={{
                 aspectRatio: "1",
                 borderRadius: "12px",
-                border: `1px solid ${active ? "var(--color-accent)" : "var(--color-border)"}`,
+                border: "none",
                 background: active ? "var(--color-accent-soft)" : "var(--color-bg-elevated)",
                 fontSize: "26px",
                 lineHeight: 1,
@@ -107,17 +107,17 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             flex: 1,
             height: "48px",
             background: "var(--color-bg-elevated)",
-            border: "1px solid var(--color-border)",
             borderRadius: "12px",
             padding: "0 12px",
             color: "#fff",
             fontSize: "18px",
-            fontWeight: 600,
+            fontWeight: 500,
             boxSizing: "border-box",
           }}
         />
         <button
           type="button"
+              className="soma-press"
           onClick={() => customEmoji.trim() && void pick(customEmoji.trim())}
           style={{
             flexShrink: 0,
@@ -127,7 +127,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             border: "none",
             background: "var(--color-accent-soft)",
             color: "var(--color-accent)",
-            fontWeight: 800,
+            fontWeight: 500,
             fontSize: "13px",
             cursor: "pointer",
           }}
@@ -139,6 +139,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
       <p style={{ ...eyebrow, marginTop: "18px" }}>Par défaut</p>
       <button
         type="button"
+              className="soma-press"
         onClick={() => void pick("logo")}
         style={{
           width: "100%",
@@ -147,7 +148,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
           gap: "12px",
           padding: "10px 12px",
           borderRadius: "12px",
-          border: `1px solid ${current === "logo" ? "var(--color-accent)" : "var(--color-border)"}`,
+          border: "none",
           background: current === "logo" ? "var(--color-accent-soft)" : "var(--color-bg-elevated)",
           cursor: "pointer",
           boxSizing: "border-box",
@@ -159,7 +160,6 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             width: "44px",
             borderRadius: "12px",
             overflow: "hidden",
-            border: "1px solid var(--color-accent-border)",
             background: "var(--color-bg)",
             flexShrink: 0,
           }}
@@ -170,7 +170,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transform: "scale(1.9)" }}
           />
         </span>
-        <span style={{ color: "#fff", fontSize: "14px", fontWeight: 700 }}>Logo SOMA</span>
+        <span style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>Logo SOMA</span>
       </button>
 
       {error && (

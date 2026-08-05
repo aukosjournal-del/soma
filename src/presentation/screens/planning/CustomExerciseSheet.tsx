@@ -8,20 +8,18 @@ const field = {
   width: "100%",
   height: "48px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
   borderRadius: "12px",
   padding: "0 12px",
   color: "#fff",
   fontSize: "14px",
-  fontWeight: 600,
+  fontWeight: 500,
   boxSizing: "border-box",
 } as const;
 
 const label = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   letterSpacing: "0.04em",
   marginBottom: "4px",
 } as const;
@@ -124,7 +122,6 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               width: "100%",
               height: "80px",
               background: "var(--color-bg-elevated)",
-              border: "1px solid var(--color-border)",
               borderRadius: "12px",
               padding: "10px 12px",
               color: "#fff",
@@ -144,12 +141,11 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               width: "100%",
               height: "72px",
               borderRadius: "12px",
-              border: "1px dashed rgba(192,235,255,0.2)",
               background:
                 "repeating-linear-gradient(45deg, rgba(192,235,255,0.06) 0px, rgba(192,235,255,0.06) 4px, rgba(192,235,255,0.03) 4px, rgba(192,235,255,0.03) 8px)",
               color: "var(--color-text-muted)",
               fontSize: "13px",
-              fontWeight: 600,
+              fontWeight: 500,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -169,16 +165,17 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
                 <button
                   key={lvl}
                   type="button"
+                  className="soma-press"
                   onClick={() => setDifficulty(lvl)}
                   aria-pressed={active}
                   style={{
                     height: "36px",
                     borderRadius: "10px",
-                    border: `1px solid ${active ? DIFFICULTY_COLOR[lvl] : "var(--color-border)"}`,
+                    border: "none",
                     background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                     color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                     fontSize: "11px",
-                    fontWeight: 700,
+                    fontWeight: 500,
                     cursor: "pointer",
                   }}
                 >
@@ -196,13 +193,14 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
 
       <button
         type="button"
+        className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

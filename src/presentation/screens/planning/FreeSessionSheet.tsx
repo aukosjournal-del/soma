@@ -10,12 +10,11 @@ const microInput = {
   width: "100%",
   height: "32px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
   borderRadius: "8px",
   textAlign: "center",
   color: "#fff",
   fontSize: "12px",
-  fontWeight: 700,
+  fontWeight: 500,
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -23,16 +22,14 @@ const microInput = {
 const microLabel = {
   color: "var(--color-at-prefix)",
   fontSize: "9px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   marginBottom: "2px",
 } as const;
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
+  fontWeight: 500,
   letterSpacing: "var(--tracking-eyebrow)",
 } as const;
 
@@ -100,7 +97,6 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           width: "100%",
           height: "64px",
           background: "var(--color-bg-elevated)",
-          border: "1px solid var(--color-border)",
           borderRadius: "12px",
           padding: "10px 12px",
           color: "#fff",
@@ -120,6 +116,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             <button
               key={lvl}
               type="button"
+              className="soma-press"
               onClick={() => setLevel(lvl)}
               aria-pressed={active}
               style={{
@@ -129,7 +126,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 fontSize: "11px",
-                fontWeight: 700,
+                fontWeight: 500,
                 cursor: "pointer",
               }}
             >
@@ -141,16 +138,16 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
 
       <button
         type="button"
+        className="soma-press"
         onClick={generate}
         style={{
           width: "100%",
           height: "44px",
           marginBottom: "16px",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: "13px",
           borderRadius: "12px",
           background: "var(--color-bg-elevated)",
-          border: "1px solid var(--color-border)",
           color: "var(--color-text-secondary)",
           cursor: "pointer",
           boxSizing: "border-box",
@@ -177,11 +174,10 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
               padding: "8px 10px",
               borderRadius: "10px",
               background: "var(--color-bg-elevated)",
-              border: "1px solid var(--color-border)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-              <span style={{ color: "#fff", fontSize: "13px", fontWeight: 700 }}>{ex.name}</span>
+              <span style={{ color: "#fff", fontSize: "13px", fontWeight: 500 }}>{ex.name}</span>
               <button
                 type="button"
                 onClick={() => setExercises((list) => list.filter((_, k) => k !== i))}
@@ -238,12 +234,11 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             flex: 1,
             height: "44px",
             background: "var(--color-bg-elevated)",
-            border: "1px solid var(--color-border)",
             borderRadius: "12px",
             padding: "0 10px",
             color: "#fff",
             fontSize: "13px",
-            fontWeight: 600,
+            fontWeight: 500,
             boxSizing: "border-box",
           }}
         >
@@ -255,6 +250,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
         </select>
         <button
           type="button"
+          className="soma-press"
           onClick={addExercise}
           style={{
             flexShrink: 0,
@@ -264,7 +260,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             border: "none",
             background: "var(--color-accent-soft)",
             color: "var(--color-accent)",
-            fontWeight: 800,
+            fontWeight: 500,
             fontSize: "13px",
             cursor: "pointer",
           }}
@@ -275,6 +271,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
 
       <button
         type="button"
+        className="soma-press"
         onClick={() => onLaunch(exercises)}
         disabled={exercises.length === 0}
         style={{
@@ -285,7 +282,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           alignItems: "center",
           justifyContent: "center",
           gap: "8px",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",
