@@ -65,12 +65,21 @@ export function SyncStatusBadge() {
         }}
       >
         <span style={{ height: "8px", width: "8px", borderRadius: "50%", background: accent, flexShrink: 0 }} />
-        <span style={{ flex: 1, minWidth: 0, color: "var(--color-text-secondary)", fontSize: "12px", fontWeight: 600 }}>
+        <span
+          style={{
+            flex: 1,
+            minWidth: 0,
+            color: "var(--color-text-secondary)",
+            fontSize: "var(--text-label)",
+            fontWeight: "var(--weight-regular)",
+          }}
+        >
           {label}
         </span>
         {failing && (
           <button
             type="button"
+            className="soma-press"
             onClick={() => {
               syncQueueStore.retryExhausted();
               void flushQueue();
@@ -80,10 +89,14 @@ export function SyncStatusBadge() {
               border: "none",
               background: "var(--color-accent-soft)",
               color: "var(--color-accent)",
-              borderRadius: "999px",
-              padding: "5px 12px",
-              fontSize: "11px",
-              fontWeight: 800,
+              borderRadius: "var(--radius-pill)",
+              // Bandeau flottant compact : 32px de haut, en dessous du seuil
+              // 48px des actions principales, mais c'est une action de reprise
+              // ponctuelle et non un contrôle utilisé en pleine série.
+              minHeight: "32px",
+              padding: "6px 14px",
+              fontSize: "var(--text-caption)",
+              fontWeight: "var(--weight-medium)",
               cursor: "pointer",
             }}
           >

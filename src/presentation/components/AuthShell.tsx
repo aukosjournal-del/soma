@@ -35,7 +35,6 @@ export function AuthShell({ children }: { children: ReactNode }) {
           width: "100%",
           maxWidth: "var(--content-max-width)",
           background: "var(--color-bg-elevated)",
-          border: "1px solid var(--color-border)",
           borderRadius: "24px",
           padding: "28px 24px",
           backdropFilter: "var(--blur-glass)",

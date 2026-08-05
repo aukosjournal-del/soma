@@ -10,22 +10,22 @@ export interface GlassInputProps
 }
 
 /**
- * Champ de saisie "glass" — base commune reprise du prototype :
- * height 48, fond rgba(192,235,255,0.08), bordure rgba(192,235,255,0.15),
- * radius 12, texte blanc 600. `align="center"` + `size=13` = variante date.
+ * Champ de saisie "glass". La bordure est retirée : le champ se détache déjà
+ * par son fond, et l'empilement bordure-de-carte + bordure-de-champ créait le
+ * bruit visuel que la refonte cherche à supprimer.
  */
 export function GlassInput({ align = "left", size = 14, ...rest }: GlassInputProps) {
   const style: CSSProperties = {
     width: "100%",
     minWidth: 0,
-    height: "48px",
+    height: "var(--hit-target)",
     background: "var(--color-bg-elevated)",
-    border: "1px solid var(--color-border)",
+    border: "none",
     borderRadius: "12px",
     padding: align === "center" ? "0 10px" : "0 14px",
     color: "#fff",
     fontSize: `${size}px`,
-    fontWeight: 600,
+    fontWeight: "var(--weight-medium)" as CSSProperties["fontWeight"],
     textAlign: align,
     boxSizing: "border-box",
   };

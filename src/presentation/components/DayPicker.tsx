@@ -35,13 +35,14 @@ export function DayPicker({ selected, assigned, onSelect }: DayPickerProps) {
           <button
             key={day}
             type="button"
+            className="soma-press"
             onClick={() => onSelect(i)}
             aria-pressed={active}
             aria-label={day}
             style={{
               minHeight: "64px",
               borderRadius: "12px",
-              border: `1px solid ${active ? "var(--color-accent)" : "var(--color-border)"}`,
+              border: "none",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -49,24 +50,26 @@ export function DayPicker({ selected, assigned, onSelect }: DayPickerProps) {
               gap: "4px",
               cursor: "pointer",
               background: active ? "var(--color-accent)" : "var(--color-bg-elevated)",
-              transition: "all 0.2s ease",
+              // `all` forçait un repaint complet à chaque frame ; seules les
+              // couleurs changent réellement ici.
+              transition: "background var(--duration-fast) ease",
             }}
           >
             <span
               style={{
-                fontSize: "10px",
-                fontWeight: 700,
+                fontSize: "var(--text-micro)",
+                fontWeight: "var(--weight-medium)",
                 textTransform: "uppercase",
                 letterSpacing: "0.06em",
-                color: active ? "rgba(0,43,76,0.7)" : "var(--color-at-prefix)",
+                color: active ? "rgba(0,43,76,0.7)" : "var(--color-text-faint)",
               }}
             >
               {day}
             </span>
             <span
               style={{
-                fontSize: "16px",
-                fontWeight: 900,
+                fontSize: "var(--text-heading)",
+                fontWeight: "var(--weight-medium)",
                 lineHeight: 1,
                 fontVariantNumeric: "tabular-nums",
                 color: active ? "var(--color-on-accent)" : "#fff",

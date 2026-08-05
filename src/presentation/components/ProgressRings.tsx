@@ -29,9 +29,17 @@ export function ProgressRings({ ratios }: { ratios: Ratios }) {
           justifyContent: "center",
         }}
       >
-        <span style={{ color: "#fff", fontSize: "34px", fontWeight: 900, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+        <span
+          style={{
+            color: "#fff",
+            fontSize: "34px",
+            fontWeight: "var(--weight-medium)",
+            lineHeight: 1,
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
           {ratios.averagePct}
-          <span style={{ fontSize: "16px", color: "var(--color-at-prefix)" }}>%</span>
+          <span style={{ fontSize: "var(--text-heading)", color: "var(--color-text-faint)" }}>%</span>
         </span>
       </div>
     </div>

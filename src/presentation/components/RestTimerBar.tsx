@@ -124,11 +124,11 @@ export function RestTimerBar() {
               width: "44px",
               borderRadius: "12px",
               background: "var(--color-bg-elevated)",
-              border: "1px solid var(--color-border)",
+              border: "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "rgba(192,235,255,0.7)",
+              color: "var(--color-text-faint)",
               cursor: "pointer",
             }}
           >

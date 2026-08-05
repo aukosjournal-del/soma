@@ -43,11 +43,11 @@ export function WeeklyBarChart({ bars, color = "var(--color-accent)" }: WeeklyBa
           </div>
           <span
             style={{
-              fontSize: "10px",
-              fontWeight: 700,
+              fontSize: "var(--text-micro)",
+              fontWeight: "var(--weight-medium)",
               textTransform: "uppercase",
               letterSpacing: "0.04em",
-              color: bar.isToday ? "var(--color-accent)" : "var(--color-at-prefix)",
+              color: bar.isToday ? "var(--color-accent)" : "var(--color-text-faint)",
             }}
           >
             {bar.day}

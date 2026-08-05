@@ -32,8 +32,10 @@ export function BrandHeader() {
       <div
         style={{
           color: "var(--color-text)",
-          fontSize: "20px",
-          fontWeight: 900,
+          fontSize: "var(--text-title)",
+          // Seule exception assumée à la graisse 500 : le wordmark est un
+          // logotype, pas du texte d'interface.
+          fontWeight: "var(--weight-strong)",
           letterSpacing: "var(--tracking-logo)",
         }}
       >

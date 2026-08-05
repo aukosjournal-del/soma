@@ -72,7 +72,6 @@ export function BottomSheet({ open, title, onClose, children, tall, footer }: Bo
           width: "100%",
           maxWidth: "var(--content-max-width)",
           background: "var(--color-bg)",
-          borderTop: "1px solid var(--color-border)",
           borderTopLeftRadius: "28px",
           borderTopRightRadius: "28px",
           // Marge basse : 32 px, augmentés de la zone sûre (encoche/barre iOS).
@@ -89,21 +88,31 @@ export function BottomSheet({ open, title, onClose, children, tall, footer }: Bo
           <div style={{ height: "4px", width: "40px", borderRadius: "999px", background: "rgba(192,235,255,0.2)" }} />
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px", flexShrink: 0 }}>
-          <h3 style={{ color: "#fff", fontSize: "18px", fontWeight: 900, margin: 0 }}>{title}</h3>
+          <h3
+            style={{
+              color: "#fff",
+              fontSize: "var(--text-title)",
+              fontWeight: "var(--weight-medium)",
+              margin: 0,
+            }}
+          >
+            {title}
+          </h3>
           <button
             type="button"
+            className="soma-press"
             onClick={onClose}
             aria-label="Fermer"
             style={{
-              height: "36px",
-              width: "36px",
+              height: "var(--hit-target)",
+              width: "var(--hit-target)",
               borderRadius: "12px",
               background: "var(--color-bg-elevated)",
-              border: "1px solid var(--color-border)",
+              border: "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "var(--color-text-secondary)",
+              color: "var(--color-text-faint)",
               cursor: "pointer",
               flexShrink: 0,
             }}

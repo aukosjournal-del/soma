@@ -53,6 +53,32 @@
   --font-sans: 'Inter', system-ui, sans-serif;
   --tracking-eyebrow: 0.14em;
   --tracking-logo: 0.06em;
+
+  /*
+   * Échelle typographique — AJOUT (aucune valeur existante modifiée).
+   * Validée par le Co-founder le 2026-08-05.
+   *
+   * La hiérarchie se fait par la TAILLE, pas par la graisse : le prototype
+   * empilait des `fontWeight: 900` à tous les niveaux, ce qui annulait toute
+   * distinction. Une seule graisse forte (500) suffit, les niveaux se lisent
+   * au corps. `--weight-strong` reste disponible pour les cas où un chiffre
+   * doit dominer un fond coloré.
+   */
+  --text-display: 22px;  /* titre d'écran */
+  --text-title: 19px;    /* titre de section, nom de routine */
+  --text-heading: 16px;  /* nom d'exercice, en-tête de carte */
+  --text-metric: 17px;   /* chiffre clé (durée, volume, séries) */
+  --text-body: 14px;
+  --text-label: 13px;
+  --text-caption: 11px;  /* légende sous un chiffre, unité */
+  --text-micro: 10px;    /* en-tête de colonne */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-strong: 600;
+
+  /* Cible tactile minimale — validée le 2026-08-05 (48×48 sur les actions). */
+  --hit-target: 48px;
 }
 
 /* Base globale (repris du prototype : body + placeholders) -------------- */

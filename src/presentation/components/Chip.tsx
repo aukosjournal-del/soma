@@ -15,16 +15,21 @@ export function Chip({ label, active, onClick, variant = "muscle" }: ChipProps) 
   return (
     <button
       type="button"
+      className="soma-press"
       onClick={onClick}
       aria-pressed={active}
       style={{
         flexShrink: 0,
+        // Hauteur portée à 36px : une pilule de filtre n'a pas besoin des
+        // 48px d'une action destructrice, mais 28px était sous le seuil
+        // confortable au pouce.
+        minHeight: "36px",
         padding: isMuscle ? "8px 14px" : "6px 12px",
-        borderRadius: "999px",
-        fontSize: isMuscle ? "12px" : "11px",
-        fontWeight: 600,
+        borderRadius: "var(--radius-pill)",
+        fontSize: isMuscle ? "var(--text-label)" : "var(--text-caption)",
+        fontWeight: "var(--weight-medium)",
         cursor: "pointer",
-        border: "1px solid var(--color-border)",
+        border: "none",
         background: active
           ? isMuscle
             ? "var(--color-accent)"
