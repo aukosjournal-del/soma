@@ -27,7 +27,7 @@ export class CheckUsernameAvailability {
     try {
       const free = await this.port.isAvailable(validation.value.value, signal);
       return free ? { status: "available" } : { status: "taken" };
-    } catch (e) {
+    } catch {
       if (signal?.aborted) return { status: "checking" };
       return { status: "error" };
     }
