@@ -248,7 +248,7 @@ export function AnalyticsScreen() {
                       letterSpacing: "0.06em",
                     }}
                   >
-                    Pure strength
+                    Force pure
                   </span>
                 {intensity && (
                   <span

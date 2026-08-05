@@ -95,6 +95,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
   const [pick, setPick] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string>();
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -103,6 +104,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
     setExercises(toDraftExercises(routine));
     setPick(library[0]?.id ?? "");
     setError(undefined);
+    setConfirmDelete(false);
   }, [open, routine, library]);
 
   const patch = (index: number, values: Partial<RoutineDraftExercise>) =>
@@ -316,27 +318,70 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
 
       <div style={{ display: "flex", gap: "8px", marginTop: "20px" }}>
         {routine && (
-          <button
-            type="button"
-            className="soma-press"
-            onClick={async () => {
-              await onDelete(routine.id);
-              onClose();
-            }}
-            style={{
-              height: "52px",
-              padding: "0 18px",
-              borderRadius: "12px",
-              background: "rgba(239,68,68,0.12)",
-              color: "var(--color-error)",
-              fontWeight: 500,
-              fontSize: "14px",
-              cursor: "pointer",
-              border: "none",
-            }}
-          >
-            Supprimer
-          </button>
+          <>
+            <button
+              type="button"
+              className="soma-press"
+              onClick={() => setConfirmDelete(true)}
+              style={{
+                height: "52px",
+                padding: "0 18px",
+                borderRadius: "12px",
+                background: confirmDelete ? "var(--color-error)" : "rgba(239,68,68,0.12)",
+                color: confirmDelete ? "#fff" : "var(--color-error)",
+                fontWeight: 500,
+                fontSize: "14px",
+                cursor: "pointer",
+                border: "none",
+                transition: "background 0.2s ease, color 0.2s ease",
+              }}
+            >
+              {confirmDelete ? "Confirmer la suppression" : "Supprimer"}
+            </button>
+            {confirmDelete && (
+              <button
+                type="button"
+                className="soma-press"
+                onClick={() => setConfirmDelete(false)}
+                style={{
+                  height: "52px",
+                  padding: "0 18px",
+                  borderRadius: "12px",
+                  background: "var(--color-bg-elevated)",
+                  color: "var(--color-text-secondary)",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  border: "none",
+                }}
+              >
+                Annuler
+              </button>
+            )}
+            {confirmDelete && (
+              <button
+                type="button"
+                className="soma-press"
+                onClick={async () => {
+                  await onDelete(routine.id);
+                  onClose();
+                }}
+                style={{
+                  height: "52px",
+                  padding: "0 18px",
+                  borderRadius: "12px",
+                  background: "var(--color-error)",
+                  color: "#fff",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  border: "none",
+                }}
+              >
+                Oui, supprimer
+              </button>
+            )}
+          </>
         )}
         <button
           type="button"
