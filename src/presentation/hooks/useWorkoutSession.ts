@@ -49,13 +49,6 @@ export function useWorkoutSession() {
         if (cancelled) return;
 
         const current = activeSessionStore.getSnapshot();
-        console.info("[SOMA] resync séance", {
-          jour: todayIndex(),
-          routinePlanifiée: routine?.name ?? null,
-          routineIdPlanifiée: routine?.id ?? null,
-          cacheRoutineId: current?.routineId ?? null,
-          cacheSource: current?.source ?? null,
-        });
         // Une Séance Libre est un choix explicite : le planning ne la remplace pas.
         if (current?.source === "free") return;
         const sameRoutine = current !== null && current.routineId === (routine?.id ?? null);
@@ -71,7 +64,6 @@ export function useWorkoutSession() {
         );
       } catch (e) {
         // Hors-ligne ou erreur réseau : on conserve la séance locale.
-        console.warn("[SOMA] resync séance impossible", e);
         if (!cancelled && activeSessionStore.getSnapshot() === null) {
           setError(e instanceof Error ? e.message : "Chargement impossible.");
         }
