@@ -27,45 +27,41 @@ import { rememberMe } from "@infrastructure/auth/rememberMe";
 
 const card = {
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
-  borderRadius: "24px",
+  borderRadius: "var(--radius-lg)",
   padding: "16px",
   backdropFilter: "var(--blur-glass)",
   WebkitBackdropFilter: "var(--blur-glass)",
-  boxShadow: "var(--shadow-card)",
 } as const;
 
 const eyebrow = {
-  color: "var(--color-at-prefix)",
-  fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "var(--tracking-eyebrow)",
+  color: "var(--color-text-faint)",
+  fontSize: "var(--text-caption)",
+  fontWeight: "var(--weight-medium)",
   margin: 0,
 } as const;
 
 const pillButton = {
-  height: "30px",
-  padding: "0 12px",
-  borderRadius: "999px",
-  border: "1px solid var(--color-border)",
-  background: "var(--color-bg-elevated)",
+  height: "36px",
+  padding: "0 14px",
+  borderRadius: "var(--radius-pill)",
+  border: "none",
+  background: "var(--color-bg-elevated-strong)",
   color: "var(--color-text-secondary)",
-  fontSize: "12px",
-  fontWeight: 700,
+  fontSize: "var(--text-label)",
+  fontWeight: "var(--weight-medium)",
   cursor: "pointer",
 } as const;
 
 const accentButton = {
   flexShrink: 0,
-  height: "36px",
+  height: "40px",
   padding: "0 14px",
   borderRadius: "12px",
   background: "var(--color-accent-soft)",
-  border: "1px solid rgba(245,158,113,0.3)",
+  border: "none",
   color: "var(--color-accent)",
-  fontSize: "12px",
-  fontWeight: 800,
+  fontSize: "var(--text-label)",
+  fontWeight: "var(--weight-medium)",
   cursor: "pointer",
 } as const;
 
@@ -156,7 +152,7 @@ export function ProfileScreen() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "24px" }}>
           <header style={{ padding: "8px 0 0" }}>
             <p style={eyebrow}>Profil</p>
-            <h1 style={{ color: "#fff", fontSize: "26px", fontWeight: 900, letterSpacing: "-0.02em", margin: "2px 0 0" }}>
+            <h1 style={{ color: "#fff", fontSize: "var(--text-display)", fontWeight: "var(--weight-medium)", margin: "2px 0 0" }}>
               {summary?.firstName || summary?.username || "—"}
             </h1>
           </header>
@@ -186,7 +182,7 @@ export function ProfileScreen() {
                       borderRadius: "50%",
                       overflow: "hidden",
                       flexShrink: 0,
-                      border: "1px solid var(--color-border)",
+                      border: "none",
                       background: "var(--color-bg)",
                       cursor: "pointer",
                       padding: 0,
@@ -227,9 +223,9 @@ export function ProfileScreen() {
                   </button>
 
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ color: "#fff", fontSize: "18px", fontWeight: 800 }}>@{summary?.username || "—"}</div>
+                    <div style={{ color: "#fff", fontSize: "var(--text-title)", fontWeight: "var(--weight-medium)" }}>@{summary?.username || "—"}</div>
                     <div style={{ color: "rgba(192,235,255,0.7)", fontSize: "15px", marginTop: "2px" }}>{fullName || "—"}</div>
-                    <div style={{ color: "var(--color-text-muted)", fontSize: "14px", fontWeight: 700, marginTop: "2px", fontVariantNumeric: "tabular-nums" }}>
+                    <div style={{ color: "var(--color-text-muted)", fontSize: "var(--text-body)", marginTop: "2px", fontVariantNumeric: "tabular-nums" }}>
                       {age !== null ? `${age} ans` : "Âge non renseigné"}
                     </div>
                   </div>
@@ -244,7 +240,7 @@ export function ProfileScreen() {
                       width: "48px",
                       borderRadius: "12px",
                       background: "var(--color-accent-soft)",
-                      border: "1px solid rgba(245,158,113,0.3)",
+                      border: "none",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -256,7 +252,7 @@ export function ProfileScreen() {
                     </svg>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <h2 style={{ color: "#fff", fontSize: "18px", fontWeight: 900, margin: 0 }}>Biométrie</h2>
+                    <h2 style={{ color: "#fff", fontSize: "var(--text-title)", fontWeight: "var(--weight-medium)", margin: 0 }}>Biométrie</h2>
                     <p style={{ color: "var(--color-at-prefix)", fontSize: "12px", margin: "2px 0 0" }}>Utilisées dans les calculs</p>
                   </div>
                   <button type="button" onClick={() => setBioOpen(true)} style={accentButton}>
@@ -270,7 +266,7 @@ export function ProfileScreen() {
                       key={field.id}
                       style={{
                         background: "var(--color-bg-elevated)",
-                        border: "1px solid var(--color-border)",
+                        border: "none",
                         borderRadius: "12px",
                         padding: "8px 6px",
                         boxSizing: "border-box",
@@ -280,8 +276,7 @@ export function ProfileScreen() {
                         style={{
                           color: "var(--color-text-muted)",
                           fontSize: "9px",
-                          fontWeight: 600,
-                          textTransform: "uppercase",
+                          fontWeight: "var(--weight-medium)",
                           letterSpacing: "0.02em",
                           marginBottom: "3px",
                           whiteSpace: "nowrap",
@@ -292,7 +287,7 @@ export function ProfileScreen() {
                         {field.label}
                       </div>
                       <div style={{ display: "flex", alignItems: "baseline", gap: "2px" }}>
-                        <span style={{ color: "#fff", fontSize: "15px", fontWeight: 900, fontVariantNumeric: "tabular-nums" }}>
+                        <span style={{ color: "#fff", fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)", fontVariantNumeric: "tabular-nums" }}>
                           {bioMetricValue(metrics, field) ?? "—"}
                         </span>
                         <span style={{ color: "var(--color-text-faint)", fontSize: "9px", flexShrink: 0 }}>{field.unit}</span>
@@ -314,13 +309,13 @@ export function ProfileScreen() {
                   <div key={indicator.id} style={card}>
                     <p style={eyebrow}>{indicator.label}</p>
                     <div style={{ marginTop: "8px", display: "flex", alignItems: "baseline", gap: "4px" }}>
-                      <span style={{ color: "#fff", fontSize: "32px", fontWeight: 900, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+                      <span style={{ color: "#fff", fontSize: "32px", fontWeight: "var(--weight-medium)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
                         {indicator.value || "—"}
                       </span>
                       <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontWeight: 500 }}>{indicator.unit}</span>
                     </div>
                     {indicator.statusLabel && (
-                      <p style={{ color: indicator.statusColor, fontSize: "11px", fontWeight: 700, margin: "8px 0 0", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                      <p style={{ color: indicator.statusColor, fontSize: "var(--text-caption)", fontWeight: "var(--weight-medium)", margin: "8px 0 0" }}>
                         {indicator.statusLabel}
                       </p>
                     )}
@@ -351,11 +346,11 @@ export function ProfileScreen() {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: "8px",
-                  fontWeight: 800,
-                  fontSize: "15px",
+                  fontWeight: "var(--weight-medium)",
+                  fontSize: "var(--text-body)",
                   borderRadius: "12px",
                   background: "rgba(239,68,68,0.12)",
-                  border: "1px solid rgba(239,68,68,0.35)",
+                  border: "none",
                   color: "var(--color-error)",
                   cursor: "pointer",
                   boxSizing: "border-box",

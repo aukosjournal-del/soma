@@ -18,42 +18,47 @@ import { flushQueue } from "@infrastructure/sync/SyncRunner";
 import { localISODate } from "@domain/home/ports/DailyLogRepository";
 import type { NutritionPayload, StepsPayload } from "@infrastructure/sync/SupabaseMutationExecutor";
 import { sessionProgress } from "@domain/workout/entities/SessionExercise";
-import { DAYS_FULL, todayIndex } from "@domain/workout/entities/Routine";
 
 const card = {
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
-  borderRadius: "24px",
+  borderRadius: "var(--radius-lg)",
   padding: "16px",
   backdropFilter: "var(--blur-glass)",
   WebkitBackdropFilter: "var(--blur-glass)",
-  boxShadow: "var(--shadow-card)",
 } as const;
 
+/** Sur-titre de carte : discret, il nomme la section sans lui voler la vedette. */
 const eyebrow = {
-  color: "var(--color-at-prefix)",
-  fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "var(--tracking-eyebrow)",
+  color: "var(--color-text-faint)",
+  fontSize: "var(--text-caption)",
+  fontWeight: "var(--weight-medium)",
   margin: 0,
 } as const;
 
 const ghostButton = {
   width: "100%",
-  minHeight: "52px",
+  minHeight: "var(--hit-target)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   gap: "8px",
-  fontWeight: 800,
-  fontSize: "15px",
+  fontWeight: "var(--weight-medium)",
+  fontSize: "var(--text-body)",
   borderRadius: "12px",
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
+  border: "none",
   color: "var(--color-text-secondary)",
   cursor: "pointer",
   boxSizing: "border-box",
+} as const;
+
+/** Chiffre dominant d'une carte de suivi (kcal, pas). */
+const bigNumber = {
+  color: "#fff",
+  fontSize: "34px",
+  fontWeight: "var(--weight-medium)",
+  lineHeight: 1,
+  fontVariantNumeric: "tabular-nums",
 } as const;
 
 const MACROS = [
@@ -110,10 +115,10 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
   });
 
   const routineName = session?.routineName ?? null;
-  const routineTitle = routineName
-    ? `${DAYS_FULL[todayIndex()]} : ${routineName.toUpperCase()}`
-    : "Repos / Séance libre";
-  const routineCta = routineName ? "DÉMARRER LA SÉANCE" : "LANCER SÉANCE LIBRE";
+  // Nom de routine seul, comme en Séance : le jour est déjà affiché juste
+  // au-dessus dans l'en-tête, et par le téléphone lui-même.
+  const routineTitle = routineName ?? "Repos / Séance libre";
+  const routineCta = routineName ? "Démarrer la séance" : "Lancer une séance libre";
 
   // Écriture optimiste : l'UI se met à jour immédiatement et la donnée part
   // dans la file — la saisie fonctionne donc entièrement hors-ligne.
@@ -133,10 +138,24 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
       <AppShell>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "24px" }}>
           <header style={{ padding: "8px 0 0" }}>
-            <p style={{ color: "var(--color-text-muted)", fontSize: "13px", fontWeight: 500, textTransform: "capitalize", margin: 0 }}>
+            <p
+              style={{
+                color: "var(--color-text-faint)",
+                fontSize: "var(--text-label)",
+                textTransform: "capitalize",
+                margin: 0,
+              }}
+            >
               {todayLong}
             </p>
-            <h1 style={{ color: "#fff", fontSize: "26px", fontWeight: 900, letterSpacing: "-0.02em", margin: "2px 0 0" }}>
+            <h1
+              style={{
+                color: "#fff",
+                fontSize: "var(--text-display)",
+                fontWeight: "var(--weight-medium)",
+                margin: "2px 0 0",
+              }}
+            >
               Bonjour, {firstName || "—"}
             </h1>
           </header>
@@ -193,8 +212,23 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
               <div style={{ minWidth: 0 }}>
                 <p style={eyebrow}>Routine du jour</p>
-                <h2 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "2px 0 0" }}>{routineTitle}</h2>
-                <p style={{ color: "var(--color-text-muted)", fontSize: "13px", margin: "2px 0 0" }}>
+                <h2
+                  style={{
+                    color: "#fff",
+                    fontSize: "var(--text-title)",
+                    fontWeight: "var(--weight-medium)",
+                    margin: "2px 0 0",
+                  }}
+                >
+                  {routineTitle}
+                </h2>
+                <p
+                  style={{
+                    color: "var(--color-text-muted)",
+                    fontSize: "var(--text-label)",
+                    margin: "2px 0 0",
+                  }}
+                >
                   {routineName ? "Séance prête à démarrer" : "Aucune routine planifiée aujourd'hui"}
                 </p>
               </div>
@@ -205,7 +239,7 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
                   width: "44px",
                   borderRadius: "12px",
                   background: "var(--color-accent-soft)",
-                  border: "1px solid rgba(245,158,113,0.3)",
+                  border: "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -222,6 +256,7 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
             </div>
             <button
               type="button"
+              className="soma-press"
               onClick={onStartSession}
               style={{
                 width: "100%",
@@ -230,13 +265,15 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "8px",
-                fontWeight: 800,
-                fontSize: "15px",
+                fontWeight: "var(--weight-medium)",
+                fontSize: "var(--text-body)",
                 borderRadius: "12px",
                 background: "var(--color-accent)",
                 color: "var(--color-on-accent)",
                 border: "none",
                 cursor: "pointer",
+                // Ombre accent conservée : c'est le seul appel à l'action
+                // principal de l'écran, elle le fait sortir du plan.
                 boxShadow: "var(--shadow-accent-cta)",
                 boxSizing: "border-box",
               }}
@@ -250,16 +287,20 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
 
           <div style={card}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
-              <p style={eyebrow}>Suivi Nutritionnel</p>
-              <span style={{ color: "var(--color-text-muted)", fontSize: "12px", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
+              <p style={eyebrow}>Nutrition</p>
+              <span
+                style={{
+                  color: "var(--color-text-muted)",
+                  fontSize: "var(--text-label)",
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
                 {nutritionPct}%
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
-              <span style={{ color: "#fff", fontSize: "36px", fontWeight: 900, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-                {data.nutrition.kcal}
-              </span>
-              <span style={{ color: "var(--color-at-prefix)", fontSize: "15px", fontWeight: 500 }}>
+              <span style={bigNumber}>{data.nutrition.kcal}</span>
+              <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-body)" }}>
                 / {data.goals.kcalGoal} kcal
               </span>
             </div>
@@ -270,54 +311,72 @@ export function HomeScreen({ onStartSession }: { onStartSession: () => void }) {
                 <div
                   key={macro.key}
                   style={{
-                    background: "var(--color-bg-elevated)",
+                    // Fond plus sourd que la carte parente : sans bordure, la
+                    // sous-carte doit se distinguer par le contraste seul.
+                    background: "var(--color-bg-elevated-strong)",
                     borderRadius: "12px",
                     padding: "10px",
-                    border: "1px solid var(--color-border)",
+                    border: "none",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "4px", marginBottom: "4px" }}>
                     <span style={{ height: "6px", width: "6px", borderRadius: "50%", background: macro.color }} />
-                    <span style={{ color: "var(--color-at-prefix)", fontSize: "10px", fontWeight: 600, textTransform: "uppercase" }}>
+                    <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-micro)" }}>
                       {macro.label}
                     </span>
                   </div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "2px" }}>
-                    <span style={{ color: "#fff", fontSize: "16px", fontWeight: 900, fontVariantNumeric: "tabular-nums" }}>
+                    <span
+                      style={{
+                        color: "#fff",
+                        fontSize: "var(--text-heading)",
+                        fontWeight: "var(--weight-medium)",
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
                       {data.nutrition[macro.key]}
                     </span>
-                    <span style={{ color: "var(--color-text-faint)", fontSize: "11px" }}>g</span>
+                    <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)" }}>g</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <button type="button" onClick={() => setQuickOpen(true)} style={ghostButton}>
+            <button type="button" className="soma-press" onClick={() => setQuickOpen(true)} style={ghostButton}>
               <PlusIcon />
-              <span>SAISIE RAPIDE</span>
+              <span>Saisie rapide</span>
             </button>
           </div>
 
           <div style={card}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
-              <p style={eyebrow}>Suivi des Pas</p>
-              <span style={{ color: "var(--color-text-muted)", fontSize: "12px", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
+              <p style={eyebrow}>Pas</p>
+              <span
+                style={{
+                  color: "var(--color-text-muted)",
+                  fontSize: "var(--text-label)",
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
                 {stepsPct}%
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
-              <span style={{ color: "#fff", fontSize: "36px", fontWeight: 900, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-                {data.steps.toLocaleString("fr-FR")}
-              </span>
-              <span style={{ color: "var(--color-at-prefix)", fontSize: "15px", fontWeight: 500 }}>
+              <span style={bigNumber}>{data.steps.toLocaleString("fr-FR")}</span>
+              <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-body)" }}>
                 / {data.goals.stepsGoal.toLocaleString("fr-FR")} pas
               </span>
             </div>
             <Bar percent={stepsPct} />
 
-            <button type="button" onClick={() => setStepsOpen(true)} style={{ ...ghostButton, marginTop: "16px" }}>
+            <button
+              type="button"
+              className="soma-press"
+              onClick={() => setStepsOpen(true)}
+              style={{ ...ghostButton, marginTop: "16px" }}
+            >
               <PlusIcon />
-              <span>SAISIE PAS</span>
+              <span>Saisir mes pas</span>
             </button>
           </div>
 
@@ -379,12 +438,27 @@ function Metric({
       >
         {svg}
       </div>
-      <span style={{ color: "var(--color-at-prefix)", fontSize: "10px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        {label}
-      </span>
+      <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-micro)" }}>{label}</span>
       <div style={{ textAlign: "center", lineHeight: 1.2 }}>
-        <div style={{ color: "#fff", fontSize: "13px", fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{value}</div>
-        <div style={{ color: "var(--color-text-faint)", fontSize: "10px", fontVariantNumeric: "tabular-nums" }}>{goal}</div>
+        <div
+          style={{
+            color: "#fff",
+            fontSize: "var(--text-label)",
+            fontWeight: "var(--weight-medium)",
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          {value}
+        </div>
+        <div
+          style={{
+            color: "var(--color-text-faint)",
+            fontSize: "var(--text-micro)",
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          {goal}
+        </div>
       </div>
     </div>
   );

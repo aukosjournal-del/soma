@@ -22,20 +22,16 @@ import type { Routine } from "@domain/workout/entities/Routine";
 
 const card = {
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
-  borderRadius: "24px",
+  borderRadius: "var(--radius-lg)",
   padding: "16px",
   backdropFilter: "var(--blur-glass)",
   WebkitBackdropFilter: "var(--blur-glass)",
-  boxShadow: "var(--shadow-card)",
 } as const;
 
 const eyebrow = {
-  color: "var(--color-at-prefix)",
-  fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "var(--tracking-eyebrow)",
+  color: "var(--color-text-faint)",
+  fontSize: "var(--text-caption)",
+  fontWeight: "var(--weight-medium)",
   margin: 0,
 } as const;
 
@@ -123,7 +119,14 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "24px" }}>
           <header style={{ padding: "8px 0 0" }}>
             <p style={eyebrow}>Cette semaine</p>
-            <h1 style={{ color: "#fff", fontSize: "26px", fontWeight: 900, letterSpacing: "-0.02em", margin: "2px 0 0" }}>
+            <h1
+              style={{
+                color: "#fff",
+                fontSize: "var(--text-display)",
+                fontWeight: "var(--weight-medium)",
+                margin: "2px 0 0",
+              }}
+            >
               Planning
             </h1>
           </header>
@@ -137,10 +140,12 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                 alignItems: "center",
                 gap: "8px",
                 borderRadius: "12px",
-                padding: "8px 12px",
-                border: `1px solid ${flash ? "rgba(16,185,129,0.4)" : "var(--color-border)"}`,
-                background: flash ? "rgba(16,185,129,0.12)" : "var(--color-bg-elevated)",
-                transition: "all 0.3s ease",
+                padding: "10px 12px",
+                border: "none",
+                // Le retour d'assignation se lit au fond seul : la bordure
+                // verte doublait l'information sans rien ajouter.
+                background: flash ? "rgba(16,185,129,0.16)" : "var(--color-bg-elevated-strong)",
+                transition: "background var(--duration-med) ease",
               }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(192,235,255,0.6)" strokeWidth="1.6" aria-hidden="true">
@@ -149,9 +154,11 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                 <line x1="5" y1="1" x2="5" y2="4.5" />
                 <line x1="11" y1="1" x2="11" y2="4.5" />
               </svg>
-              <span style={{ color: "var(--color-text-secondary)", fontSize: "13px", fontWeight: 500 }}>
+              <span style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-label)" }}>
                 {DAYS_FULL[selectedDay]} :{" "}
-                <span style={{ color: "var(--color-accent)", fontWeight: 700 }}>{assignedName}</span>
+                <span style={{ color: "var(--color-accent)", fontWeight: "var(--weight-medium)" }}>
+                  {assignedName}
+                </span>
               </span>
             </div>
           </div>
@@ -181,11 +188,13 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                       textAlign: "left",
                       borderRadius: "12px",
                       padding: "12px",
-                      border: `1px solid ${isAssigned ? "rgba(245,158,113,0.6)" : "var(--color-border)"}`,
-                      background: isAssigned ? "var(--color-accent-soft)" : "var(--color-bg-elevated)",
+                      border: "none",
+                      background: isAssigned
+                        ? "var(--color-accent-soft)"
+                        : "var(--color-bg-elevated-strong)",
                       cursor: "pointer",
                       boxSizing: "border-box",
-                      transition: "all 0.2s ease",
+                      transition: "background var(--duration-fast) ease",
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -213,23 +222,53 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
 
                       <div style={{ minWidth: 0, flex: 1 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <span style={{ color: "#fff", fontSize: "15px", fontWeight: 900 }}>{r.name}</span>
+                          <span
+                            style={{
+                              color: "#fff",
+                              fontSize: "var(--text-body)",
+                              fontWeight: "var(--weight-medium)",
+                            }}
+                          >
+                            {r.name}
+                          </span>
                           {isAssigned && (
-                            <span style={{ fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--color-accent)" }}>
+                            <span style={{ fontSize: "var(--text-micro)", color: "var(--color-accent)" }}>
                               Assigné
                             </span>
                           )}
                         </div>
-                        <p style={{ color: "var(--color-text-muted)", fontSize: "12px", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <p
+                          style={{
+                            color: "var(--color-text-muted)",
+                            fontSize: "var(--text-caption)",
+                            margin: 0,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
                           {r.focus ?? ""}
                         </p>
                       </div>
 
                       <div style={{ flexShrink: 0, textAlign: "right" }}>
-                        <div style={{ color: "#fff", fontSize: "12px", fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
+                        <div
+                          style={{
+                            color: "#fff",
+                            fontSize: "var(--text-label)",
+                            fontWeight: "var(--weight-medium)",
+                            fontVariantNumeric: "tabular-nums",
+                          }}
+                        >
                           {r.exercises.length} ex.
                         </div>
-                        <div style={{ color: "var(--color-at-prefix)", fontSize: "11px", fontVariantNumeric: "tabular-nums" }}>
+                        <div
+                          style={{
+                            color: "var(--color-text-faint)",
+                            fontSize: "var(--text-caption)",
+                            fontVariantNumeric: "tabular-nums",
+                          }}
+                        >
                           ~{Math.round(routineEstimatedSec(r) / 60)}min
                         </div>
                       </div>
@@ -241,10 +280,14 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                           openEditor(r);
                         }}
                         aria-label={`Modifier ${r.name}`}
+                        className="soma-press"
                         style={{
                           flexShrink: 0,
-                          height: "32px",
-                          width: "32px",
+                          // 44px : la ligne entière est déjà cliquable pour
+                          // assigner, ces deux actions imbriquées doivent être
+                          // visées sans ambiguïté au pouce.
+                          height: "44px",
+                          width: "44px",
                           borderRadius: "10px",
                           border: "none",
                           cursor: "pointer",
@@ -267,10 +310,11 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                           void quickDelete(r);
                         }}
                         aria-label={`Supprimer ${r.name}`}
+                        className="soma-press"
                         style={{
                           flexShrink: 0,
-                          height: "32px",
-                          width: "32px",
+                          height: "44px",
+                          width: "44px",
                           borderRadius: "10px",
                           border: "none",
                           cursor: "pointer",
@@ -294,17 +338,20 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
 
             <button
               type="button"
+              className="soma-press"
               onClick={() => openEditor(null)}
               style={{
                 width: "100%",
                 marginTop: "8px",
-                height: "48px",
+                height: "var(--hit-target)",
                 borderRadius: "12px",
-                border: "1px dashed rgba(192,235,255,0.25)",
-                background: "rgba(192,235,255,0.05)",
-                color: "rgba(192,235,255,0.7)",
-                fontSize: "13px",
-                fontWeight: 700,
+                // Tiret conservé : il signale une zone à remplir, c'est une
+                // convention utile, pas une bordure décorative.
+                border: "1px dashed rgba(192,235,255,0.2)",
+                background: "transparent",
+                color: "var(--color-text-muted)",
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
                 boxSizing: "border-box",
               }}
@@ -314,17 +361,18 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
 
             <button
               type="button"
+              className="soma-press"
               onClick={() => setFreeOpen(true)}
               style={{
                 width: "100%",
                 marginTop: "8px",
-                height: "48px",
+                height: "var(--hit-target)",
                 borderRadius: "12px",
                 border: "none",
                 background: "var(--color-accent-soft)",
                 color: "var(--color-accent)",
-                fontSize: "13px",
-                fontWeight: 800,
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
                 boxSizing: "border-box",
               }}
@@ -342,10 +390,10 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "var(--color-bg-elevated)",
-                border: "1px solid var(--color-border)",
+                background: "var(--color-bg-elevated-strong)",
+                border: "none",
                 borderRadius: "12px",
-                height: "48px",
+                height: "var(--hit-target)",
                 padding: "0 12px",
                 boxSizing: "border-box",
               }}
@@ -366,8 +414,7 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                   background: "transparent",
                   border: "none",
                   color: "var(--color-text-secondary)",
-                  fontSize: "14px",
-                  fontWeight: 500,
+                  fontSize: "var(--text-body)",
                   outline: "none",
                 }}
               />
@@ -396,8 +443,8 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                     gap: "8px",
                     padding: "10px",
                     borderRadius: "12px",
-                    background: "var(--color-bg-elevated)",
-                    border: "1px solid var(--color-border)",
+                    background: "var(--color-bg-elevated-strong)",
+                    border: "none",
                   }}
                 >
                   <div
@@ -408,29 +455,37 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                       borderRadius: "8px",
                       background:
                         "repeating-linear-gradient(45deg, rgba(192,235,255,0.1) 0px, rgba(192,235,255,0.1) 4px, rgba(192,235,255,0.05) 4px, rgba(192,235,255,0.05) 8px)",
-                      border: "1px solid var(--color-border)",
+                      border: "none",
                     }}
                   />
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <div style={{ color: "#fff", fontSize: "14px", fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <div
+                      style={{
+                        color: "#fff",
+                        fontSize: "var(--text-body)",
+                        fontWeight: "var(--weight-medium)",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {ex.name}
                     </div>
-                    <div style={{ color: "var(--color-at-prefix)", fontSize: "11px" }}>
+                    <div style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)" }}>
                       {ex.muscleGroup} · {ex.equipment}
                     </div>
                   </div>
                   <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "8px" }}>
                     <span
                       style={{
-                        fontSize: "10px",
-                        fontWeight: 700,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.06em",
+                        fontSize: "var(--text-micro)",
                         color: DIFFICULTY_COLOR[ex.difficulty],
+                        // Pastille teintée plutôt que cerclée : le contour
+                        // doublait l'information portée par la couleur.
                         background: "var(--color-bg-elevated)",
-                        border: `1px solid ${DIFFICULTY_COLOR[ex.difficulty]}`,
+                        border: "none",
                         borderRadius: "6px",
-                        padding: "4px 8px",
+                        padding: "5px 8px",
                         whiteSpace: "nowrap",
                       }}
                     >
@@ -438,21 +493,21 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                     </span>
                     <button
                       type="button"
+                      className="soma-press"
                       onClick={() => setInfoExercise(ex)}
                       aria-label={`Comment exécuter ${ex.name}`}
                       style={{
-                        height: "28px",
-                        width: "28px",
-                        borderRadius: "8px",
-                        border: "1px solid rgba(192,235,255,0.2)",
+                        height: "40px",
+                        width: "40px",
+                        borderRadius: "10px",
+                        border: "none",
                         cursor: "pointer",
                         background: "var(--color-bg-elevated)",
                         color: "var(--color-text-secondary)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: "12px",
-                        fontWeight: 800,
+                        fontSize: "var(--text-label)",
                         fontStyle: "italic",
                         fontFamily: "Georgia, serif",
                       }}
@@ -461,12 +516,13 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
                     </button>
                     <button
                       type="button"
+                      className="soma-press"
                       onClick={() => setPickerExercise(ex)}
                       aria-label={`Ajouter ${ex.name} à une routine`}
                       style={{
-                        height: "28px",
-                        width: "28px",
-                        borderRadius: "8px",
+                        height: "40px",
+                        width: "40px",
+                        borderRadius: "10px",
                         border: "none",
                         cursor: "pointer",
                         background: "var(--color-accent-soft)",
@@ -488,22 +544,23 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
 
             <button
               type="button"
+              className="soma-press"
               onClick={() => setCustomOpen(true)}
               style={{
                 width: "100%",
                 marginTop: "10px",
-                height: "48px",
-                background: "rgba(192,235,255,0.05)",
+                height: "var(--hit-target)",
+                background: "transparent",
                 border: "1px dashed rgba(192,235,255,0.2)",
                 borderRadius: "12px",
                 color: "var(--color-text-muted)",
-                fontSize: "13px",
-                fontWeight: 600,
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
                 boxSizing: "border-box",
               }}
             >
-              + CRÉER UN EXERCICE PERSONNALISÉ
+              + Créer un exercice
             </button>
           </div>
         </div>

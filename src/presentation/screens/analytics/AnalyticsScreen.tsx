@@ -10,27 +10,23 @@ import { useActiveSession } from "@presentation/hooks/activeSessionStore";
 
 const card = {
   background: "var(--color-bg-elevated)",
-  border: "1px solid var(--color-border)",
-  borderRadius: "24px",
+  borderRadius: "var(--radius-lg)",
   padding: "16px",
   backdropFilter: "var(--blur-glass)",
   WebkitBackdropFilter: "var(--blur-glass)",
-  boxShadow: "var(--shadow-card)",
 } as const;
 
 const eyebrow = {
-  color: "var(--color-at-prefix)",
-  fontSize: "11px",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "var(--tracking-eyebrow)",
+  color: "var(--color-text-faint)",
+  fontSize: "var(--text-caption)",
+  fontWeight: "var(--weight-medium)",
   margin: 0,
 } as const;
 
 const bigNumber = {
   color: "#fff",
   fontSize: "32px",
-  fontWeight: 900,
+  fontWeight: "var(--weight-medium)",
   lineHeight: 1,
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -96,7 +92,7 @@ export function AnalyticsScreen() {
       <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "24px" }}>
         <header style={{ padding: "8px 0 0" }}>
           <p style={eyebrow}>Analytique</p>
-          <h1 style={{ color: "#fff", fontSize: "26px", fontWeight: 900, letterSpacing: "-0.02em", margin: "2px 0 0" }}>
+          <h1 style={{ color: "#fff", fontSize: "var(--text-display)", fontWeight: "var(--weight-medium)", margin: "2px 0 0" }}>
             Récap
           </h1>
         </header>
@@ -128,10 +124,10 @@ export function AnalyticsScreen() {
                       padding: "10px 12px",
                       borderRadius: "12px",
                       background: "var(--color-bg-elevated)",
-                      border: "1px solid var(--color-border)",
+                      border: "none",
                     }}
                   >
-                    <span style={{ color: "#fff", fontSize: "13px", fontWeight: 700, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <span style={{ color: "#fff", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)", minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {p.name}
                     </span>
                     <div style={{ flexShrink: 0, textAlign: "right" }}>
@@ -139,12 +135,12 @@ export function AnalyticsScreen() {
                         <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontVariantNumeric: "tabular-nums" }}>
                           {p.firstKg}kg → {p.lastKg}kg
                         </span>
-                        <span style={{ marginLeft: "6px", fontSize: "12px", fontWeight: 800, color: p.deltaColor }}>
+                        <span style={{ marginLeft: "6px", fontSize: "var(--text-caption)", fontWeight: "var(--weight-medium)", color: p.deltaColor }}>
                           {p.deltaLabel}
                         </span>
                       </div>
                       {p.rmLabel && (
-                        <div style={{ color: "#A855F7", fontSize: "11px", fontWeight: 700, marginTop: "2px" }}>
+                        <div style={{ color: "#A855F7", fontSize: "var(--text-caption)", marginTop: "2px" }}>
                           {p.rmLabel}
                         </div>
                       )}
@@ -170,7 +166,7 @@ export function AnalyticsScreen() {
                     width: "44px",
                     borderRadius: "12px",
                     background: "var(--color-accent-soft)",
-                    border: "1px solid rgba(245,158,113,0.3)",
+                    border: "none",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -218,7 +214,7 @@ export function AnalyticsScreen() {
                     width: "44px",
                     borderRadius: "12px",
                     background: "rgba(168,85,247,0.15)",
-                    border: "1px solid rgba(168,85,247,0.4)",
+                    border: "none",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -248,8 +244,7 @@ export function AnalyticsScreen() {
                       display: "block",
                       color: "var(--color-success)",
                       fontSize: "11px",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
+                      fontWeight: "var(--weight-medium)",
                       letterSpacing: "0.06em",
                     }}
                   >
@@ -260,8 +255,7 @@ export function AnalyticsScreen() {
                     style={{
                       color: intensity.color,
                       fontSize: "11px",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
+                      fontWeight: "var(--weight-medium)",
                       letterSpacing: "0.06em",
                       whiteSpace: "nowrap",
                     }}
