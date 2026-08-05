@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
+import { hitTarget, hitTargetVisual } from "@presentation/design-system/hitTarget";
 import type { Routine } from "@domain/workout/entities/Routine";
 import type { Exercise } from "@domain/workout/entities/Exercise";
 import type { RoutineDraft, RoutineDraftExercise } from "@domain/workout/ports/RoutineRepository";
@@ -224,47 +225,43 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                   <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
                     <button
                       type="button"
+                      className="soma-press"
                       onClick={() => patch(i, { favorite: !ex.favorite })}
                       aria-label="Favori pour le 1RM"
                       aria-pressed={ex.favorite}
-                      style={{
-                        height: "24px",
-                        width: "24px",
-                        borderRadius: "8px",
-                        border: "none",
-                        cursor: "pointer",
-                        background: "rgba(192,235,255,0.1)",
-                        color: ex.favorite ? "#FBBF24" : "var(--color-at-prefix)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
+                      style={{ ...hitTarget(24), cursor: "pointer" }}
                     >
-                      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                        <path d="M8 1l2.1 4.6 5 .6-3.7 3.5.9 5-4.3-2.5-4.3 2.5.9-5-3.7-3.5 5-.6z" />
-                      </svg>
+                      <span
+                        style={{
+                          ...hitTargetVisual(24, 8),
+                          background: "rgba(192,235,255,0.1)",
+                          color: ex.favorite ? "#FBBF24" : "var(--color-at-prefix)",
+                        }}
+                      >
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                          <path d="M8 1l2.1 4.6 5 .6-3.7 3.5.9 5-4.3-2.5-4.3 2.5.9-5-3.7-3.5 5-.6z" />
+                        </svg>
+                      </span>
                     </button>
                     <button
                       type="button"
+                      className="soma-press"
                       onClick={() => setExercises((list) => list.filter((_, k) => k !== i))}
                       aria-label={`Retirer ${ex.name}`}
-                      style={{
-                        height: "24px",
-                        width: "24px",
-                        borderRadius: "8px",
-                        border: "none",
-                        cursor: "pointer",
-                        background: "rgba(239,68,68,0.15)",
-                        color: "var(--color-error)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
+                      style={{ ...hitTarget(24), cursor: "pointer" }}
                     >
-                      <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-                        <line x1="4" y1="4" x2="12" y2="12" />
-                        <line x1="12" y1="4" x2="4" y2="12" />
-                      </svg>
+                      <span
+                        style={{
+                          ...hitTargetVisual(24, 8),
+                          background: "rgba(239,68,68,0.15)",
+                          color: "var(--color-error)",
+                        }}
+                      >
+                        <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                          <line x1="4" y1="4" x2="12" y2="12" />
+                          <line x1="12" y1="4" x2="4" y2="12" />
+                        </svg>
+                      </span>
                     </button>
                   </div>
                 </div>

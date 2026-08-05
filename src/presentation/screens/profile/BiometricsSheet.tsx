@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
+import { hitTarget, hitTargetVisual } from "@presentation/design-system/hitTarget";
 import {
   type BodyMetrics,
   BIO_METRIC_CATALOG,
@@ -110,29 +111,28 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 aria-pressed={checked}
                 aria-label={`Afficher ${metric.label}`}
                 style={{
-                  flexShrink: 0,
-                  height: "22px",
-                  width: "22px",
-                  borderRadius: "7px",
-                  border: "none",
-                  // Non coché : surface pleine plutôt que transparente. Le
-                  // contour 1px qui rendait la case vide visible a été retiré
-                  // avec les autres bordures ; sans lui, `transparent` ne
-                  // dessinait plus rien sur la ligne.
-                  background: checked ? "var(--color-accent)" : "var(--color-bg-elevated-strong)",
-                  color: "var(--color-on-accent)",
+                  ...hitTarget(22),
                   cursor: disabled ? "not-allowed" : "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                   opacity: disabled ? 0.4 : 1,
                 }}
               >
-                {checked && (
-                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="3,8 6.5,11.5 13,4" />
-                  </svg>
-                )}
+                <span
+                  style={{
+                    ...hitTargetVisual(22, 7),
+                    // Non coché : surface pleine plutôt que transparente. Le
+                    // contour 1px qui rendait la case vide visible a été retiré
+                    // avec les autres bordures ; sans lui, `transparent` ne
+                    // dessinait plus rien sur la ligne.
+                    background: checked ? "var(--color-accent)" : "var(--color-bg-elevated-strong)",
+                    color: "var(--color-on-accent)",
+                  }}
+                >
+                  {checked && (
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polyline points="3,8 6.5,11.5 13,4" />
+                    </svg>
+                  )}
+                </span>
               </button>
 
               <span style={{ flex: 1, minWidth: 0, color: "#fff", fontSize: "13px", fontWeight: 500 }}>

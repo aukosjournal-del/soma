@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
+import { hitTarget, hitTargetVisual } from "@presentation/design-system/hitTarget";
 import type { Exercise, Difficulty } from "@domain/workout/entities/Exercise";
 import { DIFFICULTY_LABEL, DIFFICULTY_COLOR, DIFFICULTY_ORDER } from "@domain/workout/entities/Exercise";
 import type { RoutineDraftExercise } from "@domain/workout/ports/RoutineRepository";
@@ -183,26 +184,23 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
               <span style={{ color: "#fff", fontSize: "13px", fontWeight: 500 }}>{ex.name}</span>
               <button
                 type="button"
+                className="soma-press"
                 onClick={() => setExercises((list) => list.filter((_, k) => k !== i))}
                 aria-label={`Retirer ${ex.name}`}
-                style={{
-                  flexShrink: 0,
-                  height: "24px",
-                  width: "24px",
-                  borderRadius: "8px",
-                  border: "none",
-                  cursor: "pointer",
-                  background: "rgba(239,68,68,0.15)",
-                  color: "var(--color-error)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                style={{ ...hitTarget(24), cursor: "pointer" }}
               >
-                <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-                  <line x1="4" y1="4" x2="12" y2="12" />
-                  <line x1="12" y1="4" x2="4" y2="12" />
-                </svg>
+                <span
+                  style={{
+                    ...hitTargetVisual(24, 8),
+                    background: "rgba(239,68,68,0.15)",
+                    color: "var(--color-error)",
+                  }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                    <line x1="4" y1="4" x2="12" y2="12" />
+                    <line x1="12" y1="4" x2="4" y2="12" />
+                  </svg>
+                </span>
               </button>
             </div>
 

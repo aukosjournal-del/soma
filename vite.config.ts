@@ -60,8 +60,12 @@ export default defineConfig({
     // Environnement node explicite + stub `localStorage` maison. jsdom
     // s'appliquait sous Linux mais pas sur macOS : le résultat des tests
     // dépendait de la machine, ce qui est pire qu'inutile.
+    //
+    // Les tests de composants ont besoin d'un DOM : ils le demandent
+    // fichier par fichier via `@vitest-environment happy-dom`, plutôt que
+    // d'imposer un DOM aux tests de domaine qui n'en ont pas l'usage.
     environment: "node",
     setupFiles: ["./src/test/setup.ts"],
-    include: ["src/**/*.test.ts"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
   },
 });
