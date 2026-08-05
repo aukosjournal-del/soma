@@ -29,7 +29,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
       <BrandHeader />
 
       <ProgressBar percent={100} />
-      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "0 0 18px" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "0 0 18px" }}>
         Étape 3 sur 3
       </p>
 
@@ -56,7 +56,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
                 boxSizing: "border-box",
               }}
             >
-              <div style={{ color: "#fff", fontSize: "14px", fontWeight: "var(--weight-medium)" }}>{opt.title}</div>
+              <div style={{ color: "#fff", fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)" }}>{opt.title}</div>
               <div style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", marginTop: "2px" }}>
                 {opt.description}
               </div>

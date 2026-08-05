@@ -6,7 +6,7 @@ const AVATAR_EMOJIS = ["💪", "🔥", "⚡", "🏋️", "🐺", "🦁"];
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
-  fontSize: "11px",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "0 0 10px",
@@ -56,7 +56,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
           border: "1px dashed rgba(192,235,255,0.25)",
           background: "rgba(192,235,255,0.05)",
           color: "var(--color-text-muted)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           cursor: "not-allowed",
           marginBottom: "18px",
@@ -130,7 +130,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             background: "var(--color-accent-soft)",
             color: "var(--color-accent)",
             fontWeight: "var(--weight-medium)",
-            fontSize: "13px",
+            fontSize: "var(--text-label)",
             cursor: "pointer",
           }}
         >
@@ -172,7 +172,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transform: "scale(1.9)" }}
           />
         </span>
-        <span style={{ color: "#fff", fontSize: "14px", fontWeight: "var(--weight-medium)" }}>Logo SOMA</span>
+        <span style={{ color: "#fff", fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)" }}>Logo SOMA</span>
       </button>
 
       {error && (

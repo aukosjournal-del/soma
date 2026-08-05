@@ -30,7 +30,7 @@ const microLabel = {
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
-  fontSize: "11px",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
 } as const;
@@ -102,7 +102,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           borderRadius: "12px",
           padding: "10px 12px",
           color: "#fff",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           boxSizing: "border-box",
           resize: "none",
@@ -130,7 +130,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
                 border: "none",
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
-                fontSize: "11px",
+                fontSize: "var(--text-caption)",
                 fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
               }}
@@ -150,7 +150,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           height: "44px",
           marginBottom: "16px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           borderRadius: "12px",
           background: "var(--color-bg-elevated)",
           color: "var(--color-text-secondary)",
@@ -182,7 +182,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-              <span style={{ color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
+              <span style={{ color: "#fff", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
               <button
                 type="button"
                 className="soma-press"
@@ -239,7 +239,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             borderRadius: "12px",
             padding: "0 10px",
             color: "#fff",
-            fontSize: "13px",
+            fontSize: "var(--text-label)",
             fontWeight: "var(--weight-medium)",
             boxSizing: "border-box",
           }}
@@ -263,7 +263,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             background: "var(--color-accent-soft)",
             color: "var(--color-accent)",
             fontWeight: "var(--weight-medium)",
-            fontSize: "13px",
+            fontSize: "var(--text-label)",
             cursor: "pointer",
           }}
         >

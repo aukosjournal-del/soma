@@ -62,7 +62,7 @@ export function SetRow({ set, onWeight, onReps, onCheck, onFail }: SetRowProps) 
     >
       <span
         style={{
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           color: set.failed ? "var(--color-error)" : "var(--color-text-faint)",
           fontVariantNumeric: "tabular-nums",
           textAlign: "center",

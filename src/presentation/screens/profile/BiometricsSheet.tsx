@@ -136,7 +136,7 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 </span>
               </button>
 
-              <span style={{ flex: 1, minWidth: 0, color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>
+              <span style={{ flex: 1, minWidth: 0, color: "#fff", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>
                 {metric.label}
               </span>
 
@@ -163,14 +163,14 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                     borderRadius: "8px",
                     padding: "0 8px",
                     color: derived ? "var(--color-text-muted)" : "#fff",
-                    fontSize: "14px",
+                    fontSize: "var(--text-body)",
                     fontWeight: "var(--weight-medium)",
                     textAlign: "right",
                     boxSizing: "border-box",
                     fontVariantNumeric: "tabular-nums",
                   }}
                 />
-                <span style={{ color: "var(--color-text-faint)", fontSize: "10px", flexShrink: 0 }}>
+                <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-micro)", flexShrink: 0 }}>
                   {metric.unit}
                 </span>
               </div>

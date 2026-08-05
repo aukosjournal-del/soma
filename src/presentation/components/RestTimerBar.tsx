@@ -72,7 +72,7 @@ export function RestTimerBar() {
             <p
               style={{
                 color: "var(--color-text-faint)",
-                fontSize: "11px",
+                fontSize: "var(--text-caption)",
                 margin: 0,
               }}
             >

@@ -466,7 +466,7 @@ function Metric({
 
 function Muted({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ color: "var(--color-text-faint)", fontSize: "13px", textAlign: "center", padding: "16px 0", margin: 0 }}>
+    <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", textAlign: "center", padding: "16px 0", margin: 0 }}>
       {children}
     </p>
   );

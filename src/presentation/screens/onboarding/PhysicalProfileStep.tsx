@@ -44,7 +44,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
       <BrandHeader />
 
       <ProgressBar percent={66} />
-      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "0 0 18px" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "0 0 18px" }}>
         Étape 2 sur 3
       </p>
 

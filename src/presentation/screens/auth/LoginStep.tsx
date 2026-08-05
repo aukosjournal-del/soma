@@ -30,10 +30,10 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
     <AuthShell>
       <BrandHeader />
 
-      <h1 style={{ color: "#fff", fontSize: "22px", fontWeight: "var(--weight-medium)", margin: "0 0 4px", textAlign: "center" }}>
+      <h1 style={{ color: "#fff", fontSize: "var(--text-display)", fontWeight: "var(--weight-medium)", margin: "0 0 4px", textAlign: "center" }}>
         Te revoilà
       </h1>
-      <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 20px", textAlign: "center" }}>
         Reprends où tu t'es arrêté.
       </p>
 
@@ -79,7 +79,7 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
             margin: 0,
           }}
         />
-        <span style={{ color: "var(--color-text-secondary)", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>
+        <span style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>
           Rester connecté
         </span>
       </label>
@@ -121,7 +121,7 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
           background: "none",
           border: "none",
           color: "var(--color-text-muted)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}
@@ -138,7 +138,7 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
           width: "100%",
           minHeight: "48px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "14px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-bg-elevated)",
           border: "1px solid var(--color-border)",

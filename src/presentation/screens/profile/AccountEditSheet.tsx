@@ -11,14 +11,14 @@ const field = {
   borderRadius: "12px",
   padding: "0 12px",
   color: "#fff",
-  fontSize: "14px",
+  fontSize: "var(--text-body)",
   fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 } as const;
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
-  fontSize: "11px",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "16px 0 8px",
@@ -129,7 +129,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
               background: "transparent",
               border: "none",
               color: "#fff",
-              fontSize: "14px",
+              fontSize: "var(--text-body)",
               fontWeight: "var(--weight-medium)",
               outline: "none",
             }}
@@ -167,7 +167,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
                 borderRadius: "999px",
                 border: `2px solid ${active ? "#7DD3FC" : "var(--color-border)"}`,
                 cursor: "pointer",
-                fontSize: "13px",
+                fontSize: "var(--text-label)",
                 fontWeight: "var(--weight-medium)",
                 background: active ? "var(--color-accent)" : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
@@ -185,7 +185,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
         <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Nouveau mot de passe" autoComplete="new-password" style={field} />
         <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirme le mot de passe" autoComplete="new-password" style={field} />
       </div>
-      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "8px 0 0" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "8px 0 0" }}>
         Laisse vide pour conserver ton mot de passe actuel.
       </p>
 

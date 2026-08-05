@@ -39,7 +39,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
           <p
             style={{
               color: "var(--color-at-prefix)",
-              fontSize: "11px",
+              fontSize: "var(--text-caption)",
               fontWeight: "var(--weight-medium)",
               textTransform: "uppercase",
               letterSpacing: "var(--tracking-eyebrow)",
@@ -52,7 +52,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
             <span style={{ color: "var(--color-accent)", fontSize: "32px", fontWeight: "var(--weight-medium)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
               {weeks}
             </span>
-            <span style={{ color: "var(--color-text-muted)", fontSize: "13px" }}>
+            <span style={{ color: "var(--color-text-muted)", fontSize: "var(--text-label)" }}>
               semaine{weeks > 1 ? "s" : ""} consécutive{weeks > 1 ? "s" : ""}
             </span>
           </div>
@@ -67,7 +67,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
               borderRadius: "12px",
               padding: "10px 6px",
               textAlign: "center",
-              fontSize: "11px",
+              fontSize: "var(--text-caption)",
               fontWeight: "var(--weight-medium)",
               transition: "all 0.4s ease",
               opacity: badge.unlocked ? 1 : 0.3,

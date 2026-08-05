@@ -43,23 +43,30 @@ describe("harmonisation typographique", () => {
     expect(offenders, `graisses en dur :\n${offenders.join("\n")}`).toEqual([]);
   });
 
-  it("ne réintroduit pas les tailles retirées du barème", () => {
-    // Denylist volontaire, et non liste blanche : 20/24/32/34/40px restent
-    // légitimement présents, en attente d'arbitrage (voir
-    // docs/typographie-tailles.md). Seules ces quatre valeurs ont été
-    // tranchées — les reverrouiller évite qu'un futur écran les ramène.
-    const retired = [9, 12, 15, 18];
+  it("n'écrit aucune taille en dur hors des cas encore en arbitrage", () => {
+    // Liste blanche, désormais possible : toutes les valeurs du barème sont
+    // passées en token, donc une taille écrite en dur est soit un oubli, soit
+    // l'un des cas non tranchés ci-dessous (voir docs/typographie-tailles.md).
+    // Ce test devra rétrécir à mesure que ces arbitrages tombent.
+    const pending = new Set([
+      20, // titres auth/onboarding — +2px vers --text-display, à voir à l'écran
+      24, // compte à rebours RestTimerBar — emphase délibérée
+      32,
+      34,
+      40, // chiffres de mise en avant — ticket --text-figure
+      26,
+      64, // emojis — hors barème typographique
+    ]);
     const offenders: string[] = [];
     for (const [path, code] of sources) {
       code.split("\n").forEach((line, i) => {
-        for (const px of retired) {
-          if (line.includes(`fontSize: "${px}px"`)) {
-            offenders.push(`${path}:${i + 1}  ${px}px`);
-          }
+        const px = line.match(/fontSize: "(\d+)px"/)?.[1];
+        if (px && !pending.has(Number(px))) {
+          offenders.push(`${path}:${i + 1}  ${px}px  → utiliser un token --text-*`);
         }
       });
     }
-    expect(offenders, `tailles retirées :\n${offenders.join("\n")}`).toEqual([]);
+    expect(offenders, `tailles en dur :\n${offenders.join("\n")}`).toEqual([]);
   });
 
   it("réserve --weight-strong au wordmark", () => {

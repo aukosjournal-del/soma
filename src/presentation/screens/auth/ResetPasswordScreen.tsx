@@ -52,7 +52,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
     return (
       <AuthShell>
         <BrandHeader />
-        <p style={{ color: "var(--color-text-muted)", fontSize: "13px", textAlign: "center", margin: 0 }}>
+        <p style={{ color: "var(--color-text-muted)", fontSize: "var(--text-label)", textAlign: "center", margin: 0 }}>
           Vérification du lien…
         </p>
       </AuthShell>
@@ -66,7 +66,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
         <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
           Lien expiré
         </h1>
-        <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
+        <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 20px" }}>
           Ce lien de réinitialisation n'est plus valide. Demandes-en un nouveau.
         </p>
         <button type="button" onClick={onDone} style={primaryButton}>
@@ -83,7 +83,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
         <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
           Mot de passe mis à jour
         </h1>
-        <p style={{ color: "var(--color-success)", fontSize: "13px", margin: "0 0 20px" }}>
+        <p style={{ color: "var(--color-success)", fontSize: "var(--text-label)", margin: "0 0 20px" }}>
           Tu peux maintenant te connecter avec ton nouveau mot de passe.
         </p>
         <button type="button" onClick={onDone} style={primaryButton}>
@@ -102,7 +102,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
         Nouveau mot de passe
       </h1>
-      <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 20px" }}>
         Choisis un mot de passe d'au moins {MIN_PASSWORD} caractères.
       </p>
 

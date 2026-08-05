@@ -37,7 +37,7 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
   return (
     <BottomSheet open={open} title={`Ajouter « ${exercise?.name ?? ""} » à…`} onClose={onClose}>
       {routines.length === 0 ? (
-        <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", textAlign: "center", padding: "16px 0", margin: 0 }}>
+        <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", textAlign: "center", padding: "16px 0", margin: 0 }}>
           Aucune routine. Crée-en une d'abord dans Planning.
         </p>
       ) : (

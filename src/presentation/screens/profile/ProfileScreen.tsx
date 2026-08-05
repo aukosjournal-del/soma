@@ -320,7 +320,7 @@ export function ProfileScreen() {
                       </p>
                     )}
                     {indicator.description && (
-                      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "8px 0 0", lineHeight: 1.4 }}>
+                      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "8px 0 0", lineHeight: 1.4 }}>
                         {indicator.description}
                       </p>
                     )}
@@ -378,7 +378,7 @@ export function ProfileScreen() {
 
 function Muted({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ color: "var(--color-text-faint)", fontSize: "13px", textAlign: "center", padding: "16px 0", margin: 0 }}>
+    <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", textAlign: "center", padding: "16px 0", margin: 0 }}>
       {children}
     </p>
   );

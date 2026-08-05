@@ -132,10 +132,10 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
               </span>
 
               <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ display: "block", color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>
+                <span style={{ display: "block", color: "#fff", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>
                   {indicator.label}
                 </span>
-                <span style={{ display: "block", color: "var(--color-text-faint)", fontSize: "11px", marginTop: "2px" }}>
+                <span style={{ display: "block", color: "var(--color-text-faint)", fontSize: "var(--text-caption)", marginTop: "2px" }}>
                   {indicator.category}
                 </span>
               </span>
@@ -144,7 +144,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 style={{
                   flexShrink: 0,
                   color: "var(--color-text-secondary)",
-                  fontSize: "14px",
+                  fontSize: "var(--text-body)",
                   fontWeight: "var(--weight-medium)",
                   fontVariantNumeric: "tabular-nums",
                 }}

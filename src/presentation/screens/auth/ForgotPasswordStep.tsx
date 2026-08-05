@@ -48,7 +48,7 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
         Retrouve ton compte
       </h1>
-      <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 20px" }}>
         Entre ton e-mail ou ton pseudo.
       </p>
 
@@ -82,7 +82,7 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
       </button>
 
       {sent && (
-        <p style={{ color: "var(--color-success)", fontSize: "13px", textAlign: "center", margin: "14px 0 0" }}>
+        <p style={{ color: "var(--color-success)", fontSize: "var(--text-label)", textAlign: "center", margin: "14px 0 0" }}>
           Si ce compte existe, un lien de réinitialisation a été envoyé.
         </p>
       )}

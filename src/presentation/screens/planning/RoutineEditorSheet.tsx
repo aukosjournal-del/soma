@@ -184,7 +184,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={focus}
             onChange={(e) => setFocus(e.target.value)}
             placeholder="Ex: Pectoraux · Épaules · Triceps"
-            style={{ ...field, fontSize: "14px", fontWeight: "var(--weight-medium)" }}
+            style={{ ...field, fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)" }}
           />
         </label>
 
@@ -195,7 +195,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               ...field,
               background: "rgba(192,235,255,0.05)",
               color: "var(--color-accent)",
-              fontSize: "16px",
+              fontSize: "var(--text-heading)",
               fontWeight: "var(--weight-medium)",
               display: "flex",
               alignItems: "center",
@@ -222,7 +222,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-                  <span style={{ color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
+                  <span style={{ color: "#fff", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
                     <button
                       type="button"
@@ -294,7 +294,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               value={pick}
               onChange={(e) => setPick(e.target.value)}
               aria-label="Choisir un exercice"
-              style={{ ...field, flex: 1, height: "44px", fontSize: "13px", fontWeight: "var(--weight-medium)", padding: "0 10px" }}
+              style={{ ...field, flex: 1, height: "44px", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)", padding: "0 10px" }}
             >
               {library.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -315,7 +315,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 background: "var(--color-accent-soft)",
                 color: "var(--color-accent)",
                 fontWeight: "var(--weight-medium)",
-                fontSize: "13px",
+                fontSize: "var(--text-label)",
                 cursor: "pointer",
               }}
             >
@@ -369,7 +369,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               background: confirmDelete ? "var(--color-error)" : "rgba(239,68,68,0.12)",
               color: confirmDelete ? "#fff" : "var(--color-error)",
               fontWeight: "var(--weight-medium)",
-              fontSize: "14px",
+              fontSize: "var(--text-body)",
               cursor: "pointer",
               border: "none",
               transition: "background var(--duration-fast) ease, color var(--duration-fast) ease",
@@ -390,7 +390,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               background: "var(--color-bg-elevated)",
               color: "var(--color-text-secondary)",
               fontWeight: "var(--weight-medium)",
-              fontSize: "14px",
+              fontSize: "var(--text-body)",
               cursor: "pointer",
               border: "none",
             }}

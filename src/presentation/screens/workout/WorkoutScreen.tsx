@@ -56,7 +56,7 @@ export function WorkoutScreen({ onFinished }: { onFinished?: () => void } = {}) 
               <h1
                 style={{
                   color: "#fff",
-                  fontSize: "22px",
+                  fontSize: "var(--text-display)",
                   fontWeight: "var(--weight-medium)",
                   margin: 0,
                   minWidth: 0,
@@ -81,7 +81,7 @@ export function WorkoutScreen({ onFinished }: { onFinished?: () => void } = {}) 
                     border: "none",
                     background: canFinish ? "var(--color-accent)" : "var(--color-bg-elevated)",
                     color: canFinish ? "var(--color-on-accent)" : "var(--color-text-faint)",
-                    fontSize: "13px",
+                    fontSize: "var(--text-label)",
                     fontWeight: "var(--weight-medium)",
                     cursor: canFinish ? "pointer" : "not-allowed",
                   }}
@@ -184,7 +184,7 @@ function Stat({
       <p
         style={{
           color: "#fff",
-          fontSize: "17px",
+          fontSize: "var(--text-metric)",
           fontWeight: "var(--weight-medium)",
           margin: 0,
           fontVariantNumeric: "tabular-nums",
@@ -193,7 +193,7 @@ function Stat({
       >
         {value}
       </p>
-      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "1px 0 0" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "1px 0 0" }}>
         {label}
       </p>
     </div>
@@ -233,7 +233,7 @@ function EmptyCard({ title, subtitle }: { title: string; subtitle?: string }) {
         WebkitBackdropFilter: "var(--blur-glass)",
       }}
     >
-      <p style={{ color: "var(--color-text-muted)", fontSize: "14px", margin: 0 }}>{title}</p>
+      <p style={{ color: "var(--color-text-muted)", fontSize: "var(--text-body)", margin: 0 }}>{title}</p>
       {subtitle && (
         <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", margin: "6px 0 0" }}>
           {subtitle}

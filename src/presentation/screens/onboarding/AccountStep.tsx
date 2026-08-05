@@ -15,7 +15,7 @@ const oauthBtnBase: CSSProperties = {
   justifyContent: "center",
   gap: "8px",
   fontWeight: "var(--weight-medium)",
-  fontSize: "14px",
+  fontSize: "var(--text-body)",
   borderRadius: "12px",
   cursor: "pointer",
   boxSizing: "border-box",
@@ -60,7 +60,7 @@ export function AccountStep({
       <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px", textAlign: "center" }}>
         Ton carnet d'entraînement
       </h1>
-      <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 20px", textAlign: "center" }}>
         Deux minutes pour créer ton compte.
       </p>
 
@@ -107,7 +107,7 @@ export function AccountStep({
             borderRadius: "12px",
             padding: "0 14px",
             color: "#fff",
-            fontSize: "14px",
+            fontSize: "var(--text-body)",
             fontWeight: "var(--weight-medium)",
             boxSizing: "border-box",
             transition: "border-color 0.2s ease",
@@ -156,7 +156,7 @@ export function AccountStep({
           background: "none",
           border: "none",
           color: "var(--color-text-muted)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}

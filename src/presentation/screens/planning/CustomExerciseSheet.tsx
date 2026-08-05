@@ -11,7 +11,7 @@ const field = {
   borderRadius: "12px",
   padding: "0 12px",
   color: "#fff",
-  fontSize: "14px",
+  fontSize: "var(--text-body)",
   fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 } as const;
@@ -125,7 +125,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               borderRadius: "12px",
               padding: "10px 12px",
               color: "#fff",
-              fontSize: "13px",
+              fontSize: "var(--text-label)",
               fontWeight: "var(--weight-medium)",
               boxSizing: "border-box",
               resize: "none",
@@ -147,7 +147,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               background:
                 "repeating-linear-gradient(45deg, rgba(192,235,255,0.06) 0px, rgba(192,235,255,0.06) 4px, rgba(192,235,255,0.03) 4px, rgba(192,235,255,0.03) 8px)",
               color: "var(--color-text-muted)",
-              fontSize: "13px",
+              fontSize: "var(--text-label)",
               fontWeight: "var(--weight-medium)",
               display: "flex",
               alignItems: "center",
@@ -177,7 +177,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
                     border: "none",
                     background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                     color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
-                    fontSize: "11px",
+                    fontSize: "var(--text-caption)",
                     fontWeight: "var(--weight-medium)",
                     cursor: "pointer",
                   }}

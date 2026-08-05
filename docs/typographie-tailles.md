@@ -202,6 +202,18 @@ Compte à rebours de la barre de repos. C'est l'élément focal d'une barre flot
 Les groupes 1 à 3 (69 occurrences) sont mécaniques. Le 4 mérite une capture
 avant/après. Le 5 est une question de design, pas de cohérence.
 
-> Aucun test ne couvre les tailles : contrairement aux graisses, une taille
-> hors barème n'est pas une faute en soi. Un garde-fou équivalent à
-> `typography.test.ts` n'aurait de sens qu'une fois ces choix arrêtés.
+## État au terme de la passe
+
+Appliqué : les 69 occurrences hors barème (9/12/15/18px) et, dans la foulée,
+les 94 valeurs qui étaient déjà dans le barème mais écrites en dur — ces
+dernières sans aucun effet visuel, uniquement pour que le barème soit la
+seule source.
+
+`typography.test.ts` est passé en **liste blanche** : toute taille écrite en
+dur est refusée, sauf les cas encore en arbitrage listés ci-dessus (20, 24,
+26, 32, 34, 40, 64). Ce test doit rétrécir à mesure que ces arbitrages
+tombent.
+
+Exception assumée : `ErrorBoundary` conserve des valeurs de repli
+(`var(--text-label, 13px)`), car il doit s'afficher même si la feuille de
+styles n'a pas chargé — c'est précisément le cas qu'il traite.

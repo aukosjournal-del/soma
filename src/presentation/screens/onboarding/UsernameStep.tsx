@@ -34,7 +34,7 @@ const inputBase: CSSProperties = {
   borderRadius: "12px",
   padding: "0 14px",
   color: "#fff",
-  fontSize: "14px",
+  fontSize: "var(--text-body)",
   fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 };
@@ -61,7 +61,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
       <BrandHeader />
 
       <ProgressBar percent={33} />
-      <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "0 0 18px" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", margin: "0 0 18px" }}>
         Étape 1 sur 3
       </p>
 
@@ -116,7 +116,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
             background: "transparent",
             border: "none",
             color: "#fff",
-            fontSize: "14px",
+            fontSize: "var(--text-body)",
             fontWeight: "var(--weight-medium)",
             outline: "none",
           }}
@@ -158,7 +158,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
           background: "none",
           border: "none",
           color: "var(--color-text-muted)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}

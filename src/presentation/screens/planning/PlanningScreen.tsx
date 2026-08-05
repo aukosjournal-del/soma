@@ -166,7 +166,7 @@ export function PlanningScreen({ onLaunchFreeSession }: PlanningScreenProps) {
           <div style={card}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
               <p style={eyebrow}>Routines disponibles</p>
-              <span style={{ color: "var(--color-text-faint)", fontSize: "11px" }}>Tap pour assigner</span>
+              <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)" }}>Tap pour assigner</span>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxHeight: "312px", overflowY: "auto", paddingRight: "4px" }}>

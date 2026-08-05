@@ -16,7 +16,7 @@ export interface ExerciseCardProps {
 }
 
 const columnLabel = {
-  fontSize: "10px",
+  fontSize: "var(--text-micro)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "0.08em",
   color: "var(--color-text-faint)",
@@ -51,14 +51,14 @@ export function ExerciseCard({ exercise, index, total, onWeight, onReps, onCheck
       >
         {/* Hiérarchie par la TAILLE, plus par la graisse : le poids 900
             partout supprimait toute distinction entre les niveaux. */}
-        <h2 style={{ color: "#fff", fontSize: "16px", fontWeight: "var(--weight-medium)", margin: 0, minWidth: 0 }}>
+        <h2 style={{ color: "#fff", fontSize: "var(--text-heading)", fontWeight: "var(--weight-medium)", margin: 0, minWidth: 0 }}>
           {exercise.name}
         </h2>
         <span
           style={{
             flexShrink: 0,
             color: "var(--color-text-faint)",
-            fontSize: "11px",
+            fontSize: "var(--text-caption)",
             fontVariantNumeric: "tabular-nums",
           }}
         >

@@ -11,7 +11,7 @@ import {
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
-  fontSize: "11px",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "0 0 10px",
@@ -67,7 +67,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
           alignItems: "center",
           justifyContent: "center",
           color: "var(--color-text-muted)",
-          fontSize: "13px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           marginBottom: "18px",
           boxSizing: "border-box",
@@ -93,7 +93,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
                 border: "none",
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
-                fontSize: "11px",
+                fontSize: "var(--text-caption)",
                 fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
               }}
@@ -109,7 +109,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
       )}
 
       <p style={{ ...eyebrow, marginTop: "18px" }}>Exécution</p>
-      <p style={{ color: "var(--color-text-secondary)", fontSize: "14px", lineHeight: 1.6, margin: 0 }}>
+      <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-body)", lineHeight: 1.6, margin: 0 }}>
         {exercise.description?.trim() ? exercise.description : fallback}
       </p>
 

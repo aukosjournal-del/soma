@@ -13,7 +13,7 @@ const card = {
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
-  fontSize: "11px",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-medium)",
   textTransform: "uppercase",
   letterSpacing: "var(--tracking-eyebrow)",
@@ -27,7 +27,7 @@ const numberInput = {
   border: "none",
   outline: "none",
   color: "#fff",
-  fontSize: "22px",
+  fontSize: "var(--text-display)",
   fontWeight: "var(--weight-medium)",
   fontVariantNumeric: "tabular-nums",
   padding: 0,
@@ -65,7 +65,7 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginTop: "12px" }}>
         <label style={{ display: "block", background: "rgba(192,235,255,0.05)", border: "1px solid var(--color-border)", borderRadius: "12px", padding: "10px 12px" }}>
-          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
+          <div style={{ color: "var(--color-text-muted)", fontSize: "var(--text-micro)", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
             Objectif pas
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
@@ -78,12 +78,12 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
               aria-label="Objectif de pas"
               style={numberInput}
             />
-            <span style={{ color: "var(--color-text-faint)", fontSize: "11px", flexShrink: 0 }}>pas</span>
+            <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", flexShrink: 0 }}>pas</span>
           </div>
         </label>
 
         <label style={{ display: "block", background: "rgba(192,235,255,0.05)", border: "1px solid var(--color-border)", borderRadius: "12px", padding: "10px 12px" }}>
-          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
+          <div style={{ color: "var(--color-text-muted)", fontSize: "var(--text-micro)", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
             Objectif calorique
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
@@ -96,7 +96,7 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
               aria-label="Objectif calorique"
               style={numberInput}
             />
-            <span style={{ color: "var(--color-text-faint)", fontSize: "11px", flexShrink: 0 }}>kcal</span>
+            <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-caption)", flexShrink: 0 }}>kcal</span>
           </div>
         </label>
       </div>
@@ -111,7 +111,7 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
             minHeight: "44px",
             marginTop: "12px",
             fontWeight: "var(--weight-medium)",
-            fontSize: "13px",
+            fontSize: "var(--text-label)",
             borderRadius: "12px",
             background: saved ? "rgba(16,185,129,0.15)" : "var(--color-accent)",
             color: saved ? "var(--color-success)" : "var(--color-on-accent)",
