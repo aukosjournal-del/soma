@@ -6,6 +6,7 @@ import {
   exerciseEstimatedSec,
   sessionEstimatedSec,
   sessionProgress,
+  sessionVolumeKg,
   toggleSetChecked,
   toggleSetFailed,
   updateSetField,
@@ -148,6 +149,51 @@ describe("sessionProgress", () => {
 
   it("renvoie 0% sans division par zéro pour une séance vide", () => {
     expect(sessionProgress([])).toEqual({ done: 0, total: 0, percent: 0 });
+  });
+});
+
+describe("sessionVolumeKg", () => {
+  it("ne compte rien tant qu'aucune série n'est validée", () => {
+    const exo = first(buildSessionExercises(routine, 1));
+    expect(sessionVolumeKg([exo])).toBe(0);
+  });
+
+  it("compte charge × reps de la seule série validée", () => {
+    const exo = first(buildSessionExercises(routine, 1));
+    const { exercises } = toggleSetChecked([exo], exo.id, 1);
+    // la validation remplit avec les cibles : 80 kg × 8 reps
+    expect(sessionVolumeKg(exercises)).toBe(640);
+  });
+
+  it("utilise la saisie réelle plutôt que la cible quand elle existe", () => {
+    const exo = first(buildSessionExercises(routine, 1));
+    const withInput = {
+      ...exo,
+      sets: exo.sets.map((s) => (s.id === 1 ? { ...s, weight: "100", reps: "5" } : s)),
+    };
+    const { exercises } = toggleSetChecked([withInput], exo.id, 1);
+    expect(sessionVolumeKg(exercises)).toBe(500);
+  });
+
+  it("cumule sur plusieurs séries et plusieurs exercices", () => {
+    const exo = first(buildSessionExercises(routine, 1));
+    const step1 = toggleSetChecked([exo], exo.id, 1);
+    const step2 = toggleSetChecked(step1.exercises, exo.id, 2);
+    // 2 séries × 80 kg × 8 reps
+    expect(sessionVolumeKg(step2.exercises)).toBe(1280);
+  });
+
+  it("ignore une saisie non numérique sans produire NaN", () => {
+    const exo = first(buildSessionExercises(routine, 1));
+    const dirty = {
+      ...exo,
+      sets: exo.sets.map((s) => (s.id === 1 ? { ...s, weight: "abc", reps: "8", checked: true } : s)),
+    };
+    expect(sessionVolumeKg([dirty])).toBe(0);
+  });
+
+  it("renvoie 0 pour une séance vide", () => {
+    expect(sessionVolumeKg([])).toBe(0);
   });
 });
 

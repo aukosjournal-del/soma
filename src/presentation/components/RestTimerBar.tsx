@@ -18,8 +18,13 @@ export function RestTimerBar() {
     <div
       style={{
         position: "fixed",
-        left: "50%",
-        transform: "translateX(-50%)",
+        // Centrage par les marges, PAS par `translateX(-50%)` : `transform`
+        // est une propriété unique, qu'une keyframe (somaFadeIn et suivantes)
+        // écraserait entièrement, décentrant la barre pendant l'animation.
+        // Même correctif que BottomSheet et BottomNav.
+        left: 0,
+        right: 0,
+        marginInline: "auto",
         // Aligné sur la nav flottante, qui suit elle aussi la zone sûre.
         bottom: "calc(92px + env(safe-area-inset-bottom, 0px))",
         zIndex: 45,
@@ -66,11 +71,8 @@ export function RestTimerBar() {
           <div style={{ minWidth: 0, flex: 1 }}>
             <p
               style={{
-                color: "var(--color-at-prefix)",
-                fontSize: "10px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                color: "var(--color-text-faint)",
+                fontSize: "11px",
                 margin: 0,
               }}
             >
@@ -79,11 +81,11 @@ export function RestTimerBar() {
             <p
               aria-live="polite"
               style={{
-                fontSize: "22px",
-                fontWeight: 900,
+                fontSize: "24px",
+                fontWeight: 500,
                 fontVariantNumeric: "tabular-nums",
-                lineHeight: 1,
-                margin: "2px 0 0",
+                lineHeight: 1.1,
+                margin: "1px 0 0",
                 color: finished ? "var(--color-success)" : "#fff",
               }}
             >
@@ -113,12 +115,13 @@ export function RestTimerBar() {
 
           <button
             type="button"
+            className="soma-press"
             onClick={() => restTimerStore.close()}
             aria-label="Fermer le minuteur"
             style={{
               flexShrink: 0,
-              height: "36px",
-              width: "36px",
+              height: "44px",
+              width: "44px",
               borderRadius: "12px",
               background: "var(--color-bg-elevated)",
               border: "1px solid var(--color-border)",

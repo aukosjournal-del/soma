@@ -63,7 +63,10 @@ export class SupabaseSessionRepository implements SessionRepository {
       const rows = exercise.sets.map((set) => ({
         session_exercise_id: exRow.id as string,
         set_number: set.id,
-        set_type: set.type,
+        // `set_type` n'est plus envoyé : la colonne porte un DEFAULT 'N' en
+        // base et le client n'a jamais produit d'autre valeur. La colonne est
+        // conservée telle quelle pour les séries dégressives à venir — rien
+        // n'est supprimé côté base, seule l'écriture redondante disparaît.
         weight_kg: parseFloat(set.weight || set.weightPlaceholder) || 0,
         reps: parseInt(set.reps || set.repsPlaceholder, 10) || 0,
         status: set.checked ? "completed" : set.failed ? "failed" : "pending",

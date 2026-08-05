@@ -8,7 +8,7 @@ const exercises: SessionExercise[] = [
     name: "Développé Couché",
     restSec: 90,
     sets: [
-      { id: 1, type: "N", weightPlaceholder: "80", repsPlaceholder: "8", weight: "", reps: "", checked: false, failed: false },
+      { id: 1, weightPlaceholder: "80", repsPlaceholder: "8", weight: "", reps: "", checked: false, failed: false },
     ],
   },
 ];

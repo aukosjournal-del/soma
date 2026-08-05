@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { haptics } from "@infrastructure/haptics/haptics";
 
 export interface RestState {
   /** null = minuteur masqué ; 0 = récupération terminée. */
@@ -67,7 +68,11 @@ export const restTimerStore = {
   },
   tick() {
     if (state.seconds === null || state.seconds === 0) return;
-    set({ ...state, seconds: state.seconds <= 1 ? 0 : state.seconds - 1 });
+    const next = state.seconds <= 1 ? 0 : state.seconds - 1;
+    // Le repos vient de s'achever : c'est le seul instant où l'utilisateur a
+    // besoin d'être rappelé, souvent téléphone posé et écran éteint.
+    if (next === 0) haptics.restFinished();
+    set({ ...state, seconds: next });
   },
 };
 

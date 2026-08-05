@@ -13,6 +13,7 @@ import { flushQueue } from "@infrastructure/sync/SyncRunner";
 import type { SessionPayload } from "@infrastructure/sync/SupabaseMutationExecutor";
 import { restTimerStore } from "./restTimerStore";
 import { activeSessionStore, useActiveSession } from "./activeSessionStore";
+import { haptics } from "@infrastructure/haptics/haptics";
 
 /**
  * Séance du jour — offline-first. L'état vit dans `activeSessionStore`
@@ -83,12 +84,18 @@ export function useWorkoutSession() {
     activeSessionStore.updateExercises((current) => {
       const { exercises, justChecked, restSec } = toggleSetChecked(current, exerciseId, setId);
       // Valider une série démarre le repos (comportement du prototype).
-      if (justChecked) restTimerStore.start(restSec);
+      // L'haptique n'accompagne que la validation, pas la dévalidation :
+      // annuler est une correction, pas un accomplissement.
+      if (justChecked) {
+        haptics.setValidated();
+        restTimerStore.start(restSec);
+      }
       return exercises;
     });
   }, []);
 
   const fail = useCallback((exerciseId: string, setId: number) => {
+    haptics.setFailed();
     activeSessionStore.updateExercises((current) => toggleSetFailed(current, exerciseId, setId));
   }, []);
 
@@ -127,6 +134,8 @@ export function useWorkoutSession() {
   return {
     exercises: session?.exercises ?? [],
     routineName: session?.routineName ?? null,
+    /** ISO de démarrage — permet d'afficher le temps écoulé réel en séance. */
+    startedAt: session?.startedAt ?? null,
     loading,
     error,
     check,

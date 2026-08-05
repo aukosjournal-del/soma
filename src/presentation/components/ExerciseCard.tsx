@@ -15,44 +15,73 @@ export interface ExerciseCardProps {
   onFail: (setId: number) => void;
 }
 
-/** Carte glassmorphism d'un exercice (radius 24, blur 20px). */
+const columnLabel = {
+  fontSize: "10px",
+  fontWeight: 500,
+  letterSpacing: "0.08em",
+  color: "var(--color-text-faint)",
+  textTransform: "uppercase",
+} as const;
+
+/**
+ * Carte d'un exercice. Le glassmorphism (blur 20px) est conservé — c'est
+ * l'identité SOMA — mais la bordure disparaît : la carte se détache déjà par
+ * son fond, et trois bordures imbriquées (carte / ligne / champ) créaient un
+ * bruit visuel qui écrasait la seule donnée qui compte en séance, les chiffres.
+ */
 export function ExerciseCard({ exercise, index, total, onWeight, onReps, onCheck, onFail }: ExerciseCardProps) {
   return (
-    <div
+    <section
       style={{
         background: "var(--color-bg-elevated)",
-        border: "1px solid var(--color-border)",
-        borderRadius: "24px",
+        borderRadius: "var(--radius-lg)",
         padding: "16px",
         backdropFilter: "var(--blur-glass)",
         WebkitBackdropFilter: "var(--blur-glass)",
-        boxShadow: "var(--shadow-card)",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
-        <div style={{ minWidth: 0 }}>
-          <p
-            style={{
-              color: "var(--color-at-prefix)",
-              fontSize: "11px",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "var(--tracking-eyebrow)",
-              margin: 0,
-            }}
-          >
-            Exercice {index + 1} / {total}
-          </p>
-          <h2 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "2px 0 0" }}>
-            {exercise.name}
-          </h2>
-        </div>
-        <span style={{ flexShrink: 0, color: "var(--color-at-prefix)", fontSize: "12px", fontWeight: 700 }}>
-          {fmtMinSec(exerciseEstimatedSec(exercise))}
+      <header
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          gap: "12px",
+          marginBottom: "14px",
+        }}
+      >
+        {/* Hiérarchie par la TAILLE, plus par la graisse : le poids 900
+            partout supprimait toute distinction entre les niveaux. */}
+        <h2 style={{ color: "#fff", fontSize: "16px", fontWeight: 500, margin: 0, minWidth: 0 }}>
+          {exercise.name}
+        </h2>
+        <span
+          style={{
+            flexShrink: 0,
+            color: "var(--color-text-faint)",
+            fontSize: "11px",
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          {index + 1} / {total} · {fmtMinSec(exerciseEstimatedSec(exercise))}
         </span>
+      </header>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "18px 1fr 1fr 48px",
+          gap: "8px",
+          padding: "0 2px",
+          marginBottom: "8px",
+        }}
+      >
+        <span />
+        <span style={columnLabel}>Charge</span>
+        <span style={columnLabel}>Reps</span>
+        <span />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
         {exercise.sets.map((set) => (
           <SetRow
             key={set.id}
@@ -64,6 +93,6 @@ export function ExerciseCard({ exercise, index, total, onWeight, onReps, onCheck
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }

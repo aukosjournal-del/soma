@@ -4,7 +4,6 @@ import { tempoForReps, transitionTimeForRest } from "../value-objects/Duration";
 /** Une série. `checked` verrouille la ligne (inputs désactivés). */
 export interface SessionSet {
   id: number;
-  type: string;
   /** Placeholders = cibles planifiées, pondérées par le coefficient d'expérience. */
   weightPlaceholder: string;
   repsPlaceholder: string;
@@ -33,7 +32,6 @@ export function buildSessionExercises(routine: Routine | null, coefficient = 1):
     restSec: exo.restSec || 90,
     sets: Array.from({ length: exo.targetSets || 1 }, (_, i) => ({
       id: i + 1,
-      type: "N",
       weightPlaceholder: String(Math.round((exo.targetWeightKg || 0) * coefficient)),
       repsPlaceholder: exo.targetReps,
       weight: "",
@@ -54,7 +52,6 @@ export function buildSessionFromDraft(
     restSec: parseInt(d.rest, 10) || 90,
     sets: Array.from({ length: parseInt(d.sets, 10) || 1 }, (_, k) => ({
       id: k + 1,
-      type: "N",
       weightPlaceholder: String(parseFloat(d.weight) || 0),
       repsPlaceholder: d.reps,
       weight: "",
@@ -141,6 +138,25 @@ export function sessionProgress(exercises: SessionExercise[]): {
   const total = exercises.reduce((a, e) => a + e.sets.length, 0);
   const done = exercises.reduce((a, e) => a + e.sets.filter((s) => s.checked).length, 0);
   return { done, total, percent: total === 0 ? 0 : Math.round((done / total) * 100) };
+}
+
+/**
+ * Volume total soulevé (kg) — somme de charge × répétitions sur les seules
+ * séries validées. Les séries non validées ne comptent pas : le volume est un
+ * bilan de travail réellement effectué, pas une projection.
+ */
+export function sessionVolumeKg(exercises: SessionExercise[]): number {
+  return exercises.reduce(
+    (total, exo) =>
+      total +
+      exo.sets.reduce((sum, st) => {
+        if (!st.checked) return sum;
+        const weight = parseFloat(st.weight || st.weightPlaceholder) || 0;
+        const reps = parseInt(st.reps || st.repsPlaceholder, 10) || 0;
+        return sum + weight * reps;
+      }, 0),
+    0,
+  );
 }
 
 /** Durée estimée d'un exercice : séries (tempo × reps) + repos intercalaires. */

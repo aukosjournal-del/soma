@@ -25,3 +25,35 @@ html {
 #root {
   isolation: isolate;
 }
+
+/*
+ * Physique de défilement iOS. `-webkit-overflow-scrolling: touch` rétablit
+ * l'inertie et le rubber-banding natifs dans la WebView Capacitor (sans ça
+ * le défilement s'arrête net au relâchement du doigt, sensation « web »).
+ * `overscroll-behavior-y: contain` empêche le rebond de se propager au
+ * document parent et de déclencher le pull-to-refresh du navigateur au
+ * milieu d'une séance.
+ */
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/*
+ * Ressort de pression — presser un contrôle l'enfonce puis il rebondit.
+ * `--ease-spring` est déjà le cubic-bezier amorti des tokens ; on ne
+ * transitionne QUE `transform` (jamais `all`) pour rester sur le compositeur.
+ */
+.soma-press {
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+.soma-press:active {
+  transform: scale(0.95);
+}
+@media (prefers-reduced-motion: reduce) {
+  .soma-press,
+  .soma-press:active {
+    transition: none;
+    transform: none;
+  }
+}
