@@ -75,7 +75,7 @@ export function StepsSheet({ open, initial, onClose, onSave }: StepsSheetProps) 
 
       <button
         type="button"
-              className="soma-press"
+        className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
@@ -93,7 +93,7 @@ export function StepsSheet({ open, initial, onClose, onSave }: StepsSheetProps) 
           opacity: saving ? 0.6 : 1,
         }}
       >
-        {saving ? "ENREGISTREMENT…" : "ENREGISTRER"}
+        {saving ? "Enregistrement…" : "Enregistrer"}
       </button>
     </BottomSheet>
   );

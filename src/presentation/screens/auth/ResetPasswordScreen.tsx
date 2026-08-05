@@ -130,7 +130,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
         disabled={submitting}
         style={{ ...primaryButton, cursor: submitting ? "not-allowed" : "pointer", opacity: submitting ? 0.6 : 1 }}
       >
-        {submitting ? "MISE À JOUR…" : "VALIDER"}
+        {submitting ? "Mise à jour…" : "Valider"}
       </button>
 
       {error && (

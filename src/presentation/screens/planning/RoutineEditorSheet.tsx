@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
 import type { Routine } from "@domain/workout/entities/Routine";
 import type { Exercise } from "@domain/workout/entities/Exercise";
@@ -96,6 +96,21 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string>();
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const confirmDeleteRef = useRef<HTMLButtonElement>(null);
+
+  // Le bouton armé se désarme seul : laissé rouge indéfiniment, il redevient
+  // un piège au prochain passage de l'utilisateur sur la feuille.
+  useEffect(() => {
+    if (!confirmDelete) return;
+    const t = window.setTimeout(() => setConfirmDelete(false), 5000);
+    return () => window.clearTimeout(t);
+  }, [confirmDelete]);
+
+  // Le libellé du bouton change sous le focus ; sans renvoi de focus, les
+  // lecteurs d'écran n'annoncent pas la nouvelle intention.
+  useEffect(() => {
+    if (confirmDelete) confirmDeleteRef.current?.focus();
+  }, [confirmDelete]);
 
   useEffect(() => {
     if (!open) return;
@@ -316,72 +331,74 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
         <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
 
+      {confirmDelete && (
+        <p
+          role="status"
+          style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}
+        >
+          Supprimer « {routine?.name} » définitivement ?
+        </p>
+      )}
+
       <div style={{ display: "flex", gap: "8px", marginTop: "20px" }}>
         {routine && (
-          <>
-            <button
-              type="button"
-              className="soma-press"
-              onClick={() => setConfirmDelete(true)}
-              style={{
-                height: "52px",
-                padding: "0 18px",
-                borderRadius: "12px",
-                background: confirmDelete ? "var(--color-error)" : "rgba(239,68,68,0.12)",
-                color: confirmDelete ? "#fff" : "var(--color-error)",
-                fontWeight: 500,
-                fontSize: "14px",
-                cursor: "pointer",
-                border: "none",
-                transition: "background 0.2s ease, color 0.2s ease",
-              }}
-            >
-              {confirmDelete ? "Confirmer la suppression" : "Supprimer"}
-            </button>
-            {confirmDelete && (
-              <button
-                type="button"
-                className="soma-press"
-                onClick={() => setConfirmDelete(false)}
-                style={{
-                  height: "52px",
-                  padding: "0 18px",
-                  borderRadius: "12px",
-                  background: "var(--color-bg-elevated)",
-                  color: "var(--color-text-secondary)",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  border: "none",
-                }}
-              >
-                Annuler
-              </button>
-            )}
-            {confirmDelete && (
-              <button
-                type="button"
-                className="soma-press"
-                onClick={async () => {
-                  await onDelete(routine.id);
-                  onClose();
-                }}
-                style={{
-                  height: "52px",
-                  padding: "0 18px",
-                  borderRadius: "12px",
-                  background: "var(--color-error)",
-                  color: "#fff",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  border: "none",
-                }}
-              >
-                Oui, supprimer
-              </button>
-            )}
-          </>
+          // Un seul bouton destructeur qui change d'intention sur place :
+          // deux boutons rouges côte à côte (dont un inerte) rendaient la
+          // confirmation plus dangereuse que son absence.
+          <button
+            type="button"
+            className="soma-press"
+            ref={confirmDeleteRef}
+            onClick={async () => {
+              if (!confirmDelete) {
+                setConfirmDelete(true);
+                return;
+              }
+              try {
+                await onDelete(routine.id);
+                onClose();
+              } catch (e) {
+                // Même traitement que l'enregistrement : l'échec reste sur la
+                // feuille avec son message, plutôt qu'en rejet non capturé.
+                setConfirmDelete(false);
+                setError(e instanceof Error ? e.message : "Suppression impossible.");
+              }
+            }}
+            style={{
+              height: "52px",
+              padding: "0 18px",
+              borderRadius: "12px",
+              background: confirmDelete ? "var(--color-error)" : "rgba(239,68,68,0.12)",
+              color: confirmDelete ? "#fff" : "var(--color-error)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              border: "none",
+              transition: "background var(--duration-fast) ease, color var(--duration-fast) ease",
+            }}
+          >
+            {confirmDelete ? "Confirmer" : "Supprimer"}
+          </button>
+        )}
+        {routine && confirmDelete && (
+          <button
+            type="button"
+            className="soma-press"
+            onClick={() => setConfirmDelete(false)}
+            style={{
+              height: "52px",
+              padding: "0 18px",
+              borderRadius: "12px",
+              background: "var(--color-bg-elevated)",
+              color: "var(--color-text-secondary)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              border: "none",
+            }}
+          >
+            Annuler
+          </button>
         )}
         <button
           type="button"

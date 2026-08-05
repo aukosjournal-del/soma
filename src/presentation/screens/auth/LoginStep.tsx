@@ -103,7 +103,7 @@ export function LoginStep({ onSubmit, submitting, errorMessage, onForgot, onCrea
           opacity: submitting ? 0.6 : 1,
         }}
       >
-        {submitting ? "CONNEXION…" : "SE CONNECTER"}
+        {submitting ? "Connexion…" : "Se connecter"}
       </button>
 
       {errorMessage && (

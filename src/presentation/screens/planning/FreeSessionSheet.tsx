@@ -122,7 +122,10 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
               style={{
                 height: "36px",
                 borderRadius: "10px",
-                border: `1px solid ${active ? DIFFICULTY_COLOR[lvl] : "var(--color-border)"}`,
+                // Même traitement que les sélecteurs de difficulté de
+                // CustomExerciseSheet et ExerciseInfoSheet : l'état actif est
+                // porté par le fond, le contour doublait l'information.
+                border: "none",
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 fontSize: "11px",
@@ -153,7 +156,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           boxSizing: "border-box",
         }}
       >
-        GÉNÉRER
+        Générer
       </button>
 
       <p style={{ ...eyebrow, margin: "0 0 8px" }}>Exercices ({exercises.length})</p>
@@ -296,7 +299,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
           <polygon points="3,2 14,8 3,14" fill="currentColor" />
         </svg>
-        <span>LANCER LA SÉANCE</span>
+        <span>Lancer la séance</span>
       </button>
     </BottomSheet>
   );

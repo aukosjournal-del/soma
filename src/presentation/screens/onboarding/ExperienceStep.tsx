@@ -84,7 +84,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
           opacity: selected ? 1 : 0.5,
         }}
       >
-        {submitting ? "CRÉATION…" : "C'EST PARTI"}
+        {submitting ? "Création…" : "C'est parti"}
       </button>
 
       {status === "error" && errorMessage && (

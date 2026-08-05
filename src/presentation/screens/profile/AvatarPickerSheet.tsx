@@ -45,13 +45,15 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
       <p style={eyebrow}>Photo</p>
       <button
         type="button"
-              className="soma-press"
         disabled
         title="Import de photo à venir"
         style={{
           width: "100%",
           height: "56px",
           borderRadius: "12px",
+          // Tiret conservé : convention des zones vides / à venir, seule
+          // exception à la suppression des bordures 1px.
+          border: "1px dashed rgba(192,235,255,0.25)",
           background: "rgba(192,235,255,0.05)",
           color: "var(--color-text-muted)",
           fontSize: "13px",
@@ -117,7 +119,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
         />
         <button
           type="button"
-              className="soma-press"
+          className="soma-press"
           onClick={() => customEmoji.trim() && void pick(customEmoji.trim())}
           style={{
             flexShrink: 0,
@@ -139,7 +141,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
       <p style={{ ...eyebrow, marginTop: "18px" }}>Par défaut</p>
       <button
         type="button"
-              className="soma-press"
+        className="soma-press"
         onClick={() => void pick("logo")}
         style={{
           width: "100%",

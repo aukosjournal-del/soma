@@ -141,6 +141,9 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               width: "100%",
               height: "72px",
               borderRadius: "12px",
+              // Tiret conservé : convention des zones vides / à venir, seule
+              // exception à la suppression des bordures 1px.
+              border: "1px dashed rgba(192,235,255,0.2)",
               background:
                 "repeating-linear-gradient(45deg, rgba(192,235,255,0.06) 0px, rgba(192,235,255,0.06) 4px, rgba(192,235,255,0.03) 4px, rgba(192,235,255,0.03) 8px)",
               color: "var(--color-text-muted)",
@@ -211,7 +214,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
           opacity: saving ? 0.6 : 1,
         }}
       >
-        {saving ? "CRÉATION…" : "Ajouter à la bibliothèque"}
+        {saving ? "Création…" : "Ajouter à la bibliothèque"}
       </button>
     </BottomSheet>
   );

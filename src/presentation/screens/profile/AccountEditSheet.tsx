@@ -198,7 +198,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
 
       <button
         type="button"
-              className="soma-press"
+        className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
@@ -216,7 +216,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
           opacity: saving ? 0.6 : 1,
         }}
       >
-        {saving ? "ENREGISTREMENT…" : "ENREGISTRER"}
+        {saving ? "Enregistrement…" : "Enregistrer"}
       </button>
     </BottomSheet>
   );

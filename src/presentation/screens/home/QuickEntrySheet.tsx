@@ -113,7 +113,7 @@ export function QuickEntrySheet({ open, initial, onClose, onSave }: QuickEntrySh
 
       <button
         type="button"
-              className="soma-press"
+        className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
@@ -131,7 +131,7 @@ export function QuickEntrySheet({ open, initial, onClose, onSave }: QuickEntrySh
           opacity: saving ? 0.6 : 1,
         }}
       >
-        {saving ? "ENREGISTREMENT…" : "ENREGISTRER"}
+        {saving ? "Enregistrement…" : "Enregistrer"}
       </button>
     </BottomSheet>
   );

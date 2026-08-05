@@ -117,7 +117,7 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
             boxSizing: "border-box",
           }}
         >
-          {saved ? "OBJECTIFS ENREGISTRÉS" : "ENREGISTRER LES OBJECTIFS"}
+          {saved ? "Objectifs enregistrés" : "Enregistrer les objectifs"}
         </button>
       )}
     </div>

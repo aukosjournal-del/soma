@@ -50,7 +50,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
       )}
       <button
         type="button"
-              className="soma-press"
+        className="soma-press"
         onClick={submit}
         disabled={saving}
         style={{
@@ -67,7 +67,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
           opacity: saving ? 0.6 : 1,
         }}
       >
-        {saving ? "ENREGISTREMENT…" : "VALIDER"}
+        {saving ? "Enregistrement…" : "Valider"}
       </button>
     </>
   );
@@ -113,7 +113,11 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                   width: "22px",
                   borderRadius: "7px",
                   border: "none",
-                  background: checked ? "var(--color-accent)" : "transparent",
+                  // Non coché : surface pleine plutôt que transparente. Le
+                  // contour 1px qui rendait la case vide visible a été retiré
+                  // avec les autres bordures ; sans lui, `transparent` ne
+                  // dessinait plus rien sur la ligne.
+                  background: checked ? "var(--color-accent)" : "var(--color-bg-elevated-strong)",
                   color: "var(--color-on-accent)",
                   display: "flex",
                   alignItems: "center",
