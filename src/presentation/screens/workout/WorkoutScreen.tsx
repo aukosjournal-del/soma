@@ -57,7 +57,7 @@ export function WorkoutScreen({ onFinished }: { onFinished?: () => void } = {}) 
                 style={{
                   color: "#fff",
                   fontSize: "22px",
-                  fontWeight: 500,
+                  fontWeight: "var(--weight-medium)",
                   margin: 0,
                   minWidth: 0,
                   overflow: "hidden",
@@ -82,7 +82,7 @@ export function WorkoutScreen({ onFinished }: { onFinished?: () => void } = {}) 
                     background: canFinish ? "var(--color-accent)" : "var(--color-bg-elevated)",
                     color: canFinish ? "var(--color-on-accent)" : "var(--color-text-faint)",
                     fontSize: "13px",
-                    fontWeight: 500,
+                    fontWeight: "var(--weight-medium)",
                     cursor: canFinish ? "pointer" : "not-allowed",
                   }}
                 >
@@ -185,7 +185,7 @@ function Stat({
         style={{
           color: "#fff",
           fontSize: "17px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           margin: 0,
           fontVariantNumeric: "tabular-nums",
           lineHeight: 1.2,

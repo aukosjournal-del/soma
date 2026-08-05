@@ -82,7 +82,7 @@ export function RestTimerBar() {
               aria-live="polite"
               style={{
                 fontSize: "24px",
-                fontWeight: 500,
+                fontWeight: "var(--weight-medium)",
                 fontVariantNumeric: "tabular-nums",
                 lineHeight: 1.1,
                 margin: "1px 0 0",

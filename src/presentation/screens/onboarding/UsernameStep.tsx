@@ -35,7 +35,7 @@ const inputBase: CSSProperties = {
   padding: "0 14px",
   color: "#fff",
   fontSize: "14px",
-  fontWeight: 600,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 };
 
@@ -65,7 +65,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
         Étape 1 sur 3
       </p>
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 16px" }}>
         Choisis ton pseudo
       </h1>
 
@@ -99,7 +99,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
           height: "48px",
         }}
       >
-        <span style={{ color: "var(--color-at-prefix)", fontWeight: 700, marginRight: "2px" }}>@</span>
+        <span style={{ color: "var(--color-at-prefix)", fontWeight: "var(--weight-medium)", marginRight: "2px" }}>@</span>
         <input
           type="text"
           value={username}
@@ -117,7 +117,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
             border: "none",
             color: "#fff",
             fontSize: "14px",
-            fontWeight: 600,
+            fontWeight: "var(--weight-medium)",
             outline: "none",
           }}
         />
@@ -135,7 +135,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 800,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",
@@ -159,7 +159,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
           border: "none",
           color: "var(--color-text-muted)",
           fontSize: "13px",
-          fontWeight: 600,
+          fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}
       >

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
 import { hitTarget, hitTargetVisual } from "@presentation/design-system/hitTarget";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 import {
   type BodyMetrics,
   BIO_METRIC_CATALOG,
@@ -61,7 +62,7 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
         style={{
           width: "100%",
           minHeight: "52px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",
@@ -135,7 +136,7 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 </span>
               </button>
 
-              <span style={{ flex: 1, minWidth: 0, color: "#fff", fontSize: "13px", fontWeight: 500 }}>
+              <span style={{ flex: 1, minWidth: 0, color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>
                 {metric.label}
               </span>
 
@@ -143,6 +144,7 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                 <input
                   type="text"
                   inputMode="decimal"
+                  onFocus={selectZeroOnFocus}
                   disabled={derived}
                   value={shown ?? ""}
                   onChange={(e) => {
@@ -162,7 +164,7 @@ export function BiometricsSheet({ open, metrics, visibleIds, onClose, onSave }: 
                     padding: "0 8px",
                     color: derived ? "var(--color-text-muted)" : "#fff",
                     fontSize: "14px",
-                    fontWeight: 500,
+                    fontWeight: "var(--weight-medium)",
                     textAlign: "right",
                     boxSizing: "border-box",
                     fontVariantNumeric: "tabular-nums",

@@ -45,7 +45,7 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
         </svg>
       </button>
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
         Retrouve ton compte
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
@@ -68,7 +68,7 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
           width: "100%",
           minHeight: "52px",
           marginTop: "16px",
-          fontWeight: 800,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

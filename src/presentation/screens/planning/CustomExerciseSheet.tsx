@@ -12,14 +12,14 @@ const field = {
   padding: "0 12px",
   color: "#fff",
   fontSize: "14px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 } as const;
 
 const label = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   letterSpacing: "0.04em",
   marginBottom: "4px",
 } as const;
@@ -126,7 +126,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
               padding: "10px 12px",
               color: "#fff",
               fontSize: "13px",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               boxSizing: "border-box",
               resize: "none",
               fontFamily: "inherit",
@@ -148,7 +148,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
                 "repeating-linear-gradient(45deg, rgba(192,235,255,0.06) 0px, rgba(192,235,255,0.06) 4px, rgba(192,235,255,0.03) 4px, rgba(192,235,255,0.03) 8px)",
               color: "var(--color-text-muted)",
               fontSize: "13px",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -178,7 +178,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
                     background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                     color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                     fontSize: "11px",
-                    fontWeight: 500,
+                    fontWeight: "var(--weight-medium)",
                     cursor: "pointer",
                   }}
                 >
@@ -203,7 +203,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

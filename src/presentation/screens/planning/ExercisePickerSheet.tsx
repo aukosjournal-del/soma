@@ -65,12 +65,12 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
               }}
             >
               <span style={{ minWidth: 0 }}>
-                <span style={{ display: "block", color: "#fff", fontSize: "15px", fontWeight: 500 }}>{routine.name}</span>
+                <span style={{ display: "block", color: "#fff", fontSize: "15px", fontWeight: "var(--weight-medium)" }}>{routine.name}</span>
                 <span style={{ display: "block", color: "var(--color-text-muted)", fontSize: "12px" }}>
                   {routine.focus ?? ""}
                 </span>
               </span>
-              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "12px", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "12px", fontWeight: "var(--weight-medium)", fontVariantNumeric: "tabular-nums" }}>
                 {busyId === routine.id ? "Ajout…" : `${routine.exercises.length} ex.`}
               </span>
             </button>

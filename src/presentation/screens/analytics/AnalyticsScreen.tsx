@@ -156,7 +156,7 @@ export function AnalyticsScreen() {
                   <p style={eyebrow}>Volume d'exercice hebdo</p>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginTop: "4px" }}>
                     <span style={bigNumber}>{weekTotal(data?.volume ?? []).toLocaleString("fr-FR")}</span>
-                    <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: 500 }}>kg de tonnage</span>
+                    <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>kg de tonnage</span>
                   </div>
                 </div>
                 <div
@@ -185,7 +185,7 @@ export function AnalyticsScreen() {
               <p style={eyebrow}>Volume de pas hebdo</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginTop: "4px" }}>
                 <span style={bigNumber}>{weekTotal(data?.steps ?? []).toLocaleString("fr-FR")}</span>
-                <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: 500 }}>pas</span>
+                <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>pas</span>
               </div>
               <WeeklyBarChart bars={stepsBars} color="var(--color-text-secondary)" />
             </div>
@@ -194,7 +194,7 @@ export function AnalyticsScreen() {
               <p style={eyebrow}>Volume calorique hebdo</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginTop: "4px" }}>
                 <span style={bigNumber}>{weekTotal(data?.kcal ?? []).toLocaleString("fr-FR")}</span>
-                <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: 500 }}>kcal</span>
+                <span style={{ color: "var(--color-at-prefix)", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>kcal</span>
               </div>
               <WeeklyBarChart bars={kcalBars} color="#A855F7" />
             </div>
@@ -230,7 +230,7 @@ export function AnalyticsScreen() {
                 <div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
                     <span style={{ ...bigNumber, fontSize: "40px" }}>{Math.round(oneRM)}</span>
-                    <span style={{ color: "var(--color-at-prefix)", fontSize: "14px", fontWeight: 500 }}>kg</span>
+                    <span style={{ color: "var(--color-at-prefix)", fontSize: "14px", fontWeight: "var(--weight-medium)" }}>kg</span>
                   </div>
                   <p style={{ color: "var(--color-text-faint)", fontSize: "11px", margin: "4px 0 0" }}>
                     {best

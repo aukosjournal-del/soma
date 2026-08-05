@@ -63,7 +63,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
     return (
       <AuthShell>
         <BrandHeader />
-        <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px" }}>
+        <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
           Lien expiré
         </h1>
         <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
@@ -80,7 +80,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
     return (
       <AuthShell>
         <BrandHeader />
-        <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px" }}>
+        <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
           Mot de passe mis à jour
         </h1>
         <p style={{ color: "var(--color-success)", fontSize: "13px", margin: "0 0 20px" }}>
@@ -99,7 +99,7 @@ export function ResetPasswordScreen({ onDone }: { onDone: () => void }) {
     <AuthShell>
       <BrandHeader />
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px" }}>
         Nouveau mot de passe
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px" }}>
@@ -146,7 +146,7 @@ const primaryButton = {
   width: "100%",
   minHeight: "52px",
   marginTop: "16px",
-  fontWeight: 800,
+  fontWeight: "var(--weight-medium)",
   fontSize: "15px",
   borderRadius: "12px",
   background: "var(--color-accent)",

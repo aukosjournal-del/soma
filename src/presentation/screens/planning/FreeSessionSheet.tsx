@@ -6,6 +6,7 @@ import { DIFFICULTY_LABEL, DIFFICULTY_COLOR, DIFFICULTY_ORDER } from "@domain/wo
 import type { RoutineDraftExercise } from "@domain/workout/ports/RoutineRepository";
 import { type Objective, generateFreeSession } from "@domain/workout/use-cases/GenerateFreeSession";
 import { restForReps } from "@domain/workout/value-objects/Duration";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 
 const microInput = {
   width: "100%",
@@ -15,7 +16,7 @@ const microInput = {
   textAlign: "center",
   color: "#fff",
   fontSize: "12px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -23,14 +24,14 @@ const microInput = {
 const microLabel = {
   color: "var(--color-at-prefix)",
   fontSize: "9px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   marginBottom: "2px",
 } as const;
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
 } as const;
 
@@ -102,7 +103,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           padding: "10px 12px",
           color: "#fff",
           fontSize: "13px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           boxSizing: "border-box",
           resize: "none",
           fontFamily: "inherit",
@@ -130,7 +131,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 fontSize: "11px",
-                fontWeight: 500,
+                fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
               }}
             >
@@ -148,7 +149,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           width: "100%",
           height: "44px",
           marginBottom: "16px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "13px",
           borderRadius: "12px",
           background: "var(--color-bg-elevated)",
@@ -181,7 +182,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-              <span style={{ color: "#fff", fontSize: "13px", fontWeight: 500 }}>{ex.name}</span>
+              <span style={{ color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
               <button
                 type="button"
                 className="soma-press"
@@ -207,19 +208,19 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "6px" }}>
               <label style={{ display: "block" }}>
                 <div style={microLabel}>Séries</div>
-                <input type="text" inputMode="numeric" value={ex.sets} onChange={(e) => patch(i, { sets: e.target.value })} style={microInput} />
+                <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.sets} onChange={(e) => patch(i, { sets: e.target.value })} style={microInput} />
               </label>
               <label style={{ display: "block" }}>
                 <div style={microLabel}>Charge</div>
-                <input type="text" inputMode="decimal" value={ex.weight} onChange={(e) => patch(i, { weight: e.target.value })} style={microInput} />
+                <input type="text" inputMode="decimal" onFocus={selectZeroOnFocus} value={ex.weight} onChange={(e) => patch(i, { weight: e.target.value })} style={microInput} />
               </label>
               <label style={{ display: "block" }}>
                 <div style={microLabel}>Reps</div>
-                <input type="text" inputMode="numeric" value={ex.reps} onChange={(e) => patch(i, { reps: e.target.value })} style={microInput} />
+                <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.reps} onChange={(e) => patch(i, { reps: e.target.value })} style={microInput} />
               </label>
               <label style={{ display: "block" }}>
                 <div style={microLabel}>Repos</div>
-                <input type="text" inputMode="numeric" value={ex.rest} onChange={(e) => patch(i, { rest: e.target.value })} style={microInput} />
+                <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.rest} onChange={(e) => patch(i, { rest: e.target.value })} style={microInput} />
               </label>
             </div>
           </div>
@@ -239,7 +240,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             padding: "0 10px",
             color: "#fff",
             fontSize: "13px",
-            fontWeight: 500,
+            fontWeight: "var(--weight-medium)",
             boxSizing: "border-box",
           }}
         >
@@ -261,7 +262,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
             border: "none",
             background: "var(--color-accent-soft)",
             color: "var(--color-accent)",
-            fontWeight: 500,
+            fontWeight: "var(--weight-medium)",
             fontSize: "13px",
             cursor: "pointer",
           }}
@@ -283,7 +284,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           alignItems: "center",
           justifyContent: "center",
           gap: "8px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

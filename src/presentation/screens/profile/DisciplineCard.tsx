@@ -40,7 +40,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
             style={{
               color: "var(--color-at-prefix)",
               fontSize: "11px",
-              fontWeight: 600,
+              fontWeight: "var(--weight-medium)",
               textTransform: "uppercase",
               letterSpacing: "var(--tracking-eyebrow)",
               margin: 0,
@@ -49,7 +49,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
             Discipline &amp; Récompenses
           </p>
           <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginTop: "2px" }}>
-            <span style={{ color: "var(--color-accent)", fontSize: "32px", fontWeight: 900, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+            <span style={{ color: "var(--color-accent)", fontSize: "32px", fontWeight: "var(--weight-medium)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
               {weeks}
             </span>
             <span style={{ color: "var(--color-text-muted)", fontSize: "13px" }}>
@@ -68,7 +68,7 @@ export function DisciplineCard({ history }: { history: TrainingHistory }) {
               padding: "10px 6px",
               textAlign: "center",
               fontSize: "11px",
-              fontWeight: 700,
+              fontWeight: "var(--weight-medium)",
               transition: "all 0.4s ease",
               opacity: badge.unlocked ? 1 : 0.3,
               background: badge.unlocked ? "var(--color-accent-soft)" : "rgba(192,235,255,0.05)",

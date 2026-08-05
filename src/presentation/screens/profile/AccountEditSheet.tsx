@@ -12,14 +12,14 @@ const field = {
   padding: "0 12px",
   color: "#fff",
   fontSize: "14px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
 } as const;
 
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "16px 0 8px",
 } as const;
@@ -113,7 +113,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
             height: "48px",
           }}
         >
-          <span style={{ color: "var(--color-at-prefix)", fontWeight: 500, marginRight: "2px" }}>@</span>
+          <span style={{ color: "var(--color-at-prefix)", fontWeight: "var(--weight-medium)", marginRight: "2px" }}>@</span>
           <input
             type="text"
             value={username}
@@ -130,7 +130,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
               border: "none",
               color: "#fff",
               fontSize: "14px",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               outline: "none",
             }}
           />
@@ -168,7 +168,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
                 border: `2px solid ${active ? "#7DD3FC" : "var(--color-border)"}`,
                 cursor: "pointer",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: "var(--weight-medium)",
                 background: active ? "var(--color-accent)" : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 boxSizing: "border-box",
@@ -205,7 +205,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

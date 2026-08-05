@@ -312,7 +312,7 @@ export function ProfileScreen() {
                       <span style={{ color: "#fff", fontSize: "32px", fontWeight: "var(--weight-medium)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
                         {indicator.value || "—"}
                       </span>
-                      <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontWeight: 500 }}>{indicator.unit}</span>
+                      <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontWeight: "var(--weight-medium)" }}>{indicator.unit}</span>
                     </div>
                     {indicator.statusLabel && (
                       <p style={{ color: indicator.statusColor, fontSize: "var(--text-caption)", fontWeight: "var(--weight-medium)", margin: "8px 0 0" }}>

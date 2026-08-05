@@ -12,7 +12,7 @@ import {
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: "0 0 10px",
 } as const;
@@ -68,7 +68,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
           justifyContent: "center",
           color: "var(--color-text-muted)",
           fontSize: "13px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           marginBottom: "18px",
           boxSizing: "border-box",
         }}
@@ -94,7 +94,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
                 background: active ? DIFFICULTY_COLOR[lvl] : "rgba(192,235,255,0.05)",
                 color: active ? "var(--color-on-accent)" : "var(--color-text-secondary)",
                 fontSize: "11px",
-                fontWeight: 500,
+                fontWeight: "var(--weight-medium)",
                 cursor: "pointer",
               }}
             >

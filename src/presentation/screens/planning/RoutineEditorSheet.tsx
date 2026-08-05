@@ -4,6 +4,7 @@ import { hitTarget, hitTargetVisual } from "@presentation/design-system/hitTarge
 import type { Routine } from "@domain/workout/entities/Routine";
 import type { Exercise } from "@domain/workout/entities/Exercise";
 import type { RoutineDraft, RoutineDraftExercise } from "@domain/workout/ports/RoutineRepository";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 import {
   fmtMinSec,
   restForReps,
@@ -39,7 +40,7 @@ const microInput = {
   textAlign: "center",
   color: "#fff",
   fontSize: "12px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -47,14 +48,14 @@ const microInput = {
 const microLabel = {
   color: "var(--color-at-prefix)",
   fontSize: "9px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   marginBottom: "2px",
 } as const;
 
 const sectionLabel = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   marginBottom: "4px",
 } as const;
 
@@ -172,7 +173,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ex: Push"
-            style={{ ...field, fontSize: "15px", fontWeight: 500 }}
+            style={{ ...field, fontSize: "15px", fontWeight: "var(--weight-medium)" }}
           />
         </label>
 
@@ -183,7 +184,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={focus}
             onChange={(e) => setFocus(e.target.value)}
             placeholder="Ex: Pectoraux · Épaules · Triceps"
-            style={{ ...field, fontSize: "14px", fontWeight: 500 }}
+            style={{ ...field, fontSize: "14px", fontWeight: "var(--weight-medium)" }}
           />
         </label>
 
@@ -195,7 +196,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               background: "rgba(192,235,255,0.05)",
               color: "var(--color-accent)",
               fontSize: "16px",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               display: "flex",
               alignItems: "center",
               fontVariantNumeric: "tabular-nums",
@@ -221,7 +222,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-                  <span style={{ color: "#fff", fontSize: "13px", fontWeight: 500 }}>{ex.name}</span>
+                  <span style={{ color: "#fff", fontSize: "13px", fontWeight: "var(--weight-medium)" }}>{ex.name}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
                     <button
                       type="button"
@@ -269,19 +270,19 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "6px" }}>
                   <label style={{ display: "block" }}>
                     <div style={microLabel}>Séries</div>
-                    <input type="text" inputMode="numeric" value={ex.sets} onChange={(e) => patch(i, { sets: e.target.value })} style={microInput} />
+                    <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.sets} onChange={(e) => patch(i, { sets: e.target.value })} style={microInput} />
                   </label>
                   <label style={{ display: "block" }}>
                     <div style={microLabel}>Charge (kg)</div>
-                    <input type="text" inputMode="decimal" value={ex.weight} onChange={(e) => patch(i, { weight: e.target.value })} style={microInput} />
+                    <input type="text" inputMode="decimal" onFocus={selectZeroOnFocus} value={ex.weight} onChange={(e) => patch(i, { weight: e.target.value })} style={microInput} />
                   </label>
                   <label style={{ display: "block" }}>
                     <div style={microLabel}>Reps</div>
-                    <input type="text" inputMode="numeric" value={ex.reps} onChange={(e) => patch(i, { reps: e.target.value })} style={microInput} />
+                    <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.reps} onChange={(e) => patch(i, { reps: e.target.value })} style={microInput} />
                   </label>
                   <label style={{ display: "block" }}>
                     <div style={microLabel}>Repos (s)</div>
-                    <input type="text" inputMode="numeric" value={ex.rest} onChange={(e) => patch(i, { rest: e.target.value })} style={microInput} />
+                    <input type="text" inputMode="numeric" onFocus={selectZeroOnFocus} value={ex.rest} onChange={(e) => patch(i, { rest: e.target.value })} style={microInput} />
                   </label>
                 </div>
               </div>
@@ -293,7 +294,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               value={pick}
               onChange={(e) => setPick(e.target.value)}
               aria-label="Choisir un exercice"
-              style={{ ...field, flex: 1, height: "44px", fontSize: "13px", fontWeight: 500, padding: "0 10px" }}
+              style={{ ...field, flex: 1, height: "44px", fontSize: "13px", fontWeight: "var(--weight-medium)", padding: "0 10px" }}
             >
               {library.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -313,7 +314,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
                 border: "none",
                 background: "var(--color-accent-soft)",
                 color: "var(--color-accent)",
-                fontWeight: 500,
+                fontWeight: "var(--weight-medium)",
                 fontSize: "13px",
                 cursor: "pointer",
               }}
@@ -367,7 +368,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               borderRadius: "12px",
               background: confirmDelete ? "var(--color-error)" : "rgba(239,68,68,0.12)",
               color: confirmDelete ? "#fff" : "var(--color-error)",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               fontSize: "14px",
               cursor: "pointer",
               border: "none",
@@ -388,7 +389,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
               borderRadius: "12px",
               background: "var(--color-bg-elevated)",
               color: "var(--color-text-secondary)",
-              fontWeight: 500,
+              fontWeight: "var(--weight-medium)",
               fontSize: "14px",
               cursor: "pointer",
               border: "none",
@@ -405,7 +406,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
           style={{
             flex: 1,
             minHeight: "52px",
-            fontWeight: 500,
+            fontWeight: "var(--weight-medium)",
             fontSize: "15px",
             borderRadius: "12px",
             background: "var(--color-accent)",

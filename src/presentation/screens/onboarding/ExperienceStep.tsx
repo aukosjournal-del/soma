@@ -33,7 +33,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
         Étape 3 sur 3
       </p>
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 16px" }}>
         Où en es-tu&nbsp;?
       </h1>
 
@@ -56,7 +56,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
                 boxSizing: "border-box",
               }}
             >
-              <div style={{ color: "#fff", fontSize: "14px", fontWeight: 800 }}>{opt.title}</div>
+              <div style={{ color: "#fff", fontSize: "14px", fontWeight: "var(--weight-medium)" }}>{opt.title}</div>
               <div style={{ color: "var(--color-at-prefix)", fontSize: "12px", marginTop: "2px" }}>
                 {opt.description}
               </div>
@@ -73,7 +73,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 800,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

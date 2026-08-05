@@ -14,7 +14,7 @@ const oauthBtnBase: CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   gap: "8px",
-  fontWeight: 700,
+  fontWeight: "var(--weight-medium)",
   fontSize: "14px",
   borderRadius: "12px",
   cursor: "pointer",
@@ -57,7 +57,7 @@ export function AccountStep({
     <AuthShell>
       <BrandHeader />
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 4px", textAlign: "center" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 4px", textAlign: "center" }}>
         Ton carnet d'entraînement
       </h1>
       <p style={{ color: "var(--color-at-prefix)", fontSize: "13px", margin: "0 0 20px", textAlign: "center" }}>
@@ -108,7 +108,7 @@ export function AccountStep({
             padding: "0 14px",
             color: "#fff",
             fontSize: "14px",
-            fontWeight: 600,
+            fontWeight: "var(--weight-medium)",
             boxSizing: "border-box",
             transition: "border-color 0.2s ease",
           }}
@@ -133,7 +133,7 @@ export function AccountStep({
           width: "100%",
           minHeight: "52px",
           marginTop: "16px",
-          fontWeight: 800,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",
@@ -157,7 +157,7 @@ export function AccountStep({
           border: "none",
           color: "var(--color-text-muted)",
           fontSize: "13px",
-          fontWeight: 600,
+          fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}
       >

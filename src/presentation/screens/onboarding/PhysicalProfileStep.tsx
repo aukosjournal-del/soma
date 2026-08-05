@@ -3,6 +3,7 @@ import { AuthShell } from "@presentation/components/AuthShell";
 import { BrandHeader } from "@presentation/components/BrandHeader";
 import { ProgressBar } from "@presentation/components/ProgressBar";
 import { GlassInput } from "@presentation/components/GlassInput";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 import {
   type PhysicalProfileInput,
   emptyPhysicalProfile,
@@ -13,7 +14,7 @@ const accentButton = {
   width: "100%",
   minHeight: "52px",
   marginTop: "20px",
-  fontWeight: 800,
+  fontWeight: "var(--weight-medium)",
   fontSize: "15px",
   borderRadius: "12px",
   background: "var(--color-accent)",
@@ -47,7 +48,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
         Étape 2 sur 3
       </p>
 
-      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: 900, margin: "0 0 16px" }}>
+      <h1 style={{ color: "#fff", fontSize: "20px", fontWeight: "var(--weight-medium)", margin: "0 0 16px" }}>
         Parle-nous de toi
       </h1>
 
@@ -55,7 +56,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
         style={{
           color: "var(--color-text-muted)",
           fontSize: "12px",
-          fontWeight: 600,
+          fontWeight: "var(--weight-medium)",
           textTransform: "uppercase",
           letterSpacing: "0.04em",
           margin: "0 0 8px",
@@ -66,6 +67,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginBottom: "12px" }}>
         <GlassInput
           inputMode="numeric"
+          onFocus={selectZeroOnFocus}
           align="center"
           size={13}
           maxLength={2}
@@ -76,6 +78,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
         />
         <GlassInput
           inputMode="numeric"
+          onFocus={selectZeroOnFocus}
           align="center"
           size={13}
           maxLength={2}
@@ -86,6 +89,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
         />
         <GlassInput
           inputMode="numeric"
+          onFocus={selectZeroOnFocus}
           align="center"
           size={13}
           maxLength={4}
@@ -99,6 +103,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <GlassInput
           inputMode="numeric"
+          onFocus={selectZeroOnFocus}
           value={data.heightCm}
           onChange={(e) => set({ heightCm: digitsOnly(e.target.value) })}
           placeholder="Taille (cm)"
@@ -106,6 +111,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
         />
         <GlassInput
           inputMode="numeric"
+          onFocus={selectZeroOnFocus}
           value={data.weightKg}
           onChange={(e) => set({ weightKg: digitsOnly(e.target.value) })}
           placeholder="Poids actuel (kg)"
@@ -127,7 +133,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
           border: "none",
           color: "var(--color-text-faint)",
           fontSize: "12px",
-          fontWeight: 600,
+          fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}
       >

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BottomSheet } from "@presentation/components/BottomSheet";
 import type { NutritionEntry } from "@domain/home/entities/DailySummary";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 
 const field = {
   width: "100%",
@@ -10,7 +11,7 @@ const field = {
   padding: "0 12px",
   color: "#fff",
   fontSize: "15px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
 } as const;
@@ -18,7 +19,7 @@ const field = {
 const label = {
   color: "var(--color-text-muted)",
   fontSize: "12px",
-  fontWeight: 500,
+  fontWeight: "var(--weight-medium)",
   letterSpacing: "0.04em",
   marginBottom: "4px",
 } as const;
@@ -88,6 +89,7 @@ export function QuickEntrySheet({ open, initial, onClose, onSave }: QuickEntrySh
             <input
               type="text"
               inputMode="decimal"
+              onFocus={selectZeroOnFocus}
               value={values[f.key] ?? ""}
               onChange={(e) =>
                 setValues((v) => ({ ...v, [f.key]: e.target.value.replace(/[^0-9.,]/g, "") }))
@@ -120,7 +122,7 @@ export function QuickEntrySheet({ open, initial, onClose, onSave }: QuickEntrySh
           width: "100%",
           minHeight: "52px",
           marginTop: "20px",
-          fontWeight: 500,
+          fontWeight: "var(--weight-medium)",
           fontSize: "15px",
           borderRadius: "12px",
           background: "var(--color-accent)",

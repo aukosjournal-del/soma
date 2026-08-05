@@ -1,4 +1,5 @@
 import type { SessionSet } from "@domain/workout/entities/SessionExercise";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 
 export interface SetRowProps {
   set: SessionSet;
@@ -43,7 +44,7 @@ export function SetRow({ set, onWeight, onReps, onCheck, onFail }: SetRowProps) 
     borderRadius: "10px",
     padding: "0 6px",
     textAlign: "center",
-    fontWeight: 500,
+    fontWeight: "var(--weight-medium)",
     fontSize: "15px",
     color: set.checked ? "#fff" : "var(--color-text-secondary)",
     boxSizing: "border-box",
@@ -73,6 +74,7 @@ export function SetRow({ set, onWeight, onReps, onCheck, onFail }: SetRowProps) 
       <input
         type="text"
         inputMode="decimal"
+        onFocus={selectZeroOnFocus}
         disabled={set.checked}
         value={set.weight}
         onChange={(e) => onWeight(e.target.value)}
@@ -83,6 +85,7 @@ export function SetRow({ set, onWeight, onReps, onCheck, onFail }: SetRowProps) 
       <input
         type="text"
         inputMode="numeric"
+        onFocus={selectZeroOnFocus}
         disabled={set.checked}
         value={set.reps}
         onChange={(e) => onReps(e.target.value)}

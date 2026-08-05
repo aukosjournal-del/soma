@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { selectZeroOnFocus } from "@presentation/design-system/numericField";
 
 const card = {
   background: "var(--color-bg-elevated)",
@@ -13,7 +14,7 @@ const card = {
 const eyebrow = {
   color: "var(--color-at-prefix)",
   fontSize: "11px",
-  fontWeight: 600,
+  fontWeight: "var(--weight-medium)",
   textTransform: "uppercase",
   letterSpacing: "var(--tracking-eyebrow)",
   margin: 0,
@@ -27,7 +28,7 @@ const numberInput = {
   outline: "none",
   color: "#fff",
   fontSize: "22px",
-  fontWeight: 900,
+  fontWeight: "var(--weight-medium)",
   fontVariantNumeric: "tabular-nums",
   padding: 0,
 } as const;
@@ -64,13 +65,14 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginTop: "12px" }}>
         <label style={{ display: "block", background: "rgba(192,235,255,0.05)", border: "1px solid var(--color-border)", borderRadius: "12px", padding: "10px 12px" }}>
-          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>
+          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
             Objectif pas
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
             <input
               type="text"
               inputMode="numeric"
+              onFocus={selectZeroOnFocus}
               value={steps}
               onChange={(e) => setSteps(e.target.value.replace(/[^0-9]/g, ""))}
               aria-label="Objectif de pas"
@@ -81,13 +83,14 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
         </label>
 
         <label style={{ display: "block", background: "rgba(192,235,255,0.05)", border: "1px solid var(--color-border)", borderRadius: "12px", padding: "10px 12px" }}>
-          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>
+          <div style={{ color: "var(--color-text-muted)", fontSize: "10px", fontWeight: "var(--weight-medium)", textTransform: "uppercase", marginBottom: "4px" }}>
             Objectif calorique
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
             <input
               type="text"
               inputMode="numeric"
+              onFocus={selectZeroOnFocus}
               value={kcal}
               onChange={(e) => setKcal(e.target.value.replace(/[^0-9]/g, ""))}
               aria-label="Objectif calorique"
@@ -107,7 +110,7 @@ export function GoalsCard({ stepsGoal, kcalGoal, onSave }: GoalsCardProps) {
             width: "100%",
             minHeight: "44px",
             marginTop: "12px",
-            fontWeight: 800,
+            fontWeight: "var(--weight-medium)",
             fontSize: "13px",
             borderRadius: "12px",
             background: saved ? "rgba(16,185,129,0.15)" : "var(--color-accent)",

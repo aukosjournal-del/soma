@@ -53,7 +53,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
           boxSizing: "border-box",
         }}
       >
-        <h1 style={{ fontSize: "var(--text-title, 19px)", fontWeight: 500, margin: 0 }}>
+        <h1 style={{ fontSize: "var(--text-title, 19px)", fontWeight: "var(--weight-medium)", margin: 0 }}>
           Un problème est survenu
         </h1>
         <p style={{ fontSize: "13px", color: "rgba(192,235,255,0.75)", margin: 0, maxWidth: "320px" }}>
@@ -67,7 +67,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             marginTop: "8px",
             height: "48px",
             padding: "0 24px",
-            fontWeight: 500,
+            fontWeight: "var(--weight-medium)",
             fontSize: "14px",
             borderRadius: "12px",
             background: "var(--color-accent, #F5A276)",
