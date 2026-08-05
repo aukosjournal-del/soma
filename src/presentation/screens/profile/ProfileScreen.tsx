@@ -224,7 +224,7 @@ export function ProfileScreen() {
 
                   <div style={{ minWidth: 0 }}>
                     <div style={{ color: "#fff", fontSize: "var(--text-title)", fontWeight: "var(--weight-medium)" }}>@{summary?.username || "—"}</div>
-                    <div style={{ color: "rgba(192,235,255,0.7)", fontSize: "15px", marginTop: "2px" }}>{fullName || "—"}</div>
+                    <div style={{ color: "rgba(192,235,255,0.7)", fontSize: "var(--text-body)", marginTop: "2px" }}>{fullName || "—"}</div>
                     <div style={{ color: "var(--color-text-muted)", fontSize: "var(--text-body)", marginTop: "2px", fontVariantNumeric: "tabular-nums" }}>
                       {age !== null ? `${age} ans` : "Âge non renseigné"}
                     </div>
@@ -253,7 +253,7 @@ export function ProfileScreen() {
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <h2 style={{ color: "#fff", fontSize: "var(--text-title)", fontWeight: "var(--weight-medium)", margin: 0 }}>Biométrie</h2>
-                    <p style={{ color: "var(--color-at-prefix)", fontSize: "12px", margin: "2px 0 0" }}>Utilisées dans les calculs</p>
+                    <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "2px 0 0" }}>Utilisées dans les calculs</p>
                   </div>
                   <button type="button" onClick={() => setBioOpen(true)} style={accentButton}>
                     Compléter
@@ -275,7 +275,7 @@ export function ProfileScreen() {
                       <div
                         style={{
                           color: "var(--color-text-muted)",
-                          fontSize: "9px",
+                          fontSize: "var(--text-micro)",
                           fontWeight: "var(--weight-medium)",
                           letterSpacing: "0.02em",
                           marginBottom: "3px",
@@ -290,7 +290,7 @@ export function ProfileScreen() {
                         <span style={{ color: "#fff", fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)", fontVariantNumeric: "tabular-nums" }}>
                           {bioMetricValue(metrics, field) ?? "—"}
                         </span>
-                        <span style={{ color: "var(--color-text-faint)", fontSize: "9px", flexShrink: 0 }}>{field.unit}</span>
+                        <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-micro)", flexShrink: 0 }}>{field.unit}</span>
                       </div>
                     </div>
                   ))}
@@ -312,7 +312,7 @@ export function ProfileScreen() {
                       <span style={{ color: "#fff", fontSize: "32px", fontWeight: "var(--weight-medium)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
                         {indicator.value || "—"}
                       </span>
-                      <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontWeight: "var(--weight-medium)" }}>{indicator.unit}</span>
+                      <span style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)" }}>{indicator.unit}</span>
                     </div>
                     {indicator.statusLabel && (
                       <p style={{ color: indicator.statusColor, fontSize: "var(--text-caption)", fontWeight: "var(--weight-medium)", margin: "8px 0 0" }}>

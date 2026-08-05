@@ -69,7 +69,7 @@ export function ForgotPasswordStep({ onBack, onSubmit, sent }: ForgotPasswordSte
           minHeight: "52px",
           marginTop: "16px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

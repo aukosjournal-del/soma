@@ -57,7 +57,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
               }}
             >
               <div style={{ color: "#fff", fontSize: "14px", fontWeight: "var(--weight-medium)" }}>{opt.title}</div>
-              <div style={{ color: "var(--color-at-prefix)", fontSize: "12px", marginTop: "2px" }}>
+              <div style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", marginTop: "2px" }}>
                 {opt.description}
               </div>
             </button>
@@ -74,7 +74,7 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
           minHeight: "52px",
           marginTop: "20px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",
@@ -88,12 +88,12 @@ export function ExperienceStep({ selected, onSelect, onFinalize, status, errorMe
       </button>
 
       {status === "error" && errorMessage && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>
           {errorMessage}
         </p>
       )}
       {status === "confirm_email" && (
-        <p style={{ color: "var(--color-success)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>
+        <p style={{ color: "var(--color-success)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>
           Compte créé. Confirme ton e-mail pour activer ton profil.
         </p>
       )}

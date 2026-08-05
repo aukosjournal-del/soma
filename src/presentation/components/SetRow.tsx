@@ -45,7 +45,7 @@ export function SetRow({ set, onWeight, onReps, onCheck, onFail }: SetRowProps) 
     padding: "0 6px",
     textAlign: "center",
     fontWeight: "var(--weight-medium)",
-    fontSize: "15px",
+    fontSize: "var(--text-body)",
     color: set.checked ? "#fff" : "var(--color-text-secondary)",
     boxSizing: "border-box",
     fontVariantNumeric: "tabular-nums",

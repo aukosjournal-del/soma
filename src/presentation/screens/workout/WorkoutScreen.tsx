@@ -153,7 +153,7 @@ export function WorkoutScreen({ onFinished }: { onFinished?: () => void } = {}) 
               <p
                 style={{
                   color: "var(--color-error)",
-                  fontSize: "12px",
+                  fontSize: "var(--text-label)",
                   margin: 0,
                   textAlign: "center",
                 }}
@@ -235,7 +235,7 @@ function EmptyCard({ title, subtitle }: { title: string; subtitle?: string }) {
     >
       <p style={{ color: "var(--color-text-muted)", fontSize: "14px", margin: 0 }}>{title}</p>
       {subtitle && (
-        <p style={{ color: "var(--color-text-faint)", fontSize: "12px", margin: "6px 0 0" }}>
+        <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", margin: "6px 0 0" }}>
           {subtitle}
         </p>
       )}

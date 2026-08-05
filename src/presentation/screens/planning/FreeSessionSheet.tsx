@@ -15,7 +15,7 @@ const microInput = {
   borderRadius: "8px",
   textAlign: "center",
   color: "#fff",
-  fontSize: "12px",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
@@ -23,7 +23,7 @@ const microInput = {
 
 const microLabel = {
   color: "var(--color-at-prefix)",
-  fontSize: "9px",
+  fontSize: "var(--text-micro)",
   fontWeight: "var(--weight-medium)",
   marginBottom: "2px",
 } as const;
@@ -164,7 +164,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
       <p style={{ ...eyebrow, margin: "0 0 8px" }}>Exercices ({exercises.length})</p>
       <div style={{ display: "flex", flexDirection: "column", gap: "6px", maxHeight: "280px", overflowY: "auto", marginBottom: "8px" }}>
         {exercises.length === 0 && (
-          <p style={{ color: "var(--color-text-faint)", fontSize: "12px", textAlign: "center", padding: "12px 0", margin: 0 }}>
+          <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", textAlign: "center", padding: "12px 0", margin: 0 }}>
             Ajoute au moins un exercice pour lancer ta séance.
           </p>
         )}
@@ -285,7 +285,7 @@ export function FreeSessionSheet({ open, library, defaultLevel, onClose, onLaunc
           justifyContent: "center",
           gap: "8px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

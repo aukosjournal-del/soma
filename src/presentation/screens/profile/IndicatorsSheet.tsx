@@ -46,7 +46,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
   const footer = (
     <>
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "0 0 10px", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "0 0 10px", textAlign: "center" }}>{error}</p>
       )}
       <button
         type="button"
@@ -57,7 +57,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
           width: "100%",
           minHeight: "52px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",
@@ -74,7 +74,7 @@ export function IndicatorsSheet({ open, metrics, visibleIds, onClose, onSave }: 
 
   return (
     <BottomSheet open={open} title="Choisir les indicateurs" onClose={onClose} tall footer={footer}>
-      <p style={{ color: "var(--color-at-prefix)", fontSize: "12px", margin: "0 0 12px" }}>
+      <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "0 0 12px" }}>
         Coche jusqu'à {MAX_VISIBLE_INDICATORS} indicateurs à afficher dans Récap ({visible.length}/
         {MAX_VISIBLE_INDICATORS})
       </p>

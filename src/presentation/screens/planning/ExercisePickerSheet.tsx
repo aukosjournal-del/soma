@@ -65,12 +65,12 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
               }}
             >
               <span style={{ minWidth: 0 }}>
-                <span style={{ display: "block", color: "#fff", fontSize: "15px", fontWeight: "var(--weight-medium)" }}>{routine.name}</span>
-                <span style={{ display: "block", color: "var(--color-text-muted)", fontSize: "12px" }}>
+                <span style={{ display: "block", color: "#fff", fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)" }}>{routine.name}</span>
+                <span style={{ display: "block", color: "var(--color-text-muted)", fontSize: "var(--text-label)" }}>
                   {routine.focus ?? ""}
                 </span>
               </span>
-              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "12px", fontWeight: "var(--weight-medium)", fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ flexShrink: 0, color: "var(--color-accent)", fontSize: "var(--text-label)", fontWeight: "var(--weight-medium)", fontVariantNumeric: "tabular-nums" }}>
                 {busyId === routine.id ? "Ajout…" : `${routine.exercises.length} ex.`}
               </span>
             </button>
@@ -79,7 +79,7 @@ export function ExercisePickerSheet({ open, exercise, routines, onClose, onAdd }
       )}
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
     </BottomSheet>
   );

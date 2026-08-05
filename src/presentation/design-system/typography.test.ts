@@ -43,6 +43,25 @@ describe("harmonisation typographique", () => {
     expect(offenders, `graisses en dur :\n${offenders.join("\n")}`).toEqual([]);
   });
 
+  it("ne réintroduit pas les tailles retirées du barème", () => {
+    // Denylist volontaire, et non liste blanche : 20/24/32/34/40px restent
+    // légitimement présents, en attente d'arbitrage (voir
+    // docs/typographie-tailles.md). Seules ces quatre valeurs ont été
+    // tranchées — les reverrouiller évite qu'un futur écran les ramène.
+    const retired = [9, 12, 15, 18];
+    const offenders: string[] = [];
+    for (const [path, code] of sources) {
+      code.split("\n").forEach((line, i) => {
+        for (const px of retired) {
+          if (line.includes(`fontSize: "${px}px"`)) {
+            offenders.push(`${path}:${i + 1}  ${px}px`);
+          }
+        }
+      });
+    }
+    expect(offenders, `tailles retirées :\n${offenders.join("\n")}`).toEqual([]);
+  });
+
   it("réserve --weight-strong au wordmark", () => {
     // Une seule graisse forte dans l'app : la hiérarchie se joue sur la
     // taille. Si ce compte augmente, c'est que le gras redevient un outil

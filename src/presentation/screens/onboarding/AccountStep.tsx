@@ -87,7 +87,7 @@ export function AccountStep({
       {OAUTH_ENABLED && (
         <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "18px 0" }}>
           <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
-          <span style={{ color: "var(--color-text-faint)", fontSize: "12px" }}>ou avec ton e-mail</span>
+          <span style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)" }}>ou avec ton e-mail</span>
           <div style={{ flex: 1, height: "1px", background: "var(--color-border)" }} />
         </div>
       )}
@@ -114,7 +114,7 @@ export function AccountStep({
           }}
         />
         {emailInvalid && (
-          <p style={{ color: "var(--color-error)", fontSize: "12px", margin: 0 }}>Cette adresse ne semble pas valide.</p>
+          <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: 0 }}>Cette adresse ne semble pas valide.</p>
         )}
         <GlassInput
           type="password"
@@ -134,7 +134,7 @@ export function AccountStep({
           minHeight: "52px",
           marginTop: "16px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

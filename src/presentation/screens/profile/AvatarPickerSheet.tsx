@@ -112,7 +112,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
             borderRadius: "12px",
             padding: "0 12px",
             color: "#fff",
-            fontSize: "18px",
+            fontSize: "var(--text-title)",
             fontWeight: "var(--weight-medium)",
             boxSizing: "border-box",
           }}
@@ -176,7 +176,7 @@ export function AvatarPickerSheet({ open, current, onClose, onPick }: AvatarPick
       </button>
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
     </BottomSheet>
   );

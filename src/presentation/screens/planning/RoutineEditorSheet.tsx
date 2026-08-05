@@ -39,7 +39,7 @@ const microInput = {
   borderRadius: "8px",
   textAlign: "center",
   color: "#fff",
-  fontSize: "12px",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-medium)",
   boxSizing: "border-box",
   fontVariantNumeric: "tabular-nums",
@@ -47,14 +47,14 @@ const microInput = {
 
 const microLabel = {
   color: "var(--color-at-prefix)",
-  fontSize: "9px",
+  fontSize: "var(--text-micro)",
   fontWeight: "var(--weight-medium)",
   marginBottom: "2px",
 } as const;
 
 const sectionLabel = {
   color: "var(--color-text-muted)",
-  fontSize: "12px",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-medium)",
   marginBottom: "4px",
 } as const;
@@ -173,7 +173,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ex: Push"
-            style={{ ...field, fontSize: "15px", fontWeight: "var(--weight-medium)" }}
+            style={{ ...field, fontSize: "var(--text-body)", fontWeight: "var(--weight-medium)" }}
           />
         </label>
 
@@ -326,13 +326,13 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
       </div>
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
 
       {confirmDelete && (
         <p
           role="status"
-          style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}
+          style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}
         >
           Supprimer « {routine?.name} » définitivement ?
         </p>
@@ -407,7 +407,7 @@ export function RoutineEditorSheet({ open, routine, library, onClose, onSave, on
             flex: 1,
             minHeight: "52px",
             fontWeight: "var(--weight-medium)",
-            fontSize: "15px",
+            fontSize: "var(--text-body)",
             borderRadius: "12px",
             background: "var(--color-accent)",
             color: "var(--color-on-accent)",

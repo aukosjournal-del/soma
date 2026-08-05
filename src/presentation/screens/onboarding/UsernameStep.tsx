@@ -123,7 +123,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
         />
       </div>
 
-      <p aria-live="polite" style={{ fontSize: "12px", margin: "8px 0 0", color: status.color }}>
+      <p aria-live="polite" style={{ fontSize: "var(--text-label)", margin: "8px 0 0", color: status.color }}>
         {status.text}
       </p>
 
@@ -136,7 +136,7 @@ export function UsernameStep({ onContinue, onHaveAccount }: UsernameStepProps) {
           minHeight: "52px",
           marginTop: "20px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

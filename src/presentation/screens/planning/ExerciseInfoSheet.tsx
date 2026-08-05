@@ -105,7 +105,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
       </div>
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "10px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "10px 0 0", textAlign: "center" }}>{error}</p>
       )}
 
       <p style={{ ...eyebrow, marginTop: "18px" }}>Exécution</p>
@@ -113,7 +113,7 @@ export function ExerciseInfoSheet({ open, exercise, onClose, onChangeDifficulty 
         {exercise.description?.trim() ? exercise.description : fallback}
       </p>
 
-      <p style={{ color: "var(--color-text-faint)", fontSize: "12px", margin: "12px 0 0" }}>
+      <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", margin: "12px 0 0" }}>
         {exercise.muscleGroup} · {exercise.equipment} · {compound ? "Polyarticulaire" : "Isolation"}
       </p>
     </BottomSheet>

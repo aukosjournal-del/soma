@@ -18,7 +18,7 @@ const field = {
 
 const label = {
   color: "var(--color-text-muted)",
-  fontSize: "12px",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-medium)",
   letterSpacing: "0.04em",
   marginBottom: "4px",
@@ -191,7 +191,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
       </div>
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
 
       <button
@@ -204,7 +204,7 @@ export function CustomExerciseSheet({ open, library, onClose, onCreate }: Custom
           minHeight: "52px",
           marginTop: "20px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

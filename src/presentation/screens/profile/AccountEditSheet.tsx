@@ -190,10 +190,10 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
       </p>
 
       {error && (
-        <p style={{ color: "var(--color-error)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
+        <p style={{ color: "var(--color-error)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{error}</p>
       )}
       {message && (
-        <p style={{ color: "var(--color-success)", fontSize: "12px", margin: "12px 0 0", textAlign: "center" }}>{message}</p>
+        <p style={{ color: "var(--color-success)", fontSize: "var(--text-label)", margin: "12px 0 0", textAlign: "center" }}>{message}</p>
       )}
 
       <button
@@ -206,7 +206,7 @@ export function AccountEditSheet({ open, summary, onClose, onSave }: AccountEdit
           minHeight: "52px",
           marginTop: "20px",
           fontWeight: "var(--weight-medium)",
-          fontSize: "15px",
+          fontSize: "var(--text-body)",
           borderRadius: "12px",
           background: "var(--color-accent)",
           color: "var(--color-on-accent)",

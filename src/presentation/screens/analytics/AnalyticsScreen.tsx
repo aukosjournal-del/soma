@@ -104,12 +104,12 @@ export function AnalyticsScreen() {
           <>
             <div style={card}>
               <p style={eyebrow}>Progression</p>
-              <p style={{ color: "var(--color-text-faint)", fontSize: "12px", margin: "4px 0 14px" }}>
+              <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", margin: "4px 0 14px" }}>
                 Évolution de la charge sur tes exercices
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 {progressions.length === 0 && (
-                  <p style={{ color: "var(--color-text-faint)", fontSize: "12px", textAlign: "center", padding: "12px 0", margin: 0 }}>
+                  <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-label)", textAlign: "center", padding: "12px 0", margin: 0 }}>
                     Valide des séries pour suivre ta progression.
                   </p>
                 )}
@@ -132,7 +132,7 @@ export function AnalyticsScreen() {
                     </span>
                     <div style={{ flexShrink: 0, textAlign: "right" }}>
                       <div>
-                        <span style={{ color: "var(--color-at-prefix)", fontSize: "12px", fontVariantNumeric: "tabular-nums" }}>
+                        <span style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", fontVariantNumeric: "tabular-nums" }}>
                           {p.firstKg}kg → {p.lastKg}kg
                         </span>
                         <span style={{ marginLeft: "6px", fontSize: "var(--text-caption)", fontWeight: "var(--weight-medium)", color: p.deltaColor }}>
@@ -203,7 +203,7 @@ export function AnalyticsScreen() {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
                 <div style={{ minWidth: 0 }}>
                   <p style={eyebrow}>1RM estimé (Formule de Brzycki)</p>
-                  <p style={{ color: "var(--color-at-prefix)", fontSize: "12px", margin: "4px 0 0" }}>
+                  <p style={{ color: "var(--color-at-prefix)", fontSize: "var(--text-label)", margin: "4px 0 0" }}>
                     Basé sur ta plus lourde série validée aujourd'hui
                   </p>
                 </div>

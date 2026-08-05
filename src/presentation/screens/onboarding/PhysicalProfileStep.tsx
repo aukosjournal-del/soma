@@ -15,7 +15,7 @@ const accentButton = {
   minHeight: "52px",
   marginTop: "20px",
   fontWeight: "var(--weight-medium)",
-  fontSize: "15px",
+  fontSize: "var(--text-body)",
   borderRadius: "12px",
   background: "var(--color-accent)",
   color: "var(--color-on-accent)",
@@ -55,7 +55,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
       <p
         style={{
           color: "var(--color-text-muted)",
-          fontSize: "12px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           textTransform: "uppercase",
           letterSpacing: "0.04em",
@@ -132,7 +132,7 @@ export function PhysicalProfileStep({ initial, onContinue, onSkip }: PhysicalPro
           background: "none",
           border: "none",
           color: "var(--color-text-faint)",
-          fontSize: "12px",
+          fontSize: "var(--text-label)",
           fontWeight: "var(--weight-medium)",
           cursor: "pointer",
         }}
